@@ -42,8 +42,7 @@ let handler = async (m, { conn }) => {
     'https://media.tenor.com/lKmddHTKgWQAAAAM/onimai-oniichan-wa-oshimai.gif',
     'https://media.tenor.com/db0yF9G7qn4AAAAM/cat-dance.gif',
     'https://media.tenor.com/LzCV-UOvyBAAAAAM/s%C5%8Dsuke-aizen-gin-ichimaru.gif',
-    'https://media.tenor.com/b-xhltuOrEYAAAAM/anime-dance-kawaii-dance.gif',
-    ''
+    'https://media.tenor.com/b-xhltuOrEYAAAAM/anime-dance-kawaii-dance.gif'
    
   ]
 
@@ -52,7 +51,8 @@ let handler = async (m, { conn }) => {
   const userTag = '@' + sender.split('@')[0]
   const text = `${userTag} está bailando 🎶`
 
-  let gifUrl = gifs[Math.floor(Math.random() * gifs.length)]
+  const validGifs = gifs.filter(Boolean)
+  let gifUrl = validGifs[Math.floor(Math.random() * validGifs.length)]
 
   
   const tmpName = `danzar_${Date.now()}`

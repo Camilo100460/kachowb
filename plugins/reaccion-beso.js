@@ -7,7 +7,7 @@ import { spawn } from 'child_process'
 let handler = async (m, { conn }) => {
   
   const target = m.mentionedJid && m.mentionedJid.length ? m.mentionedJid[0] : null
-  if (!target) return conn.sendMessage(m.chat, { text: `[❗] Debes mencionar a un usuario.\n\n> Ejemplo: /kiss @usuario`, contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
+  if (!target) return conn.sendMessage(m.chat, { text: `[❗] Debes mencionar a un usuario.\n\n> Ejemplo: /kiss @usuario` }, { quoted: m })
 
   
 
@@ -63,12 +63,10 @@ let handler = async (m, { conn }) => {
 
     await conn.sendMessage(m.chat, { video: mp4Buffer, caption: text, mimetype: 'video/mp4', gifPlayback: true, contextInfo: { mentionedJid: mention } }, { quoted: m })
   } catch (err) {
-    console.error('bang plugin error:', err)
-    try {
-      await conn.sendMessage(m.chat, { video: { url: gifUrl }, gifPlayback: true, caption: text, contextInfo: { mentionedJid: mention } }, { quoted: m })
-    } catch (err2) {
-      try { await conn.sendMessage(m.chat, { image: { url: gifUrl }, caption: text, contextInfo: { mentionedJid: mention } }, { quoted: m }) } catch {}
-    }
+    console.error('kiss plugin error:', err)
+    await conn.sendMessage(m.chat, {
+      text: '[❌] No se pudo enviar el GIF.'
+    }, { quoted: m })
   } finally {
     try { if (existsSync(gifPath)) unlinkSync(gifPath) } catch {}
     try { if (existsSync(mp4Path)) unlinkSync(mp4Path) } catch {}

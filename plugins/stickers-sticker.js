@@ -41,19 +41,11 @@ export default handler
 
 /** Usa pack/autor de .setmeta; si no hay, el diseño por defecto del bot. */
 export function resolveStickerMeta(m, conn) {
-  const user = global.db?.data?.users?.[m.sender] || {}
-  const username = m.pushName || conn?.getName?.(m.sender) || 'Usuario'
-  const nombreBot = global.namebot || 'PAIN BOT'
-
-  const defaultPack = `👑 𝗢𝘄𝗻𝗲𝗿𝘀: \n✰ Sunkovv`
-  const defaultAuthor = `\n\n🪐 𝗕𝗼𝘁:\n↳${nombreBot}\n\n🍁 𝑼𝒔𝒖𝒂𝒓𝒊𝒐:\n↳@${username}`
-
-  const customPack = String(user.packname || '').trim()
-  const customAuthor = String(user.author || '').trim()
+  const username = String(m.pushName || conn?.getName?.(m.sender) || 'Usuario').trim()
 
   return {
-    packname: customPack || defaultPack,
-    author: customAuthor || defaultAuthor
+    packname: username,
+    author: username
   }
 }
 

@@ -6,7 +6,7 @@ const handler = async (m, { conn, usedPrefix, command }) => {
   const botActual = conn.user?.jid?.split('@')[0].replace(/\D/g, '')
   const configGlobalPath = path.join('./Serbot', botActual, 'config.json')
 
-  let nombreBot = global.namebot || 'PAIN BOT'
+  let nombreBot = global.namebot || 'MAY-BOT'
   if (fs.existsSync(configGlobalPath)) {
     try {
       const globalConfig = JSON.parse(fs.readFileSync(configGlobalPath))

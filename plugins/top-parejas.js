@@ -1,89 +1,57 @@
-let handler = async (m, { conn, args, participants, isAdmin, isBotAdmin, isOwner, isPrems, usedPrefix, command }) => {
-  if (!m.isGroup) return conn.sendMessage(m.chat, {
-    text: '[❗] Este comando solo puede ser usado en grupos.',
-    contextInfo: {
-      ...rcanal.contextInfo
-    }
-  }, { quoted: m })
+let handler = async (m, { conn, participants }) => {
+  if (!m.isGroup) return
 
   try {
-   
-    const groupMetadata = await conn.groupMetadata(m.chat)
-    const participants = groupMetadata.participants || []
-    
-    
-    const allParticipants = participants.filter(p => p.id !== conn.user.jid)
-    
-    if (allParticipants.length < 2) {
-      return conn.sendMessage(m.chat, {
-        text: '[❗] Se necesitan al menos 2 usuarios para crear parejas.',
-        contextInfo: {
-          ...rcanal.contextInfo
-        }
+    // 1. Filtrar al bot de la lista de participantes
+    const botJid = conn.user?.jid || conn.user?.id
+    const members = (participants || []).filter(p => p.id !== botJid)
+
+    if (members.length < 2) {
+      return conn.sendMessage(m.chat, { 
+        text: '⚠️ [❗] Se necesitan al menos 2 usuarios para crear parejas.' 
       }, { quoted: m })
     }
-    
-    
+
+    // 2. Mezclar aleatoriamente y formar hasta 10 parejas
+    const shuffled = [...members].sort(() => 0.5 - Math.random())
+    const maxPairs = Math.min(10, Math.floor(shuffled.length / 2))
     const pairs = []
-    const maxPairs = Math.min(10, Math.floor(allParticipants.length / 2))
-    const shuffledParticipants = [...allParticipants].sort(() => Math.random() - 0.5)
-    
+
     for (let i = 0; i < maxPairs; i++) {
-      const index1 = i * 2
-      const index2 = index1 + 1
-      
-      if (index2 < shuffledParticipants.length) {
-        pairs.push({
-          user1: shuffledParticipants[index1],
-          user2: shuffledParticipants[index2]
-        })
-      }
+      pairs.push({
+        user1: shuffled[i * 2],
+        user2: shuffled[i * 2 + 1]
+      })
     }
-    
-    if (pairs.length === 0) {
-      return conn.sendMessage(m.chat, {
-        text: '[❌] No se pudieron crear parejas con los usuarios disponibles.',
-        contextInfo: {
-          ...rcanal.contextInfo
-        }
-      }, { quoted: m })
-    }
-    
-    
-    let txt = `💕 𝗧𝗼𝗽 𝗽𝗮𝗿𝗲𝗷𝗮𝘀 𝗱𝗲𝗹 𝗴𝗿𝘂𝗽𝗼\n\n`
-    
-   
+
+    // 3. Texto con la fuente en formato Sans-Serif Bold Italic
+    let txt = `💕 𝙏𝙊𝙋 𝙋𝘼𝙍𝙀𝙅𝘼𝙎 𝘿𝙀𝙇 𝙂𝙍𝙐𝙋𝙊\n\n`
+
     pairs.forEach((pair, index) => {
       const position = index + 1
       const emoji = position === 1 ? '🥇' : position === 2 ? '🥈' : position === 3 ? '🥉' : '💕'
-      txt += `*${position}.* @${pair.user1.id.split('@')[0]} 💕 @${pair.user2.id.split('@')[0]}\n`
+      txt += `${emoji} *${position}.* @${pair.user1.id.split('@')[0]} 💕 @${pair.user2.id.split('@')[0]}\n`
     })
-    
-    
-    const mentionedJid = pairs.flatMap(pair => [pair.user1.id, pair.user2.id])
-    
-    return conn.sendMessage(m.chat, {
+
+    const mentions = pairs.flatMap(p => [p.user1.id, p.user2.id])
+
+    // 4. Enviar garantizando la visualización del texto
+    return await conn.sendMessage(m.chat, {
       text: txt,
-      contextInfo: {
-        ...rcanal.contextInfo,
-        mentionedJid: mentionedJid
-      }
+      mentions: mentions
     }, { quoted: m })
-    
+
   } catch (e) {
-    console.error('Error en top parejas:', e)
-    return conn.sendMessage(m.chat, {
-      text: '[❌] Ocurrió un error al generar el top de parejas del grupo.',
-      contextInfo: {
-        ...rcanal.contextInfo
-      }
+    console.error('Error en topparejas:', e)
+    return conn.sendMessage(m.chat, { 
+      text: '❌ [❗] Ocurrió un error al generar el top de parejas del grupo.' 
     }, { quoted: m })
   }
 }
 
-handler.help = ['#topparejas']
-handler.tags = ['fun', 'grupos']
+handler.help = ['topparejas']
+handler.tags = ['fun', 'group']
 handler.command = ['topparejas', 'toppareja', 'parejas', 'parejatop']
 handler.group = true
 
-export default handler 
+export default handler

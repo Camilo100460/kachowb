@@ -1,6 +1,4 @@
 import chalk from 'chalk'
-import { webp2png } from '../lib/webp2mp4.js'
-import { toWebp } from './stickers-sticker.js'
 import {
   detectViewOnce,
   extractMediaContent,
@@ -156,8 +154,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       return conn.reply(
         m.chat,
         `*[❗] Responde a una foto o video de *ver una vez* con ${usedPrefix + command}.*`,
-        m,
-        rcanal
+        m
       )
     }
 
@@ -214,8 +211,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       return conn.reply(
         m.chat,
         `*[❗] No se detectó foto/video de *ver una vez*.\n> Respondé al mensaje.`,
-        m,
-        rcanal
+        m
       )
     }
 
@@ -225,14 +221,9 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     logSssDebug('DESCARGA OK', { bytes: buffer.length, type: result.type, source: result.source })
 
     const { caption, mentionedJid } = buildMentionData(result.mediaMsg, conn)
-    const contextInfo = {
-      ...rcanal.contextInfo,
-      ...(mentionedJid.length ? { mentionedJid } : {})
-    }
     const extra = {
       ...(caption ? { caption } : {}),
-      ...(mentionedJid.length ? { mentions: mentionedJid } : {}),
-      contextInfo
+      ...(mentionedJid.length ? { mentions: mentionedJid } : {})
     }
 
     if (result.type === 'video') {
@@ -244,12 +235,9 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       return
     }
 
-    const stickerBuffer = await toWebp(buffer)
-    const imageUrl = await webp2png(stickerBuffer)
-    if (!imageUrl) throw new Error('No se pudo convertir a imagen')
-
     await conn.sendMessage(m.chat, {
-      image: { url: imageUrl },
+      image: buffer,
+      mimetype: result.mediaMsg.mimetype || 'image/jpeg',
       ...extra
     }, { quoted: m })
   } catch (e) {
@@ -257,8 +245,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     conn.reply(
       m.chat,
       `*[❌] Error al procesar view once: ${e.message || 'desconocido'}*`,
-      m,
-      rcanal
+      m
     )
   }
 }

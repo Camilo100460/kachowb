@@ -72,7 +72,7 @@ let handler = async (m, { conn }) => {
       }
     }
 
-    let nombreBot = global.namebot || 'PAIN BOT'
+    let nombreBot = global.namebot || 'MAY-BOT'
     if (fs.existsSync(configPath)) {
       try {
         const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'))

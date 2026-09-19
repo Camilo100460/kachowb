@@ -46,7 +46,7 @@ try {
 m = smsg(this, m) || m
 if (!m) return
 
-if (!m.messageStubType && m.isGroup && !m.fromMe) {
+if (!m.messageStubType && !m.fromMe) {
   await runAntiViewOnce(this, m)
 }
 
@@ -89,6 +89,12 @@ try {
   if (!('onlyLatinos' in chat)) chat.onlyLatinos = false  
   if (!('nsfw' in chat)) chat.nsfw = false  
   if (!isNumber(chat.expired)) chat.expired = 0  
+
+  if (m.isGroup && m.sender && !m.fromMe) {
+    global.db.data.groupActivity ||= {}
+    global.db.data.groupActivity[m.chat] ||= {}
+    global.db.data.groupActivity[m.chat][m.sender] = Date.now()
+  }
 
   let settings = global.db.data.settings[this.user.jid] ||= {}  
   if (!('self' in settings)) settings.self = false  
@@ -259,7 +265,7 @@ for (let name in global.plugins) {
   processedPlugins.push(normalizedPlugin)
 }
 
-const sessionPlugins = ['xnxx.js', 'hentai.js', 'xvideos.js']
+const sessionPlugins = ['xnxx.js', 'hentai.js', 'xvideos.js', 'anti-privado.js']
 
 for (let plugin of processedPlugins) {
   if (plugin.handler && typeof plugin.handler.before === 'function' && sessionPlugins.includes(plugin.name)) {

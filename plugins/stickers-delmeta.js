@@ -23,7 +23,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
         m.chat,
         `*[❗] Responde a un *sticker* (normal o animado) con el comando.*\n\n` +
           `Ejemplos:\n` +
-          `> ${usedPrefix + command} Pain Bot|Sunkovv\n` +
+          `> ${usedPrefix + command} MAY-BOT|Sunkovv\n` +
           `> ${usedPrefix + command} Mi Pack\n` +
           `> ${usedPrefix + command} Mi Pack|`,
         m,
@@ -32,21 +32,19 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     }
 
     const raw = String(text || '').trim()
-    if (!raw) {
-      return conn.reply(
-        m.chat,
-        `*[❗] Escribe el nombre del pack y, opcional, el autor.*\n\n` +
-          `Formato: ${usedPrefix + command} nombre|autor\n` +
-          `Si no pones autor, se usa tu nombre de WhatsApp.`,
-        m,
-        global.rcanal
-      )
-    }
+    const pushname =
+      m.pushName ||
+      m.name ||
+      conn.getName?.(m.sender) ||
+      'Usuario'
 
     let packname = ''
     let author = ''
 
-    if (raw.includes('|')) {
+    if (!raw) {
+      packname = String(pushname).trim() || 'Usuario'
+      author = packname
+    } else if (raw.includes('|')) {
       const parts = raw.split('|')
       packname = (parts[0] || '').trim()
       author = parts.slice(1).join('|').trim()
@@ -59,17 +57,11 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       return conn.reply(
         m.chat,
         `*[❗] Debes indicar al menos el *nombre* del pack.*\n\n` +
-          `Ejemplo: ${usedPrefix + command} Pain Bot|Sunkovv`,
+          `Ejemplo: ${usedPrefix + command} MAY-BOT|Sunkovv`,
         m,
         global.rcanal
       )
     }
-
-    const pushname =
-      m.pushName ||
-      m.name ||
-      conn.getName?.(m.sender) ||
-      'Usuario'
 
     if (!author) author = String(pushname).trim() || 'Usuario'
 

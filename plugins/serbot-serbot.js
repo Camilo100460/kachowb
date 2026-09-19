@@ -387,7 +387,7 @@ export async function AYBot(options) {
                 try {
           const botNumber = path.basename(pathAYBot)
           const configPath = path.join(pathAYBot, 'config.json')
-          let nombreBot = global.namebot || 'PAIN BOT'
+          let nombreBot = global.namebot || 'MAY-BOT'
           let subConfig = { name: nombreBot, autoRead: false }
           
           if (fs.existsSync(configPath)) {

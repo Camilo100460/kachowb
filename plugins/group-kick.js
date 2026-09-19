@@ -25,17 +25,16 @@ let handler = async (m, { conn, args, participants, isAdmin, isBotAdmin, isOwner
   }, { quoted: m })
   
   
-  if (!m.mentionedJid || m.mentionedJid.length === 0) {
+  const who = m.mentionedJid?.[0] || m.quoted?.sender
+  if (!who) {
     return conn.sendMessage(m.chat, {
-      text: `[❗] Debes mencionar al usuario que deseas banear.\n\n> *Ejemplo:* ${usedPrefix + command} @usuario`,
+      text: `[❗] Debes mencionar al usuario o responder a su mensaje.\n\n> *Ejemplo:* ${usedPrefix + command} @usuario`,
       contextInfo: {
         ...rcanal.contextInfo
       }
     }, { quoted: m })
   }
-  const who = m.mentionedJid[0]
-  
-  const targetUser = participants.find(u => u.id === who)
+  const targetUser = participants.find(u => conn.decodeJid(u.id) === conn.decodeJid(who))
   const isTargetAdmin = targetUser?.admin === 'admin' || targetUser?.admin === 'superadmin'
   
   if (isTargetAdmin) {
@@ -47,12 +46,12 @@ let handler = async (m, { conn, args, participants, isAdmin, isBotAdmin, isOwner
     }, { quoted: m })
   }
   
-  const ownerNumbers = global.owner.map(v => {
-    const id = typeof v === 'string' ? v.replace(/[^0-9]/g, '') : String(v).replace(/[^0-9]/g, '');
-    return id + '@s.whatsapp.net';
-  });
+  const ownerNumbers = (global.owner || []).map(v => {
+    const number = Array.isArray(v) ? v[0] : v
+    return `${String(number).replace(/[^0-9]/g, '')}@s.whatsapp.net`
+  })
   
-  if (ownerNumbers.includes(who)) {
+  if (ownerNumbers.includes(conn.decodeJid(who))) {
     return conn.sendMessage(m.chat, {
       text: '[❗] No puedes eliminar a un propietario del bot.',
       contextInfo: {
@@ -61,33 +60,24 @@ let handler = async (m, { conn, args, participants, isAdmin, isBotAdmin, isOwner
     }, { quoted: m })
   }
   
-  if (who === conn.user.jid) return conn.sendMessage(m.chat, {
+  if (conn.decodeJid(who) === conn.decodeJid(conn.user.jid)) return conn.sendMessage(m.chat, {
     text: '[❗] No se puede usar este comando para eliminar al bot.',
     contextInfo: {
       ...rcanal.contextInfo
     }
   }, { quoted: m })
   
-  await conn.groupParticipantsUpdate(m.chat, [who], 'remove')
-  
-  if (!global.db.data.users[who]) {
-    global.db.data.users[who] = {}
+  try {
+    await conn.groupParticipantsUpdate(m.chat, [who], 'remove')
+  } catch (error) {
+    console.error('Error expulsando usuario:', error)
+    return conn.sendMessage(m.chat, {
+      text: '[❌] No se pudo sacar a la persona. Verifica que el bot sea administrador.',
+      contextInfo: { ...rcanal.contextInfo }
+    }, { quoted: m })
   }
-  global.db.data.users[who].banned = true
-  
 
-  const userName = await conn.getName(who)
-  const adminName = await conn.getName(m.sender)
-  const groupName = (await conn.groupMetadata(m.chat)).subject
-  
-
-  return conn.sendMessage(m.chat, {
-    text: `🌴 𝗨𝘀𝘂𝗮𝗿𝗶𝗼 𝗯𝗮𝗻𝗲𝗮𝗱𝗼 𝗰𝗼𝗿𝗿𝗲𝗰𝘁𝗮𝗺𝗲𝗻𝘁𝗲\n\n> *Usuario:* @${who.split('@')[0]}\n> *Por:* @${m.sender.split('@')[0]}\n> *Grupo:* ${groupName}`,
-    contextInfo: {
-      ...rcanal.contextInfo,
-      mentionedJid: [who, m.sender]
-    }
-  }, { quoted: m })
+  return
 }
 
 handler.command = ['ban', 'kick']

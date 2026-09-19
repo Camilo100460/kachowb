@@ -8,18 +8,35 @@ import {
   formatRemainingDetailed,
   resolvePermanentRentalType
 } from '../lib/alquiler.js'
+import { existsSync, readFileSync } from 'fs'
+import { join } from 'path'
+
+const MARAVILLA_AUDIO = join(process.cwd(), 'maravilla.mp3')
+
+async function sendMaravillaAudio(conn, chatId, quoted) {
+  if (!existsSync(MARAVILLA_AUDIO)) return
+
+  await conn.sendMessage(chatId, {
+    audio: readFileSync(MARAVILLA_AUDIO),
+    mimetype: 'audio/mpeg',
+    fileName: 'maravilla.mp3',
+    ptt: false
+  }, { quoted }).catch(error => {
+    console.error('No se pudo enviar el audio de maravilla:', error)
+  })
+}
 
 let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
   if (!isOwner) {
     return conn.sendMessage(m.chat, {
-      text: '[❗] Este comando solo puede ser usado por el owner del bot.',
+      text: '╭━━〔 🔐 ACCESO RESTRINGIDO 〕━━╮\n┃ ❌ Este comando solo puede\n┃ ser usado por el owner del bot.\n╰━━━━━━━━━━━━━━━━━━━━╯',
       contextInfo: { ...rcanal.contextInfo }
     }, { quoted: m })
   }
 
   if (!m.isGroup) {
     return conn.sendMessage(m.chat, {
-      text: '[❗] Este comando solo funciona en grupos.',
+      text: '╭━━〔 ⚠️ COMANDO NO DISPONIBLE 〕━━╮\n┃ Este comando solo funciona\n┃ dentro de un grupo.\n╰━━━━━━━━━━━━━━━━━━━━╯',
       contextInfo: { ...rcanal.contextInfo }
     }, { quoted: m })
   }
@@ -37,7 +54,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
   if (['del', 'delete', 'remove', 'quitar', 'off'].includes(action)) {
     await removeRental(m.chat)
     return conn.sendMessage(m.chat, {
-      text: `🗑️ *Alquiler eliminado*\n\n> *Grupo:* ${groupName}\n> El bot quedó sin plan activo en este grupo.`,
+      text: `╭━━〔 🗑️ ALQUILER ELIMINADO 〕━━╮\n┃ 👥 *Grupo:* ${groupName}\n┃ 🔕 El bot quedó sin plan activo.\n╰━━━━━━━━━━━━━━━━━━━━╯`,
       contextInfo: { ...rcanal.contextInfo }
     }, { quoted: m })
   }
@@ -48,19 +65,14 @@ let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
 
     const label = permanentType === 'official' ? 'Grupo Oficial ♾️' : 'Infinito ♾️'
 
-    return conn.sendMessage(m.chat, {
-      text: `✅ *Alquiler activado*\n\n> *Grupo:* ${groupName}\n> *Tipo:* ${label}\n> *Tiempo:* Sin expiración\n> *Por:* @${m.sender.split('@')[0]}`,
-      contextInfo: {
-        ...rcanal.contextInfo,
-        mentionedJid: [m.sender]
-      }
-    }, { quoted: m })
+    await sendMaravillaAudio(conn, m.chat, m)
+    return
   }
 
   const durationMs = parseRentalTime(args.join(' ').trim() || action)
   if (!durationMs) {
     return conn.sendMessage(m.chat, {
-      text: `*[❗] Tiempo inválido.*\n\nUsá:\n> ${usedPrefix + command} 1h\n> ${usedPrefix + command} 1d\n> ${usedPrefix + command} 30m\n> ${usedPrefix + command} 7d\n> ${usedPrefix + command} infinito\n> ${usedPrefix + command} oficial\n\nSin tiempo muestra el estado.\n> ${usedPrefix + command} del → quitar límite`,
+      text: `╭━━〔 ⚙️ CONFIGURAR ALQUILER 〕━━╮\n┃ ❌ Tiempo no válido.\n╰━━━━━━━━━━━━━━━━━━━━╯\n\n📌 *Ejemplos:*\n▫️ ${usedPrefix + command} 30m\n▫️ ${usedPrefix + command} 1h\n▫️ ${usedPrefix + command} 1d\n▫️ ${usedPrefix + command} infinito\n▫️ ${usedPrefix + command} oficial\n\n📋 Sin tiempo: consultar estado\n🗑️ ${usedPrefix + command} del: quitar el plan`,
       contextInfo: { ...rcanal.contextInfo }
     }, { quoted: m })
   }
@@ -68,25 +80,20 @@ let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
   try {
     const rental = await saveRental(m.chat, durationMs, m.sender)
 
-    return conn.sendMessage(m.chat, {
-      text: `✅ *Alquiler activado*\n\n> *Grupo:* ${groupName}\n> *Tiempo establecido:* ${formatDuration(durationMs)}\n> *Restante:* ${formatRemainingDetailed(rental.expiresAt)}\n> *Vence:* ${new Date(rental.expiresAt).toLocaleString('es-ES')}\n> *Por:* @${m.sender.split('@')[0]}`,
-      contextInfo: {
-        ...rcanal.contextInfo,
-        mentionedJid: [m.sender]
-      }
-    }, { quoted: m })
+    await sendMaravillaAudio(conn, m.chat, m)
+    return
   } catch (e) {
     console.error('Error en comando one:', e)
     return conn.sendMessage(m.chat, {
-      text: '[❌] No se pudo guardar el alquiler en la base de datos.',
+      text: '╭━━〔 ❌ ERROR DE ACTIVACIÓN 〕━━╮\n┃ No se pudo guardar el alquiler\n┃ en la base de datos.\n╰━━━━━━━━━━━━━━━━━━━━╯',
       contextInfo: { ...rcanal.contextInfo }
     }, { quoted: m })
   }
 }
 
-handler.help = ['.one 1h → activa alquiler del bot en el grupo (solo owner)']
+handler.help = ['.activar 1h → activa el alquiler del bot en el grupo (solo owner)']
 handler.tags = ['owner']
-handler.command = ['one', 'alquiler', 'rent']
+handler.command = ['one', 'alquiler', 'rent', 'activar']
 handler.owner = true
 
 export default handler

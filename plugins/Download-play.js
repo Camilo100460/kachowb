@@ -4,16 +4,12 @@ const handler = async (m, { conn, text, usedPrefix }) => {
   try {
     if (!text?.trim())
       return conn.sendMessage(m.chat, {
-        text: " ִֶָ☾. Ingresa el nombre o enlace de YouTube.",
-        contextInfo: { ...rcanal?.contextInfo }
+        text: " ִֶָ☾. Ingresa el nombre o enlace de YouTube."
       }, { quoted: m })
 
     const isUrl = /youtu\.be|youtube\.com/.test(text)
     let videoUrl
     let title = "Desconocido"
-    let author = { name: "Desconocido" }
-    let duration = "Desconocido"
-    let thumbUrl
 
     if (isUrl) {
       videoUrl = text.trim()
@@ -26,9 +22,6 @@ const handler = async (m, { conn, text, usedPrefix }) => {
       const first = sres.data[0]
       videoUrl = first.url || `https://youtu.be/${first.videoId}`
       title = first.title || title
-      author = first.author || author
-      duration = first.duration || duration
-      thumbUrl = first.image || first.thumbnail
     }
 
     
@@ -39,31 +32,11 @@ const handler = async (m, { conn, text, usedPrefix }) => {
 
     const infoData = dres.data
     const audioUrl = typeof infoData.download === "string" ? infoData.download : infoData.download?.url
-    const cover = infoData.image || thumbUrl
     title = infoData.title || title
 
     if (!audioUrl)
       throw "[❗] No se encontró la URL del audio."
 
-    const info = `ִֶָ☾. 𝗣𝗹𝗮𝘆 ִֶָ☾.
- 𓍯  *Título:* ${title}
- 𓍯  *Canal:* ${author.name || author}
- 𓍯  *Duración:* ${duration}
- 𓍯  *Enlace:* ${videoUrl}`
-
-    
-    if (cover) {
-      try {
-        const thumb = (await conn.getFile(cover)).data
-        await conn.sendMessage(m.chat, { image: thumb, caption: info, contextInfo: { ...rcanal?.contextInfo } }, { quoted: m })
-      } catch (e) {
-       
-      }
-    } else {
-      await conn.sendMessage(m.chat, { text: info, contextInfo: { ...rcanal?.contextInfo } }, { quoted: m })
-    }
-
-   
     await conn.sendMessage(
       m.chat,
       { audio: { url: audioUrl }, fileName: `${title}.mp3`, mimetype: "audio/mpeg" },
@@ -74,8 +47,7 @@ const handler = async (m, { conn, text, usedPrefix }) => {
     return conn.sendMessage(m.chat, {
       text: typeof e === "string"
         ? e
-        : `[❌] Se ha producido un problema.\n> Usa *${usedPrefix}report* para informarlo.\n\n${e.message}`,
-      contextInfo: { ...rcanal?.contextInfo }
+        : `[❌] Se ha producido un problema.\n> Usa *${usedPrefix}report* para informarlo.\n\n${e.message}`
     }, { quoted: m })
   }
 }

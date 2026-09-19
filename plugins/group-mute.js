@@ -100,7 +100,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, participants
     const muted = global.db.data.muted[m.chat]
     const alreadyMuted = idsOverlap(muted, targetIds)
 
-    if (command === 'mute' || command === 'group-mute' || command === 'mutechat') {
+    if (['mute', 'group-mute', 'mutechat', 'silenciar', 'silencio'].includes(command)) {
       if (alreadyMuted) {
         return conn.sendMessage(m.chat, { text: `El usuario ya está muteado.`, contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
       }
@@ -113,7 +113,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, participants
       }, { quoted: m })
     }
 
-    if (command === 'delmute' || command === 'unmute' || command === 'group-unmute') {
+    if (['delmute', 'unmute', 'group-unmute', 'desilenciar', 'quitar-silencio', 'quitarsilencio'].includes(command)) {
       if (!alreadyMuted) {
         return conn.sendMessage(m.chat, { text: `El usuario no está muteado.`, contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
       }
@@ -124,14 +124,23 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, participants
       }, { quoted: m })
     }
 
-    return conn.sendMessage(m.chat, { text: `Comando no reconocido. Uso: ${usedPrefix}mute @usuario | ${usedPrefix}delmute @usuario`, contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
+    return conn.sendMessage(m.chat, { text: `Comando no reconocido. Usa ${usedPrefix}silenciar @usuario o ${usedPrefix}desilenciar @usuario`, contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
   } catch (e) {
     console.error(e)
     return conn.sendMessage(m.chat, { text: '[❌] Error al procesar el comando.', contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
   }
 }
 
-handler.command = ['mute', 'delmute', 'unmute', 'group-mute', 'group-unmute']
+handler.help = [
+  'silenciar @usuario',
+  'desilenciar @usuario',
+  'mute @usuario',
+  'unmute @usuario'
+]
+handler.command = [
+  'mute', 'delmute', 'unmute', 'group-mute', 'group-unmute', 'mutechat',
+  'silenciar', 'silencio', 'desilenciar', 'quitar-silencio', 'quitarsilencio'
+]
 handler.group = true
 handler.admin = true
 handler.botAdmin = true

@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url'
 // CAMBIA POR EL NUMERO QUE VA SER OWNER DEL BOT
 global.owner = [
   ['573009438795', 'MayBot', true],
+  ['19047931753', 'Owner', true],
 ]
 
 //  ACA PON EL LID DEL OWNER DEL BOT PARA QUE TE HAGA CASO COMO OWNER EL BOT, USA EL COMANDO /ID EN TU 
@@ -32,17 +33,17 @@ global.moneda = 'USD'
 // Etiqueta de canal en mensajes (rcanal). Obtén el JID con: .canalid <link del canal>
 // Ejemplo: global.canal = { jid: '120363423390538090@newsletter', name: 'Pain Community' }
 // También acepta link: global.canal = 'https://whatsapp.com/channel/XXXXXXXX'
-global.canal = { jid: '120363405059433072@newsletter', name: 'Nexo Community' }
+global.canal = { jid: 'https://whatsapp.com/channel/0029VbDoqAbL7UVTIPkXw42x', name: 'MayBot' }
 
 // Canales que el bot y sub-bots siguen al conectar.
 // Puedes usar el JID (recomendado) o el link del canal:
 // ch1: '120363405059433072@newsletter'
 global.ch = {
-ch1: '120363405059433072@newsletter',
+ch1: '1203634433072@newsletter',
 }
 
 // Canal para logs/anuncios de sub-bots. El bot y sub-bots también lo siguen al conectar.
-global.logssubbots = '120363430965244922@newsletter'
+global.logssubbots = '1203634309652@newsletter'
 
 // true = botones/listas con @itsliaaa/baileys | false = solo @whiskeysockets/baileys
 global.baileysInteractive = true

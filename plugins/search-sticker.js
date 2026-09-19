@@ -91,7 +91,7 @@ const handler = async (m, { conn, text, args }) => {
 
         const webp = await toWebp(buffer)
         const packname = `${query}`
-        const author = `${username}` + '\n' + (global.namebot || 'PAIN BOT')
+        const author = `${username}` + '\n' + (global.namebot || 'MAY-BOT')
         const finalSticker = await addExif(webp, packname, author)
 
         await conn.sendFile(m.chat, finalSticker, 'sticker.webp', item.title || '', m, null, rcanal)

@@ -9,7 +9,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       m.chat,
       `*[❗] Define el *pack* y/o el *autor* por defecto para tus stickers (.s, .st, .sw).*\n\n` +
         `Formato:\n> ${usedPrefix + command} pack | autor\n` +
-        `Ejemplo:\n> ${usedPrefix + command} Pain Bot | Sunkovv\n` +
+        `Ejemplo:\n> ${usedPrefix + command} MAY-BOT | Sunkovv\n` +
         `Solo pack:\n> ${usedPrefix + command} Mi Pack\n` +
         `Borrar: ${usedPrefix}delstickermeta` +
         actual,

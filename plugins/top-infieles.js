@@ -43,7 +43,7 @@ let handler = async (m, { conn, args, participants, isAdmin, isBotAdmin, isOwner
     }
     
    
-    let txt = `💔 𝗧𝗼𝗽 𝗶𝗻𝗳𝗶𝗲𝗹𝗲𝘀 𝗱𝗲𝗹 𝗴𝗿𝘂𝗽𝗼\n\n`
+    let txt = `💔 𝙏𝙊𝙋 𝙄𝙉𝙁𝙄𝙀𝙇𝙀𝙎 𝘿𝙀𝙇 𝙂𝙍𝙐𝙋𝙊\n\n`
     
   
     selectedUsers.forEach((user, index) => {
