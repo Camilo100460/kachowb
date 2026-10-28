@@ -7,7 +7,7 @@ const EXTRA_BLOCKS = [
   ]],
   ['⛽ 𝘿𝙀𝙎𝘾𝘼𝙍𝙂𝘼𝙎', [
     '◦ 📱 .apps', '◦ 🎬 .fb', '◦ 📸 .ig', '◦ 🎵 .ytmp3',
-    '◦ 🎬 .ytmp4', '◦ 🎵 .soundcloud', '◦ 🎵 .scdl', '◦ 🖼️ .image', '◦ 🖼️ .img'
+    '◦ 🎬 .ytmp4', '◦ 🎵 .soundcloud', '◦ 🎵 .scdl', '◦ 🖼️ .imagee', '◦ 🖼️ .img'
   ]],
   ['🛠️ 𝙂𝙍𝙐𝙋𝙊𝙎', [
     '◦ 🚫 .kick', '◦ 🚫 .expulsartodos', '◦ 🔇 .silenciar', '◦ 🔊 .desilenciar',
