@@ -1,0 +1,105 @@
+{
+  "activo": false,
+  "ronda": 4,
+  "equipos": [
+    {
+      "id": "t44417bff74",
+      "nombre": "X-FLY",
+      "logo": "scrim-data\\logos\\llaves_120363412018329393_g_us_t44417bff74.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    {
+      "id": "t4679ad15d3",
+      "nombre": "REVEN DYNASTY",
+      "logo": "scrim-data\\logos\\llaves_120363412018329393_g_us_t4679ad15d3.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    {
+      "id": "t45dd03e88d",
+      "nombre": "BRIGHT START",
+      "logo": "scrim-data\\logos\\llaves_120363412018329393_g_us_t45dd03e88d.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    {
+      "id": "t192f96a5ce",
+      "nombre": "HUMBLE RANCH",
+      "logo": "scrim-data\\logos\\llaves_120363412018329393_g_us_t192f96a5ce.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    {
+      "id": "tfdcd4873b6",
+      "nombre": "RUTHLESS",
+      "logo": "scrim-data\\logos\\llaves_120363412018329393_g_us_tfdcd4873b6.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    {
+      "id": "t5d996f08fb",
+      "nombre": "GOLDEN WOLVES",
+      "logo": "scrim-data\\logos\\llaves_120363412018329393_g_us_t5d996f08fb.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    {
+      "id": "t0537ebf699",
+      "nombre": "Zorros",
+      "logo": "scrim-data\\logos\\llaves_120363412018329393_g_us_t0537ebf699.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    {
+      "id": "t3dd94f42b5",
+      "nombre": "MKE FEM",
+      "logo": "scrim-data\\logos\\llaves_120363412018329393_g_us_t3dd94f42b5.png",
+      "owner": "573146680977@s.whatsapp.net"
+    }
+  ],
+  "resultados": {
+    "1": [
+      1,
+      2,
+      1,
+      2
+    ],
+    "2": [
+      2,
+      2
+    ],
+    "3": [
+      2
+    ]
+  },
+  "salas": {
+    "1": [
+      {
+        "id": "t44417bff74",
+        "motivo": "sorteo"
+      },
+      {
+        "id": "t192f96a5ce",
+        "motivo": "sorteo"
+      },
+      {
+        "id": "t5d996f08fb",
+        "motivo": "sorteo"
+      },
+      {
+        "id": "t3dd94f42b5",
+        "motivo": "sorteo"
+      }
+    ],
+    "2": [
+      {
+        "id": "t192f96a5ce",
+        "motivo": "sorteo"
+      },
+      {
+        "id": "tfdcd4873b6",
+        "motivo": "regla"
+      }
+    ],
+    "3": [
+      {
+        "id": "t192f96a5ce",
+        "motivo": "sorteo"
+      }
+    ]
+  }
+}

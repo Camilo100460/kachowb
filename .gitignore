@@ -2,11 +2,10 @@ sessions/
 yarn.lock
 Serbot/
 storage/databases/database.json
+storage/databases/pokemon-rpg-state.json
 storage/maxsubs.json
+storage/recuperar-img/
 package-lock.json
 tmp/
 
-node_modules
-node_modules
-node_modules
 node_modules

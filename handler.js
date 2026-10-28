@@ -13,11 +13,13 @@ import { handleModoDescargas } from './lib/Modos/modo-descargas.js'
 import { isViewOnceCandidate, isKnownViewOnce, runAntiViewOnce } from './lib/viewOnce.js'
 import { checkGroupRental, isRentalBypassCommand } from './lib/alquiler.js'
 import { checkCmd18Command } from './lib/cmd18.js'
-import { findGroupParticipant, findBotParticipant } from './lib/group-participant.js'
+import { findGroupParticipant, findBotParticipant, participantJids } from './lib/group-participant.js'
 import { shouldSkipGroupMessageEarly } from './plugins/modo-sub.js'
 import { shouldBlockByGrupoOff } from './lib/bot-groups.js'
 import { sendMichiBoard } from './lib/michi-board.js'
 import { isInviteOpponent } from './lib/michi-users.js'
+import { handleAntiCall } from './lib/anticall-handler.js'
+import { BOT_BANS_KEY, isSenderListed } from './lib/blacklist.js'
 
 const { proto } = (await import('@whiskeysockets/baileys')).default
 const isNumber = x => typeof x === 'number' && !isNaN(x)
@@ -26,9 +28,30 @@ clearTimeout(this)
 resolve()
 }, ms))
 
+let groupActivitySaveTimer = null
+function scheduleGroupActivitySave() {
+  if (groupActivitySaveTimer) return
+  groupActivitySaveTimer = setTimeout(async () => {
+    groupActivitySaveTimer = null
+    try {
+      await global.db.write()
+    } catch (error) {
+      console.error('Error guardando actividad de grupo:', error)
+    }
+  }, 5000)
+}
+
 export async function handler(chatUpdate) {
 this.msgqueque = this.msgqueque || []
 if (!chatUpdate) return
+
+// Anti-llamadas: se engancha una sola vez al evento 'call' de esta conexión
+if (!this._antiCallBound) {
+  this._antiCallBound = true
+  this.ev.on('call', async (calls) => {
+    try { await handleAntiCall(calls, this, rcanal) } catch (e) { console.error(e) }
+  })
+}
 let m = chatUpdate.messages[chatUpdate.messages.length - 1]
 if (!m) return
 
@@ -94,6 +117,7 @@ try {
     global.db.data.groupActivity ||= {}
     global.db.data.groupActivity[m.chat] ||= {}
     global.db.data.groupActivity[m.chat][m.sender] = Date.now()
+    scheduleGroupActivitySave()
   }
 
   let settings = global.db.data.settings[this.user.jid] ||= {}  
@@ -123,8 +147,20 @@ if (typeof m.text !== 'string') m.text = ''
 
 let _user = global.db.data?.users?.[m.sender]  
 
+const groupMetadata = (m.isGroup ? ((this.chats[m.chat] || {}).metadata || await this.groupMetadata(m.chat).catch(_ => null)) : {}) || {}
+const participants = (m.isGroup ? groupMetadata.participants : []) || []
+const ownerParticipant = m.isGroup ? findGroupParticipant(participants, m, this) : null
+
+const normalizeOwnerJid = (jid) => {
+  const decoded = conn.decodeJid(String(jid || ''))
+  const [user, server] = String(decoded || '').split('@')
+  if (!user || !server) return String(decoded || '')
+  return `${user.split(':')[0]}@${server}`
+}
+
 const createOwnerIds = (number) => {
-  const cleanNumber = number.replace(/[^0-9]/g, '')
+  const cleanNumber = String(number || '').replace(/[^0-9]/g, '')
+  if (!cleanNumber) return []
   return [
     cleanNumber + '@s.whatsapp.net',
     cleanNumber + '@lid'
@@ -135,9 +171,55 @@ const allOwnerIds = [
   conn.decodeJid(global.conn.user.id),
   ...global.owner.flatMap(([number]) => createOwnerIds(number)),
   ...(global.ownerLid || []).flatMap(([number]) => createOwnerIds(number))
-]
+].map(normalizeOwnerJid)
 
-const isROwner = allOwnerIds.includes(m.sender)
+const senderIds = [
+  m.sender,
+  m.senderPn,
+  m.senderLid,
+  m.participant,
+  m.participantPn,
+  m.participantAlt,
+  m.key?.participant,
+  m.key?.participantPn,
+  m.key?.participantAlt,
+  m.key?.remoteJidAlt,
+  m.key?.senderPn,
+  ...participantJids(ownerParticipant, conn)
+].filter(Boolean).map(normalizeOwnerJid)
+
+let isROwner = senderIds.some(id => allOwnerIds.includes(id))
+
+if (!isROwner) {
+  const ownerPhoneNumbers = new Set((global.owner || [])
+    .map(([number]) => String(number || '').replace(/\D/g, ''))
+    .filter(Boolean))
+  const senderPhoneNumbers = senderIds
+    .filter(id => /@(s\.whatsapp\.net|c\.us|hosted)$/.test(id))
+    .map(id => id.split('@')[0].replace(/\D/g, ''))
+  isROwner = senderPhoneNumbers.some(number => ownerPhoneNumbers.has(number))
+}
+
+if (!isROwner) {
+  const lidMapping = this.signalRepository?.lidMapping
+  if (typeof lidMapping?.getPNForLID === 'function') {
+    for (const senderId of senderIds) {
+      if (!String(senderId).endsWith('@lid') && !String(senderId).endsWith('@hosted.lid')) continue
+
+      try {
+        const phoneJid = await lidMapping.getPNForLID(senderId)
+        const normalizedPhoneJid = normalizeOwnerJid(phoneJid)
+        if (phoneJid && allOwnerIds.includes(normalizedPhoneJid)) {
+          isROwner = true
+          break
+        }
+      } catch (error) {
+        console.error('No se pudo resolver el número del owner desde su LID:', error)
+      }
+    }
+  }
+}
+
 const isOwner = isROwner || m.fromMe  
 const isMods = isOwner || global.mods.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)  
 const isPrems = isROwner || global.prems.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender) || _user?.prem == true  
@@ -155,13 +237,12 @@ if (opts['queque'] && m.text && !(isMods || isPrems)) {
 if (m.isBaileys) return  
 m.exp += Math.ceil(Math.random() * 10)  
 
-const groupMetadata = (m.isGroup ? ((this.chats[m.chat] || {}).metadata || await this.groupMetadata(m.chat).catch(_ => null)) : {}) || {}  
-const participants = (m.isGroup ? groupMetadata.participants : []) || []  
 const user = (m.isGroup ? findGroupParticipant(participants, m, this) : null) || {}  
 const bot = (m.isGroup ? findBotParticipant(participants, this) : null) || {}  
 const isRAdmin = user?.admin == 'superadmin' || false  
 const isAdmin = isRAdmin || user?.admin == 'admin' || false  
 const isBotAdmin = bot?.admin || false  
+m.isBotBanned = !isOwner && isSenderListed(BOT_BANS_KEY, m, this, participants)
 
 if (shouldBlockByGrupoOff(m, this)) return
 
@@ -237,6 +318,7 @@ let commandExecuted = false
 
 
 const processedPlugins = []
+const seenCommands = new Set()
 for (let name in global.plugins) {
   let plugin = global.plugins[name]
   if (!plugin || plugin.disabled) continue
@@ -261,11 +343,25 @@ for (let name in global.plugins) {
   if (normalizedPlugin.command instanceof RegExp) {
     normalizedPlugin.command = [normalizedPlugin.command.source]
   }
-  
+
+  const commandAliases = (normalizedPlugin.command || [])
+    .filter(Boolean)
+    .map(cmd => {
+      if (typeof cmd === 'string') return cmd.toLowerCase()
+      if (cmd instanceof RegExp) return cmd.source.toLowerCase()
+      return null
+    })
+    .filter(Boolean)
+
+  if (commandAliases.length && commandAliases.some(alias => seenCommands.has(alias))) {
+    continue
+  }
+
+  commandAliases.forEach(alias => seenCommands.add(alias))
   processedPlugins.push(normalizedPlugin)
 }
 
-const sessionPlugins = ['xnxx.js', 'hentai.js', 'xvideos.js', 'anti-privado.js']
+const sessionPlugins = ['rpg-analisis.js', 'xnxx.js', 'hentai.js', 'xvideos.js', 'anti-privado.js']
 
 for (let plugin of processedPlugins) {
   if (plugin.handler && typeof plugin.handler.before === 'function' && sessionPlugins.includes(plugin.name)) {
@@ -378,7 +474,7 @@ for (let plugin of processedPlugins) {
   })
 
   if (isMatchCommand) {
-    
+    if (m.isBotBanned) continue
   
     if (m.isGroup && global.db.data.soloAdmin && global.db.data.soloAdmin[m.chat] === true) {
       if (!isAdmin && !isOwner && !isROwner) {
@@ -387,7 +483,15 @@ for (let plugin of processedPlugins) {
       }
     }
     
-    const allowedPrivateCommands = ['qr', 'code', 'setbotname', 'setbotimg', 'setautoread']
+    const allowedPrivateCommands = [
+      'qr', 'code', 'setbotname', 'setbotimg', 'setautoread',
+      'explorar', 'explorarpokemon',
+      'pokemon', 'pokemones', 'equipo',
+      'alimentar', 'liberar', 'liberarpokemon',
+      'evolucionar', 'evolucionarpokemon',
+      'pokebatalla', 'batallapokemon',
+      'poketienda', 'tiendapokemon', 'pokebolsa', 'bolsapokemon', 'venderpoke'
+    ]
     if (!m.isGroup && !allowedPrivateCommands.includes(command) && !isOwner) {
       return 
     }
@@ -435,66 +539,6 @@ for (let plugin of processedPlugins) {
 
 
 
-if (m.text && !commandExecuted && global.db.data.adivinanzasActivas && global.db.data.adivinanzasActivas[m.chat]) {
-  
-  if (m.isGroup && global.db.data.soloAdmin && global.db.data.soloAdmin[m.chat] === true) {
-    if (!isAdmin && !isOwner && !isROwner) {
-      return 
-    }
-  }
-  
-  const adivinanzaActiva = global.db.data.adivinanzasActivas[m.chat]
-  
-  
-  if (adivinanzaActiva.activa && !adivinanzaActiva.respondida) {
-    const tiempoTranscurrido = Date.now() - adivinanzaActiva.timestamp
-    const tiempoLimite = 60 * 1000 
-    
-    
-    if (tiempoTranscurrido > tiempoLimite) {
-      adivinanzaActiva.activa = false
-      adivinanzaActiva.respondida = true
-      
-      await this.sendMessage(m.chat, {
-        text: `👻 𝗔𝗱𝗶𝘃𝗶𝗻𝗮𝗻𝘇𝗮 𝗲𝘅𝗽𝗶𝗿𝗮𝗱𝗼\n\n> *Respuesta:* ${adivinanzaActiva.respuesta}\n> Nadie pudo adivinarlo.`,
-        contextInfo: {
-          ...rcanal.contextInfo
-        }
-      }, { quoted: m })
-      
-      return
-    }
-    
-  
-    const respuestaUsuario = m.text.toLowerCase().trim()
-    if (respuestaUsuario === adivinanzaActiva.respuesta) {
-     
-      adivinanzaActiva.activa = false
-      adivinanzaActiva.respondida = true
-      adivinanzaActiva.ganador = m.sender
-      
-    
-      let user = global.db.data.users[m.sender]
-      if (!user) global.db.data.users[m.sender] = {}
-      
-      const premio = Math.floor(Math.random() * (500 - 250 + 1)) + 250
-      user.coins = (user.coins || 0) + premio
-      
-      await this.sendMessage(m.chat, {
-        text: ` 🎉 𝗧𝗲𝗻𝗲𝗺𝗼𝘀 𝘂𝗻 𝗴𝗮𝗻𝗮𝗱𝗼𝗿 🎉\n\n> *Ganador:* @${m.sender.split('@')[0]}\n> *Respuesta:* ${adivinanzaActiva.respuesta}\n> *Premio:* +${premio} ${global.moneda}\n> *Total:* ${user.coins} ${global.moneda}`,
-        contextInfo: {
-          ...rcanal.contextInfo,
-          mentionedJid: [m.sender]
-        }
-      }, { quoted: m })
-      
-      return
-    }
-  }
-}
-
-
-  
   await handleModoDescargas(m, this, commandExecuted)
   await handleAntiSystems(m, this, isAdmin, isOwner, isRAdmin, isBotAdmin, isPrems, commandExecuted)
 
@@ -757,7 +801,7 @@ if (shouldAutoRead && !skipAutoRead) {
   }
 }
 
-if (shouldAutoRead) {
+if (shouldAutoRead && !m.isBotBanned) {
   await handleAIModes(m, this)
 }
 

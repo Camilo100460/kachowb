@@ -35,20 +35,15 @@ let handler = async (m, { conn, isAdmin, isBotAdmin }) => {
 
     if (!candidates.length) return m.reply('[❗] No hay miembros normales para mostrar.')
 
-    const lines = await Promise.all(candidates.map(async ({ participant, lastActivity }, index) => {
+    const taggedParticipants = candidates.map(({ participant }) => {
       const jids = participantJids(participant, conn)
-      const jid = jids[0] || participant.id
-      const name = await conn.getName(jid).catch(() => 'Usuario')
-      const status = lastActivity
-        ? new Date(lastActivity).toLocaleString('es-ES')
-        : 'Sin actividad registrada'
-      return `${index + 1}. @${jid.split('@')[0]}\n   > ${name}\n   > Última actividad: ${status}`
-    }))
+      const jid = jids.find(value => value.endsWith('@s.whatsapp.net')) || jids[0] || participant.id
+      return { jid, tag: `@${jid.split('@')[0]}` }
+    })
 
-    const mentions = candidates.flatMap(({ participant }) => participantJids(participant, conn).slice(0, 1))
     return conn.sendMessage(m.chat, {
-      text: `👻 *10 personas más inactivas*\n\n${lines.join('\n\n')}`,
-      mentions
+      text: `👻 *FANTASMAS DEL GRUPO*\n\n${taggedParticipants.map(({ tag }) => tag).join('\n')}`,
+      mentions: taggedParticipants.map(({ jid }) => jid)
     }, { quoted: m })
   } catch (error) {
     console.error('Error en fantasmas:', error)

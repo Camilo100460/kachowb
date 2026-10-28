@@ -1,0 +1,44 @@
+{
+  "activo": true,
+  "ronda": 1,
+  "equipos": [
+    {
+      "id": "t44417bff74",
+      "nombre": "X-FLY",
+      "logo": "scrim-data\\logos\\llaves_120363411520302312_g_us_t44417bff74.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    {
+      "id": "t679ab15110",
+      "nombre": "RAVEN DYNASTY",
+      "logo": "scrim-data\\logos\\llaves_120363411520302312_g_us_t679ab15110.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    {
+      "id": "te506b76746",
+      "nombre": "BRIGHT STARS",
+      "logo": "scrim-data\\logos\\llaves_120363411520302312_g_us_te506b76746.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    {
+      "id": "t3dd94f42b5",
+      "nombre": "MKE FEM",
+      "logo": "scrim-data\\logos\\llaves_120363411520302312_g_us_t3dd94f42b5.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    {
+      "id": "t192f96a5ce",
+      "nombre": "HUMBLE RANCH",
+      "logo": "scrim-data\\logos\\llaves_120363411520302312_g_us_t192f96a5ce.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    {
+      "id": "t6c39fc3f99",
+      "nombre": "Ruthless ϟ",
+      "logo": "scrim-data\\logos\\llaves_120363411520302312_g_us_t6c39fc3f99.png",
+      "owner": "573146680977@s.whatsapp.net"
+    }
+  ],
+  "resultados": {},
+  "salas": {}
+}

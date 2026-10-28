@@ -10,15 +10,35 @@ import { fileURLToPath } from 'url'
 
 // CAMBIA POR EL NUMERO QUE VA SER OWNER DEL BOT
 global.owner = [
-  ['573009438795', 'MayBot', true],
-  ['19047931753', 'Owner', true],
+  ['573107668900', 'Dueño', true],
+  ['26666668999', 'Owner', true],
+  ['573178454976', 'Owner', true],
+]
+global.scrimUsers = [
+  '573146680977',
+  '573009876543',
+  '19152160389',
+  '573011277561',
 ]
 
+global.scrimUsers2 = [
+  '573146680977',
+  '573009876543',
+  '19152160389',
+  '573011277561',
+]
+
+// Usuarios autorizados para los comandos de resultados/administración del cuadrilátero.
+// El registro de equipo con logo (.cuadricorp) está disponible para cualquier integrante del grupo.
+global.cuadriUsers = [
+  '573146680977',
+  '573009876543',
+  '19152160389',
+  '573011277561',
+]
 //  ACA PON EL LID DEL OWNER DEL BOT PARA QUE TE HAGA CASO COMO OWNER EL BOT, USA EL COMANDO /ID EN TU 
 //PRIVADO PARA SACAR TU LID
-global.ownerLid = [
-  ['573009438795', 'MayBot', true]
-]
+global.ownerLid = []
 
 global.sessions = 'Sessions'
 global.bot = 'Serbot' 
@@ -26,7 +46,7 @@ global.AFBots = true
 
 global.packname = '𝗣𝗔𝗜𝗡 𝗕𝗢𝗧'
 global.namebot = '𝗣𝗔𝗜𝗡 𝗕𝗢𝗧'
-global.author = 'Sunkovv'
+global.author = 'Camilo'
 global.moneda = 'USD'
 
 
@@ -34,6 +54,9 @@ global.moneda = 'USD'
 // Ejemplo: global.canal = { jid: '120363423390538090@newsletter', name: 'Pain Community' }
 // También acepta link: global.canal = 'https://whatsapp.com/channel/XXXXXXXX'
 global.canal = { jid: 'https://whatsapp.com/channel/0029VbDoqAbL7UVTIPkXw42x', name: 'MayBot' }
+
+// Enlace del grupo de soporte que muestran los comandos .info y .owner.
+global.supportGroup = 'https://chat.whatsapp.com/BOHAe6LJpEH9sSzIo3jcMB'
 
 // Canales que el bot y sub-bots siguen al conectar.
 // Puedes usar el JID (recomendado) o el link del canal:
@@ -59,7 +82,8 @@ global.APIs = {
 vreden: { url: "https://api.vreden.web.id", key: null },
 delirius: { url: "https://api.delirius.online", key: null },
 zenzxz: { url: "https://api.zenzxz.my.id", key: null },
-siputzx: { url: "https://api.siputzx.my.id", key: null }
+siputzx: { url: "https://api.siputzx.my.id", key: null },
+hunt: { url: "https://api.huntapi.com", key: null, webhookUrl: null }
 }
 
 import { syncRcanalFromConfig } from './lib/newsletter-rcanal.js'

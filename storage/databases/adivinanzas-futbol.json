@@ -1,0 +1,302 @@
+[
+  {
+    "id": 51,
+    "pregunta": "¿Qué selección ganó el Mundial de 1954 en el evento conocido como el 'Milagro de Berna'?",
+    "respuesta": "alemania",
+    "categoria": "mundial"
+  },
+  {
+    "id": 52,
+    "pregunta": "¿Quién es el máximo goleador histórico de la selección de Brasil superando a Pelé?",
+    "respuesta": "neymar",
+    "categoria": "records"
+  },
+  {
+    "id": 53,
+    "pregunta": "¿Qué club de la Premier League es apodado 'The Red Devils' (Los Diablos Rojos)?",
+    "respuesta": "manchester united",
+    "categoria": "clubes"
+  },
+  {
+    "id": 54,
+    "pregunta": "¿Qué legendario defensor italiano vistió únicamente la camiseta del AC Milan durante toda su carrera profesional de 24 años?",
+    "respuesta": "paolo maldini",
+    "categoria": "leyendas"
+  },
+  {
+    "id": 55,
+    "pregunta": "¿Qué equipo colombiano ganó la Copa Libertadores en la edición de 2004 derrotando a Boca Juniors?",
+    "respuesta": "once caldas",
+    "categoria": "torneos"
+  },
+  {
+    "id": 56,
+    "pregunta": "¿En qué país se celebró la Copa Mundial de la FIFA en 1994?",
+    "respuesta": "estados unidos",
+    "categoria": "mundial"
+  },
+  {
+    "id": 57,
+    "pregunta": "¿Qué entrenador estuvo al mando del Manchester United durante 26 temporadas consecutivas logrando 38 títulos?",
+    "respuesta": "alex ferguson",
+    "categoria": "entrenadores"
+  },
+  {
+    "id": 58,
+    "pregunta": "¿Qué famoso delantero camerunés jugó en el Barcelona, Inter de Milán y Chelsea?",
+    "respuesta": "samuel etoo",
+    "categoria": "jugadores"
+  },
+  {
+    "id": 59,
+    "pregunta": "¿En qué estadio juega como local el club Bayern Múnich desde el año 2005?",
+    "respuesta": "allianz arena",
+    "categoria": "estadios"
+  },
+  {
+    "id": 60,
+    "pregunta": "¿Qué selección europea disputó tres finales de Copa del Mundo (1974, 1978 y 2010) sin ganar ninguna?",
+    "respuesta": "paises bajos",
+    "categoria": "mundial"
+  },
+  {
+    "id": 61,
+    "pregunta": "¿Qué jugador anotó tres goles en la final del Mundial de Qatar 2022?",
+    "respuesta": "kylian mbappe",
+    "categoria": "mundial"
+  },
+  {
+    "id": 62,
+    "pregunta": "¿Qué club de la Serie A de Italia es conocido popularmente como 'La Vecchia Signora'?",
+    "respuesta": "juventus",
+    "categoria": "clubes"
+  },
+  {
+    "id": 63,
+    "pregunta": "¿Qué árbitro dirigió la histórica final del Mundial de Italia 1990 entre Alemania y Argentina?",
+    "respuesta": "edgardo codesal",
+    "categoria": "arbitraje"
+  },
+  {
+    "id": 64,
+    "pregunta": "¿Qué galardón entrega anualmente la revista France Football al mejor futbolista del mundo?",
+    "respuesta": "balon de oro",
+    "categoria": "premios"
+  },
+  {
+    "id": 65,
+    "pregunta": "¿Qué futbolista español anotó el gol decisivo en la final del Mundial 2010 contra Países Bajos?",
+    "respuesta": "andres iniesta",
+    "categoria": "mundial"
+  },
+  {
+    "id": 66,
+    "pregunta": "¿Qué club sudamericano ganó tres Copas Intercontinentales consecutivas entre 1977 y 1986 de la mano de diferentes generaciones?",
+    "respuesta": "river plate",
+    "categoria": "historia"
+  },
+  {
+    "id": 67,
+    "pregunta": "¿Quién es el máximo goleador histórico de la selección argentina?",
+    "respuesta": "lionel messi",
+    "categoria": "records"
+  },
+  {
+    "id": 68,
+    "pregunta": "¿Qué selección africana dio la gran campanada al vencer al campeón defensor Francia en el partido inaugural del Mundial 2002?",
+    "respuesta": "senegal",
+    "categoria": "curiosidades"
+  },
+  {
+    "id": 69,
+    "pregunta": "¿Cómo se llama el clásico partido que disputan el Real Madrid y el FC Barcelona?",
+    "respuesta": "el clasico",
+    "categoria": "rivalidades"
+  },
+  {
+    "id": 70,
+    "pregunta": "¿En qué club alemán destacó Erling Haaland antes de ser transferido al Manchester City?",
+    "respuesta": "borussia dortmund",
+    "categoria": "fichajes"
+  },
+  {
+    "id": 71,
+    "pregunta": "¿Qué jugador sostiene el récord de haber anotado 13 goles en una sola edición de la Copa del Mundo (Suecia 1958)?",
+    "respuesta": "just fontaine",
+    "categoria": "records"
+  },
+  {
+    "id": 72,
+    "pregunta": "¿En qué ciudad se disputó la final de la UEFA Champions League 2005 en la que el Liverpool remontó un 0-3 al AC Milan?",
+    "respuesta": "estambul",
+    "categoria": "torneos"
+  },
+  {
+    "id": 73,
+    "pregunta": "¿Qué famoso zurdo galés jugó toda su carrera en el Manchester United ganando 13 títulos de Premier League?",
+    "respuesta": "ryan giggs",
+    "categoria": "leyendas"
+  },
+  {
+    "id": 74,
+    "pregunta": "¿Qué país organizó y ganó el Mundial de 1966?",
+    "respuesta": "inglaterra",
+    "categoria": "mundial"
+  },
+  {
+    "id": 75,
+    "pregunta": "¿Qué apodo recibe el seleccionado nacional de fútbol de México?",
+    "respuesta": "el tri",
+    "categoria": "selecciones"
+  },
+  {
+    "id": 76,
+    "pregunta": "¿Qué club inglés es conocido como 'The Magpies' (Las Uracas)?",
+    "respuesta": "newcastle",
+    "categoria": "clubes"
+  },
+  {
+    "id": 77,
+    "pregunta": "¿Qué técnico dirigió a la selección de Alemania en su consagración durante el Mundial de Brasil 2014?",
+    "respuesta": "joachim low",
+    "categoria": "entrenadores"
+  },
+  {
+    "id": 78,
+    "pregunta": "¿Qué jugador ostenta el récord de más apariciones internacionales con la selección de Portugal?",
+    "respuesta": "cristiano ronaldo",
+    "categoria": "records"
+  },
+  {
+    "id": 79,
+    "pregunta": "¿Qué estadio emblemático de Madrid es la sede del Real Madrid?",
+    "respuesta": "santiago bernabeu",
+    "categoria": "estadios"
+  },
+  {
+    "id": 80,
+    "pregunta": "¿Qué selección sudamericana es conocida popularmente como 'La Celeste'?",
+    "respuesta": "uruguay",
+    "categoria": "selecciones"
+  },
+  {
+    "id": 81,
+    "pregunta": "¿Qué famoso delantero marfileño fue el referente histórico del Chelsea a mediados de la década de 2000?",
+    "respuesta": "didier drogba",
+    "categoria": "leyendas"
+  },
+  {
+    "id": 82,
+    "pregunta": "¿Quién fue el máximo goleador del Mundial de Brasil 2014 ganando la Bota de Oro?",
+    "respuesta": "james rodriguez",
+    "categoria": "mundial"
+  },
+  {
+    "id": 83,
+    "pregunta": "¿Qué club argentino tiene el apodo de 'El Ciclón'?",
+    "respuesta": "san lorenzo",
+    "categoria": "clubes"
+  },
+  {
+    "id": 84,
+    "pregunta": "¿Qué torneo continental de selecciones organiza la CONCACAF?",
+    "respuesta": "copa oro",
+    "categoria": "torneos"
+  },
+  {
+    "id": 85,
+    "pregunta": "¿Qué jugador neerlandés fue famoso por su impecable pegada de tiro libre y por haber dirigido al Barcelona?",
+    "respuesta": "ronald koeman",
+    "categoria": "leyendas"
+  },
+  {
+    "id": 86,
+    "pregunta": "¿Qué arquero español fue apodado 'El Santo' tras sus actuaciones históricas con el Real Madrid y España?",
+    "respuesta": "iker casillas",
+    "categoria": "leyendas"
+  },
+  {
+    "id": 87,
+    "pregunta": "¿Qué trofeo se le otorga al ganador del torneo de clubes más importante de Sudamérica?",
+    "respuesta": "copa libertadores",
+    "categoria": "torneos"
+  },
+  {
+    "id": 88,
+    "pregunta": "¿Qué club de la Premier League disputa sus partidos como local en Stamford Bridge?",
+    "respuesta": "chelsea",
+    "categoria": "estadios"
+  },
+  {
+    "id": 89,
+    "pregunta": "¿Qué histórico jugador sueco jugó en el Ajax, Juventus, Inter, Barcelona, Milan y PSG?",
+    "respuesta": "zlatan ibrahimovic",
+    "categoria": "jugadores"
+  },
+  {
+    "id": 90,
+    "pregunta": "¿Qué selección ganó el primer torneo continental oficial de la Copa América en 1916?",
+    "respuesta": "uruguay",
+    "categoria": "historia"
+  },
+  {
+    "id": 91,
+    "pregunta": "¿Qué jugador inglés ostenta el récord de más goles anotados en la historia de la Premier League?",
+    "respuesta": "alan shearer",
+    "categoria": "records"
+  },
+  {
+    "id": 92,
+    "pregunta": "¿Qué entrenador argentino lideró a la selección de Argentina a ganar la Copa del Mundo 2022?",
+    "respuesta": "lionel scaloni",
+    "categoria": "entrenadores"
+  },
+  {
+    "id": 93,
+    "pregunta": "¿En qué país se disputó la Copa Mundial de la FIFA en 2006?",
+    "respuesta": "alemania",
+    "categoria": "mundial"
+  },
+  {
+    "id": 94,
+    "pregunta": "¿Qué término futbolístico describe la acción de pasar el balón por entre las piernas de un rival?",
+    "respuesta": "caño",
+    "categoria": "terminos"
+  },
+  {
+    "id": 95,
+    "pregunta": "¿Qué club portugues es conocido como los 'Dragões' (Dragones)?",
+    "respuesta": "porto",
+    "categoria": "clubes"
+  },
+  {
+    "id": 96,
+    "pregunta": "¿Quién era el capitán y figura defensiva de Italia en la conquista del Mundial 2006?",
+    "respuesta": "fabio cannavaro",
+    "categoria": "mundial"
+  },
+  {
+    "id": 97,
+    "pregunta": "¿Qué club francés disputa el gran clásico de Francia ('Le Classique') contra el Paris Saint-Germain?",
+    "respuesta": "marseille",
+    "categoria": "rivalidades"
+  },
+  {
+    "id": 98,
+    "pregunta": "¿Qué mítico delantero checo ganó el Balón de Oro en 2003 brillando en la Juventus?",
+    "respuesta": "pavel nedved",
+    "categoria": "leyendas"
+  },
+  {
+    "id": 99,
+    "pregunta": "¿Qué selección sudamericana disputó el famoso 'Partido del Siglo' en el Mundial de México 1970 ante Italia?",
+    "respuesta": "alemania",
+    "categoria": "historia"
+  },
+  {
+    "id": 100,
+    "pregunta": "¿Qué premio de la FIFA reconoce al mejor gol anotado durante el año natural?",
+    "respuesta": "puskas",
+    "categoria": "premios"
+  }
+]

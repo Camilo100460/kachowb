@@ -1,0 +1,257 @@
+{
+  "activo": true,
+  "salaActual": 4,
+  "totalSalas": 6,
+  "equipos": {
+    "t44417bff74": {
+      "nombre": "x-fly",
+      "logo": "scrim-data-team2\\logos\\120363412018329393_g_us_t44417bff74.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t20901f355b": {
+      "nombre": "Perros",
+      "logo": "scrim-data-team2\\logos\\120363412018329393_g_us_t20901f355b.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t9da5f5df51": {
+      "nombre": "Gatos",
+      "logo": "scrim-data-team2\\logos\\120363412018329393_g_us_t9da5f5df51.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tf948d0c26b": {
+      "nombre": "Perras",
+      "logo": "scrim-data-team2\\logos\\120363412018329393_g_us_tf948d0c26b.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t0537ebf699": {
+      "nombre": "zorros",
+      "logo": "scrim-data-team2\\logos\\120363412018329393_g_us_t0537ebf699.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tfa50f73a0d": {
+      "nombre": "zorras",
+      "logo": "scrim-data-team2\\logos\\120363412018329393_g_us_tfa50f73a0d.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t04987067fa": {
+      "nombre": "Abuelos",
+      "logo": "scrim-data-team2\\logos\\120363412018329393_g_us_t04987067fa.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t4dcd1a3dd1": {
+      "nombre": "Abuelas",
+      "logo": "scrim-data-team2\\logos\\120363412018329393_g_us_t4dcd1a3dd1.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t9040bea339": {
+      "nombre": "Chicos",
+      "logo": "scrim-data-team2\\logos\\120363412018329393_g_us_t9040bea339.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t47ae7d00f3": {
+      "nombre": "Chicas",
+      "logo": "scrim-data-team2\\logos\\120363412018329393_g_us_t47ae7d00f3.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tdea56e47f1": {
+      "nombre": "Barcelona",
+      "logo": "scrim-data-team2\\logos\\120363412018329393_g_us_tdea56e47f1.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t8500e24df2": {
+      "nombre": "niñas",
+      "logo": "scrim-data-team2\\logos\\120363412018329393_g_us_t8500e24df2.png",
+      "owner": "573146680977@s.whatsapp.net"
+    }
+  },
+  "resultados": {
+    "1": {
+      "t44417bff74": {
+        "puesto": 6,
+        "kills": 0,
+        "puntos": 5
+      },
+      "t20901f355b": {
+        "puesto": 7,
+        "kills": 0,
+        "puntos": 4
+      },
+      "t9da5f5df51": {
+        "puesto": 11,
+        "kills": 0,
+        "puntos": 0
+      },
+      "tf948d0c26b": {
+        "puesto": 8,
+        "kills": 0,
+        "puntos": 3
+      },
+      "t0537ebf699": {
+        "puesto": 9,
+        "kills": 0,
+        "puntos": 2
+      },
+      "tfa50f73a0d": {
+        "puesto": 12,
+        "kills": 0,
+        "puntos": 0
+      },
+      "t04987067fa": {
+        "puesto": 4,
+        "kills": 0,
+        "puntos": 7
+      },
+      "t4dcd1a3dd1": {
+        "puesto": 3,
+        "kills": 0,
+        "puntos": 8
+      },
+      "t9040bea339": {
+        "puesto": 2,
+        "kills": 0,
+        "puntos": 9
+      },
+      "t47ae7d00f3": {
+        "puesto": 1,
+        "kills": 0,
+        "puntos": 12
+      },
+      "tdea56e47f1": {
+        "puesto": 5,
+        "kills": 0,
+        "puntos": 6
+      },
+      "t8500e24df2": {
+        "puesto": 10,
+        "kills": 0,
+        "puntos": 1
+      }
+    },
+    "2": {
+      "t44417bff74": {
+        "puesto": 3,
+        "kills": 0,
+        "puntos": 8
+      },
+      "t20901f355b": {
+        "puesto": 4,
+        "kills": 0,
+        "puntos": 7
+      },
+      "t9da5f5df51": {
+        "puesto": 8,
+        "kills": 0,
+        "puntos": 3
+      },
+      "tf948d0c26b": {
+        "puesto": 7,
+        "kills": 0,
+        "puntos": 4
+      },
+      "t0537ebf699": {
+        "puesto": 6,
+        "kills": 0,
+        "puntos": 5
+      },
+      "tfa50f73a0d": {
+        "puesto": 5,
+        "kills": 0,
+        "puntos": 6
+      },
+      "t04987067fa": {
+        "puesto": 2,
+        "kills": 0,
+        "puntos": 9
+      },
+      "t4dcd1a3dd1": {
+        "puesto": 1,
+        "kills": 0,
+        "puntos": 12
+      },
+      "t9040bea339": {
+        "puesto": 12,
+        "kills": 0,
+        "puntos": 0
+      },
+      "t47ae7d00f3": {
+        "puesto": 11,
+        "kills": 0,
+        "puntos": 0
+      },
+      "tdea56e47f1": {
+        "puesto": 10,
+        "kills": 0,
+        "puntos": 1
+      },
+      "t8500e24df2": {
+        "puesto": 9,
+        "kills": 0,
+        "puntos": 2
+      }
+    },
+    "3": {
+      "t44417bff74": {
+        "puesto": 2,
+        "kills": 0,
+        "puntos": 9
+      },
+      "t20901f355b": {
+        "puesto": 1,
+        "kills": 0,
+        "puntos": 12
+      },
+      "t9da5f5df51": {
+        "puesto": 11,
+        "kills": 0,
+        "puntos": 0
+      },
+      "tf948d0c26b": {
+        "puesto": 10,
+        "kills": 0,
+        "puntos": 1
+      },
+      "t0537ebf699": {
+        "puesto": 6,
+        "kills": 0,
+        "puntos": 5
+      },
+      "tfa50f73a0d": {
+        "puesto": 3,
+        "kills": 0,
+        "puntos": 8
+      },
+      "t04987067fa": {
+        "puesto": 5,
+        "kills": 0,
+        "puntos": 6
+      },
+      "t4dcd1a3dd1": {
+        "puesto": 4,
+        "kills": 0,
+        "puntos": 7
+      },
+      "t9040bea339": {
+        "puesto": 9,
+        "kills": 0,
+        "puntos": 2
+      },
+      "t47ae7d00f3": {
+        "puesto": 7,
+        "kills": 0,
+        "puntos": 4
+      },
+      "tdea56e47f1": {
+        "puesto": 12,
+        "kills": 0,
+        "puntos": 0
+      },
+      "t8500e24df2": {
+        "puesto": 8,
+        "kills": 0,
+        "puntos": 3
+      }
+    }
+  },
+  "clave": "9827",
+  "integrantes": []
+}

@@ -58,7 +58,7 @@ async function searchOnce(query) {
   const res = await fetch(searchUrl, {
     headers: {
       Accept: 'application/json',
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) PainBot/1.0'
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) KACHOWBOT/1.0'
     }
   })
   const raw = await res.text()

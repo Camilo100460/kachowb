@@ -11,18 +11,21 @@ import {
 import { existsSync, readFileSync } from 'fs'
 import { join } from 'path'
 
-const MARAVILLA_AUDIO = join(process.cwd(), 'maravilla.mp3')
+const RAYO_AUDIO = join(process.cwd(), 'rayo.mp3')
 
-async function sendMaravillaAudio(conn, chatId, quoted) {
-  if (!existsSync(MARAVILLA_AUDIO)) return
+async function sendRayoAudio(conn, chatId, quoted) {
+  if (!existsSync(RAYO_AUDIO)) {
+    console.error(`No se encontró el audio de activación: ${RAYO_AUDIO}`)
+    return
+  }
 
   await conn.sendMessage(chatId, {
-    audio: readFileSync(MARAVILLA_AUDIO),
+    audio: readFileSync(RAYO_AUDIO),
     mimetype: 'audio/mpeg',
-    fileName: 'maravilla.mp3',
+    fileName: 'rayo.mp3',
     ptt: false
   }, { quoted }).catch(error => {
-    console.error('No se pudo enviar el audio de maravilla:', error)
+    console.error('No se pudo enviar el audio de rayo:', error)
   })
 }
 
@@ -65,7 +68,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
 
     const label = permanentType === 'official' ? 'Grupo Oficial ♾️' : 'Infinito ♾️'
 
-    await sendMaravillaAudio(conn, m.chat, m)
+    await sendRayoAudio(conn, m.chat, m)
     return
   }
 
@@ -80,7 +83,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
   try {
     const rental = await saveRental(m.chat, durationMs, m.sender)
 
-    await sendMaravillaAudio(conn, m.chat, m)
+    await sendRayoAudio(conn, m.chat, m)
     return
   } catch (e) {
     console.error('Error en comando one:', e)

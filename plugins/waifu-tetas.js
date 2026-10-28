@@ -52,8 +52,8 @@ let handler = async (m, { conn }) => {
   }
 }
 
-handler.help = ['#tetas', '#tch', '#ts']
+handler.help = ['#tch', '#ts']
 handler.tags = ['nsfw']
-handler.command = ['tetas', 'tch', 'ts']
+handler.command = ['tch', 'ts']
 
 export default handler

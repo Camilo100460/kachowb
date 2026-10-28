@@ -478,5 +478,185 @@
     "pregunta": "¿Qué tiene dedos pero no es mano?",
     "respuesta": "pie",
     "categoria": "cuerpo"
+  },
+  {
+    "id": 81,
+    "pregunta": "¿Cómo se dice \"casa\" en inglés?",
+    "respuesta": "house",
+    "categoria": "ingles"
+  },
+  {
+    "id": 82,
+    "pregunta": "¿Cómo se dice \"perro\" en inglés?",
+    "respuesta": "dog",
+    "categoria": "ingles"
+  },
+  {
+    "id": 83,
+    "pregunta": "¿Cómo se dice \"gato\" en inglés?",
+    "respuesta": "cat",
+    "categoria": "ingles"
+  },
+  {
+    "id": 84,
+    "pregunta": "¿Cómo se dice \"libro\" en inglés?",
+    "respuesta": "book",
+    "categoria": "ingles"
+  },
+  {
+    "id": 85,
+    "pregunta": "¿Cómo se dice \"agua\" en inglés?",
+    "respuesta": "water",
+    "categoria": "ingles"
+  },
+  {
+    "id": 86,
+    "pregunta": "¿Cómo se dice \"comida\" en inglés?",
+    "respuesta": "food",
+    "categoria": "ingles"
+  },
+  {
+    "id": 87,
+    "pregunta": "¿Cómo se dice \"amigo\" en inglés?",
+    "respuesta": "friend",
+    "categoria": "ingles"
+  },
+  {
+    "id": 88,
+    "pregunta": "¿Cómo se dice \"escuela\" en inglés?",
+    "respuesta": "school",
+    "categoria": "ingles"
+  },
+  {
+    "id": 89,
+    "pregunta": "¿Cómo se dice \"manzana\" en inglés?",
+    "respuesta": "apple",
+    "categoria": "ingles"
+  },
+  {
+    "id": 90,
+    "pregunta": "¿Cómo se dice \"rojo\" en inglés?",
+    "respuesta": "red",
+    "categoria": "ingles"
+  },
+  {
+    "id": 91,
+    "pregunta": "¿Cómo se dice \"azul\" en inglés?",
+    "respuesta": "blue",
+    "categoria": "ingles"
+  },
+  {
+    "id": 92,
+    "pregunta": "¿Cómo se dice \"verde\" en inglés?",
+    "respuesta": "green",
+    "categoria": "ingles"
+  },
+  {
+    "id": 93,
+    "pregunta": "¿Cómo se dice \"libre\" o \"feliz\" en inglés?",
+    "respuesta": "happy",
+    "categoria": "ingles"
+  },
+  {
+    "id": 94,
+    "pregunta": "¿Cómo se dice \"grande\" en inglés?",
+    "respuesta": "big",
+    "categoria": "ingles"
+  },
+  {
+    "id": 95,
+    "pregunta": "¿Cómo se dice \"pequeño\" en inglés?",
+    "respuesta": "small",
+    "categoria": "ingles"
+  },
+  {
+    "id": 96,
+    "pregunta": "¿Cómo se dice \"día\" en inglés?",
+    "respuesta": "day",
+    "categoria": "ingles"
+  },
+  {
+    "id": 97,
+    "pregunta": "¿Cómo se dice \"noche\" en inglés?",
+    "respuesta": "night",
+    "categoria": "ingles"
+  },
+  {
+    "id": 98,
+    "pregunta": "¿Cómo se dice \"familia\" en inglés?",
+    "respuesta": "family",
+    "categoria": "ingles"
+  },
+  {
+    "id": 99,
+    "pregunta": "¿Cómo se dice \"madre\" en inglés?",
+    "respuesta": "mother",
+    "categoria": "ingles"
+  },
+  {
+    "id": 100,
+    "pregunta": "¿Cómo se dice \"padre\" en inglés?",
+    "respuesta": "father",
+    "categoria": "ingles"
+  },
+  {
+    "id": 101,
+    "pregunta": "¿Cómo se dice \"uno\" en inglés?",
+    "respuesta": "one",
+    "categoria": "ingles"
+  },
+  {
+    "id": 102,
+    "pregunta": "¿Cómo se dice \"cinco\" en inglés?",
+    "respuesta": "five",
+    "categoria": "ingles"
+  },
+  {
+    "id": 103,
+    "pregunta": "¿Cómo se dice \"diez\" en inglés?",
+    "respuesta": "ten",
+    "categoria": "ingles"
+  },
+  {
+    "id": 104,
+    "pregunta": "¿Cómo se dice \"gracias\" en inglés?",
+    "respuesta": "thank you",
+    "categoria": "ingles"
+  },
+  {
+    "id": 105,
+    "pregunta": "¿Cómo se dice \"por favor\" en inglés?",
+    "respuesta": "please",
+    "categoria": "ingles"
+  },
+  {
+    "id": 106,
+    "pregunta": "¿Cómo se dice \"buenos días\" en inglés?",
+    "respuesta": "good morning",
+    "categoria": "ingles"
+  },
+  {
+    "id": 107,
+    "pregunta": "¿Cómo se dice \"buenas noches\" en inglés?",
+    "respuesta": "good night",
+    "categoria": "ingles"
+  },
+  {
+    "id": 108,
+    "pregunta": "¿Cómo se dice \"ventana\" en inglés?",
+    "respuesta": "window",
+    "categoria": "ingles"
+  },
+  {
+    "id": 109,
+    "pregunta": "¿Cómo se dice \"silla\" en inglés?",
+    "respuesta": "chair",
+    "categoria": "ingles"
+  },
+  {
+    "id": 110,
+    "pregunta": "¿Cómo se dice \"maestro\" en inglés?",
+    "respuesta": "teacher",
+    "categoria": "ingles"
   }
 ]

@@ -30,7 +30,7 @@ async function toWebp(buffer, opts = {}) {
   const options = [
     '-vcodec', 'libwebp',
     '-vf', `scale=512:512:force_original_aspect_ratio=decrease,pad=512:512:(ow-iw)/2:(oh-ih)/2:color=0x00000000,fps=15,split[a][b];[a]palettegen=reserve_transparent=on:transparency_color=ffffff[p];[b][p]paletteuse`,
-    ...(ext.match(/(mp4|mkv|m4p|gif|webm)/) ? ['-loop', '0', '-preset', 'default', '-an', '-vsync', '0'] : [])
+    ...(ext.match(/(mp4|mkv|m4p|gif|webm)/) ? ['-loop', '0', '-preset', 'default', '-an'] : [])
   ]
 
   return new Promise((resolve, reject) => {

@@ -10,7 +10,7 @@ let handler = async (m, { conn }) => {
 
   conn.reply(m.chat, msg, m, rcanal, { mentions: cumple.map(v => v.replace(/[^\d]/g, '') + '@s.whatsapp.net') })
 }
-handler.help = ['#birthdays • #cumpleaños • #births\n→ Revisa quién está por celebrar su día']
+handler.help = ['#birthdays • #births\n→ Revisa quién está celebrando su cumpleaños hoy']
 handler.tags = ['perfiles']
-handler.command = ['birthdays', 'cumpleaños', 'births']
+handler.command = ['birthdays', 'births']
 export default handler

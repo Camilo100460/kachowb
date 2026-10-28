@@ -1,0 +1,38 @@
+{
+  "activo": false,
+  "equipos": {
+    "t44417bff74": {
+      "nombre": "x-fly",
+      "logo": "cuadri-data-corp\\logos\\120363429232418377_g_us_t44417bff74.png",
+      "color": "negro",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t0537ebf699": {
+      "nombre": "Zorros",
+      "logo": "cuadri-data-corp\\logos\\120363429232418377_g_us_t0537ebf699.png",
+      "color": "blanco",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t331d269488": {
+      "nombre": "LOS INSANIOS",
+      "logo": "cuadri-data-corp\\logos\\120363429232418377_g_us_t331d269488.png",
+      "color": "rojo",
+      "owner": "26666668999@s.whatsapp.net"
+    },
+    "ta3f3d7df63": {
+      "nombre": "Camas",
+      "logo": "cuadri-data-corp\\logos\\120363429232418377_g_us_ta3f3d7df63.png",
+      "color": "amarillo",
+      "owner": "573146680977@s.whatsapp.net"
+    }
+  },
+  "salas": {
+    "1": "t0537ebf699",
+    "2": "t44417bff74",
+    "3": "t331d269488",
+    "4": "ta3f3d7df63",
+    "5": "t44417bff74"
+  },
+  "ganador": "t44417bff74",
+  "clave": "5005"
+}

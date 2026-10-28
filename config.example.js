@@ -34,6 +34,9 @@ global.moneda = 'USD'
 // Etiqueta de canal en mensajes (rcanal). Obtén el JID con: .canalid <link del canal>
 global.canal = ''
 
+// Enlace del grupo de soporte (opcional).
+global.supportGroup = ''
+
 // Canales que el bot y sub-bots siguen al conectar (JID @newsletter o link del canal)
 global.ch = {
 ch1: '',
@@ -48,6 +51,10 @@ global.baileysInteractive = true
 global.mods =   []
 global.prems = []
 
+// Usuarios autorizados para los comandos de resultados/administración del cuadrilátero.
+// El registro de equipo con logo (.cuadricorp) está disponible para cualquier integrante del grupo.
+global.cuadriUsers = []
+
 global.multiplier = 69 
 global.maxwarn = '2'
 
@@ -56,7 +63,8 @@ global.APIs = {
 vreden: { url: "https://api.vreden.web.id", key: null },
 delirius: { url: "https://api.delirius.online", key: null },
 zenzxz: { url: "https://api.zenzxz.my.id", key: null },
-siputzx: { url: "https://api.siputzx.my.id", key: null }
+siputzx: { url: "https://api.siputzx.my.id", key: null },
+hunt: { url: "https://api.huntapi.com", key: null, webhookUrl: null }
 }
 
 import { syncRcanalFromConfig } from './lib/newsletter-rcanal.js'

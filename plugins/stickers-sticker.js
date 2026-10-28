@@ -35,7 +35,7 @@ let handler = async (m, { conn, args }) => {
 
 handler.help = ['#sticker • #s • #stickers + {imagen/video o link}']
 handler.tags = ['stickers']
-handler.command = ['s', 'stickers', 'sticker']
+handler.command = []
 
 export default handler
 
@@ -80,7 +80,7 @@ async function toWebp(buffer, opts = {}) {
     '-vcodec', 'libwebp',
     '-vf', `scale=512:512:force_original_aspect_ratio=decrease,pad=512:512:(ow-iw)/2:(oh-ih)/2:color=0x00000000,fps=15,split[a][b];[a]palettegen=reserve_transparent=on:transparency_color=ffffff[p];[b][p]paletteuse`,
     ...(ext.match(/(mp4|mkv|m4p|gif|webm)/)
-      ? ['-loop', '0', '-preset', 'default', '-an', '-vsync', '0']
+      ? ['-loop', '0', '-preset', 'default', '-an']
       : []
     )
   ]

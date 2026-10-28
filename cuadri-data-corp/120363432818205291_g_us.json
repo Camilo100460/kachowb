@@ -1,0 +1,31 @@
+{
+  "activo": false,
+  "equipos": {
+    "t44417bff74": {
+      "nombre": "X-fly",
+      "logo": "cuadri-data-corp\\logos\\120363432818205291_g_us_t44417bff74.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t0537ebf699": {
+      "nombre": "Zorros",
+      "logo": "cuadri-data-corp\\logos\\120363432818205291_g_us_t0537ebf699.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t20901f355b": {
+      "nombre": "Perros",
+      "logo": "cuadri-data-corp\\logos\\120363432818205291_g_us_t20901f355b.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t9da5f5df51": {
+      "nombre": "Gatos",
+      "logo": "cuadri-data-corp\\logos\\120363432818205291_g_us_t9da5f5df51.png",
+      "owner": "573146680977@s.whatsapp.net"
+    }
+  },
+  "salas": {
+    "1": "t44417bff74",
+    "2": "t44417bff74"
+  },
+  "ganador": "t44417bff74",
+  "clave": "6098"
+}

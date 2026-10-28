@@ -1,3 +1,5 @@
+import { BLACKLIST_KEY, findEntryKey } from '../lib/blacklist.js'
+
 let handler = async (m, { conn, args, participants, isAdmin, isBotAdmin, isOwner, isPrems, usedPrefix, command }) => {
   if (!m.isGroup) return conn.sendMessage(m.chat, {
     text: '[❗] Este comando solo puede ser usado en grupos.',
@@ -93,12 +95,35 @@ let handler = async (m, { conn, args, participants, isAdmin, isBotAdmin, isOwner
   
   try {
     
-    await conn.groupParticipantsUpdate(m.chat, [jid], 'add')
+    if (findEntryKey(BLACKLIST_KEY, [number]) !== null) {
+      return conn.sendMessage(m.chat, {
+        text: `[❗] El número ${number} está en la lista negra y no puede ser invitado.`,
+        contextInfo: {
+          ...rcanal.contextInfo
+        }
+      }, { quoted: m })
+    }
+
+    const [registered] = await conn.onWhatsApp(jid)
+    if (!registered?.exists) {
+      return conn.sendMessage(m.chat, {
+        text: `[❗] No se pudo invitar al usuario ${number}.\n\n> El número no existe en whatsapp.`,
+        contextInfo: {
+          ...rcanal.contextInfo
+        }
+      }, { quoted: m })
+    }
+
+    const inviteCode = await conn.groupInviteCode(m.chat)
+    await conn.sendMessage(registered.jid || jid, {
+      text: `👋 Hola, @${m.sender.split('@')[0]} te invita al grupo *${groupMetadata.subject}*.\n\n🔗 Únete con este enlace:\nhttps://chat.whatsapp.com/${inviteCode}`,
+      mentions: [m.sender]
+    })
     
     const groupName = groupMetadata.subject
     
     return conn.sendMessage(m.chat, {
-      text: `🌴 𝗨𝘀𝘂𝗮𝗿𝗶𝗼 𝗮𝗴𝗿𝗲𝗴𝗮𝗱𝗼 𝗰𝗼𝗿𝗿𝗲𝗰𝘁𝗮𝗺𝗲𝗻𝘁𝗲.\n\n> 🜸 Número: ${number}\n> ✰ Admin: @${m.sender.split('@')[0]}\n> ❂ Grupo: ${groupName}`,
+      text: `🌴 𝗘𝗻𝗹𝗮𝗰𝗲 𝗲𝗻𝘃𝗶𝗮𝗱𝗼 𝗮𝗹 𝗽𝗿𝗶𝘃𝗮𝗱𝗼.\n\n> 🜸 Número: ${number}\n> ✰ Admin: @${m.sender.split('@')[0]}\n> ❂ Grupo: ${groupName}`,
       contextInfo: {
         ...rcanal.contextInfo,
         mentionedJid: [m.sender]

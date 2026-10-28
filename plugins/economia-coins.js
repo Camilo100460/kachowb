@@ -1,22 +1,32 @@
 let handler = async (m, { conn, text, args }) => {
-  let who = m.mentionedJid[0] 
-    ? m.mentionedJid[0] 
+  const who = m.mentionedJid?.[0]
+    ? m.mentionedJid[0]
     : args[0] 
       ? args[0].replace(/[^0-9]/g, '') + '@s.whatsapp.net' 
       : m.sender
 
-  let user = global.db.data.users[who]
-  if (!user) return conn.reply(m.chat, '[❗] Usuario no registrado en la base de datos.', m, rcanal, { mentions: [who] })
+  const user = global.db.data.users[who]
+  if (!user) {
+    return conn.reply(
+      m.chat,
+      '╭━〔 💰 _*ECONOMÍA*_ 〕━╮\n┃ Ese usuario aún no está registrado.\n╰━━━━━━━━━━━━╯',
+      m,
+      rcanal,
+      { mentions: [who] }
+    )
+  }
 
-  let coins = user.coins || 0
-  let name = await conn.getName(who)
+  const coins = Number(user.coins) || 0
+  const name = await conn.getName(who)
+  const formattedCoins = new Intl.NumberFormat('es-ES').format(coins)
 
   return conn.sendMessage(m.chat, {
-  text: `☾. Economía de usuario
-
-𓍯 Usuario: @${who.split('@')[0]}
-𓍯 Coins actuales: ${coins}`,
-      contextInfo: {
+    text: `╭━━〔 💰 _*ECONOMÍA*_ 〕━━╮
+┃
+┃ 👤 *${name || 'Usuario'}*
+┃ 🪙 *Saldo:* *${formattedCoins} coins*
+╰━━━━━━━━━━━━━━╯`,
+    contextInfo: {
       ...rcanal.contextInfo,
       mentionedJid: [who, m.sender]
     }

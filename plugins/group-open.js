@@ -60,7 +60,7 @@ let handler = async (m, { conn, args, participants, isAdmin, isBotAdmin, isOwner
   }
 }
 
-handler.command = ['open', 'abrir', 'grupo-abierto']
+handler.command = ['open', 'abrir', 'grupo-abierto', 'abrirgrupo', 'grupo_abierto', 'unlock', 'abierto'];
 handler.group = true
 handler.admin = true
 handler.botAdmin = true

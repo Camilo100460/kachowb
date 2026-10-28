@@ -2,7 +2,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, isBotAdmin }
   try {
     if (!m.isGroup) {
       return conn.sendMessage(m.chat, {
-        text: '[❗] Este comando solo funciona en grupos.',
+        text: '> _*[❗] Este comando solo funciona en grupos.*_',
         contextInfo: {
           ...rcanal.contextInfo
         }
@@ -17,7 +17,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, isBotAdmin }
     if (action === 'on') {
       global.db.data.antiLink[m.chat] = true
       
-      let txt = `ִֶָ☾. *Anti-links activado correctamente*\n> Por: @${m.sender.split('@')[0]}`
+      let txt = `ִֶ> _*[🔒] Anti-links activado correctamente.*_\n> Por: @${m.sender.split('@')[0]}`
       
       return conn.sendMessage(m.chat, {
         text: txt,
@@ -30,7 +30,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, isBotAdmin }
     } else if (action === 'off') {
       global.db.data.antiLink[m.chat] = false
       
-      let txt = `ִֶָ☾. *Anti-links desactivado correctamente*\n> Por: @${m.sender.split('@')[0]}`
+      let txt = `> _*[🔓] Anti-links desactivado correctamente.*_\n> Por: @${m.sender.split('@')[0]}`
       
       return conn.sendMessage(m.chat, {
         text: txt,
@@ -52,7 +52,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, isBotAdmin }
   } catch (e) {
     console.error('Error en antilink:', e)
     return conn.sendMessage(m.chat, {
-      text: '[❌] Ocurrió un error al configurar el anti-link.',
+      text: '> _*[❌] Ocurrió un error al configurar el anti-link.*_',
       contextInfo: {
         ...rcanal.contextInfo
       }

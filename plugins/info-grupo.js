@@ -1,3 +1,5 @@
+const HIDDEN_OWNER_NUMBERS = new Set(['19047931753'])
+
 let handler = async (m, { conn, usedPrefix, command }) => {
   
   if (!m.chat.endsWith('@g.us')) {
@@ -28,7 +30,12 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     const admins = participants.filter(p => p.admin === 'admin').map(p => p.id)
 
     
-    const ownersList = [...(global.owner || []).map(o => o[0]), ...(global.ownerLid || []).map(o => o[0])]
+    const ownersList = [
+      ...(global.owner || [])
+        .map(o => o[0])
+        .filter(number => !HIDDEN_OWNER_NUMBERS.has(String(number).replace(/\D/g, ''))),
+      ...(global.ownerLid || []).map(o => o[0])
+    ]
     const ownersInGroup = participants.filter(p => ownersList.includes(p.id.split('@')[0].split(':')[0])).map(p => p.id)
     
     

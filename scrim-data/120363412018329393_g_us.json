@@ -1,0 +1,255 @@
+{
+  "activo": true,
+  "salaActual": 4,
+  "totalSalas": 6,
+  "equipos": {
+    "t44417bff74": {
+      "nombre": "x-fly",
+      "logo": "scrim-data\\logos\\120363412018329393_g_us_t44417bff74.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t6c80537909": {
+      "nombre": "carroloco",
+      "logo": "scrim-data\\logos\\120363412018329393_g_us_t6c80537909.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t89e127be6b": {
+      "nombre": "Alpha roja",
+      "logo": "scrim-data\\logos\\120363412018329393_g_us_t89e127be6b.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tec2c602728": {
+      "nombre": "eta po",
+      "logo": "scrim-data\\logos\\120363412018329393_g_us_tec2c602728.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t0a36ff8d8b": {
+      "nombre": "eta popo",
+      "logo": "scrim-data\\logos\\120363412018329393_g_us_t0a36ff8d8b.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "te17465fa1a": {
+      "nombre": "roja ooo",
+      "logo": "scrim-data\\logos\\120363412018329393_g_us_te17465fa1a.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tc492f8de2d": {
+      "nombre": "uiui",
+      "logo": "scrim-data\\logos\\120363412018329393_g_us_tc492f8de2d.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "te72fbd5d39": {
+      "nombre": "poroa",
+      "logo": "scrim-data\\logos\\120363412018329393_g_us_te72fbd5d39.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t39803bbd30": {
+      "nombre": "navional",
+      "logo": "scrim-data\\logos\\120363412018329393_g_us_t39803bbd30.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tf42e6c8cf6": {
+      "nombre": "llorar",
+      "logo": "scrim-data\\logos\\120363412018329393_g_us_tf42e6c8cf6.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t90194ff66a": {
+      "nombre": "puli",
+      "logo": "scrim-data\\logos\\120363412018329393_g_us_t90194ff66a.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "td47a7df050": {
+      "nombre": "poiwuu",
+      "logo": "scrim-data\\logos\\120363412018329393_g_us_td47a7df050.png",
+      "owner": "573146680977@s.whatsapp.net"
+    }
+  },
+  "resultados": {
+    "1": {
+      "t44417bff74": {
+        "puesto": 1,
+        "kills": 5,
+        "puntos": 17
+      },
+      "t6c80537909": {
+        "puesto": 2,
+        "kills": 7,
+        "puntos": 16
+      },
+      "t89e127be6b": {
+        "puesto": 3,
+        "kills": 8,
+        "puntos": 16
+      },
+      "tec2c602728": {
+        "puesto": 4,
+        "kills": 9,
+        "puntos": 16
+      },
+      "t0a36ff8d8b": {
+        "puesto": 5,
+        "kills": 7,
+        "puntos": 13
+      },
+      "te17465fa1a": {
+        "puesto": 6,
+        "kills": 7,
+        "puntos": 12
+      },
+      "tc492f8de2d": {
+        "puesto": 7,
+        "kills": 8,
+        "puntos": 12
+      },
+      "te72fbd5d39": {
+        "puesto": 8,
+        "kills": 9,
+        "puntos": 12
+      },
+      "t39803bbd30": {
+        "puesto": 9,
+        "kills": 10,
+        "puntos": 12
+      },
+      "tf42e6c8cf6": {
+        "puesto": 10,
+        "kills": 1,
+        "puntos": 2
+      },
+      "t90194ff66a": {
+        "puesto": 11,
+        "kills": 7,
+        "puntos": 7
+      },
+      "td47a7df050": {
+        "puesto": 12,
+        "kills": 6,
+        "puntos": 6
+      }
+    },
+    "2": {
+      "t44417bff74": {
+        "puesto": 1,
+        "kills": 5,
+        "puntos": 17
+      },
+      "t6c80537909": {
+        "puesto": 2,
+        "kills": 7,
+        "puntos": 16
+      },
+      "t89e127be6b": {
+        "puesto": 3,
+        "kills": 8,
+        "puntos": 16
+      },
+      "tec2c602728": {
+        "puesto": 4,
+        "kills": 9,
+        "puntos": 16
+      },
+      "t0a36ff8d8b": {
+        "puesto": 5,
+        "kills": 7,
+        "puntos": 13
+      },
+      "te17465fa1a": {
+        "puesto": 6,
+        "kills": 7,
+        "puntos": 12
+      },
+      "tc492f8de2d": {
+        "puesto": 7,
+        "kills": 8,
+        "puntos": 12
+      },
+      "te72fbd5d39": {
+        "puesto": 8,
+        "kills": 9,
+        "puntos": 12
+      },
+      "t39803bbd30": {
+        "puesto": 9,
+        "kills": 10,
+        "puntos": 12
+      },
+      "tf42e6c8cf6": {
+        "puesto": 10,
+        "kills": 1,
+        "puntos": 2
+      },
+      "t90194ff66a": {
+        "puesto": 11,
+        "kills": 7,
+        "puntos": 7
+      },
+      "td47a7df050": {
+        "puesto": 12,
+        "kills": 6,
+        "puntos": 6
+      }
+    },
+    "3": {
+      "t44417bff74": {
+        "puesto": 1,
+        "kills": 5,
+        "puntos": 17
+      },
+      "t6c80537909": {
+        "puesto": 2,
+        "kills": 7,
+        "puntos": 16
+      },
+      "t89e127be6b": {
+        "puesto": 3,
+        "kills": 8,
+        "puntos": 16
+      },
+      "tec2c602728": {
+        "puesto": 4,
+        "kills": 9,
+        "puntos": 16
+      },
+      "t0a36ff8d8b": {
+        "puesto": 5,
+        "kills": 7,
+        "puntos": 13
+      },
+      "te17465fa1a": {
+        "puesto": 6,
+        "kills": 7,
+        "puntos": 12
+      },
+      "tc492f8de2d": {
+        "puesto": 7,
+        "kills": 8,
+        "puntos": 12
+      },
+      "te72fbd5d39": {
+        "puesto": 8,
+        "kills": 9,
+        "puntos": 12
+      },
+      "t39803bbd30": {
+        "puesto": 9,
+        "kills": 10,
+        "puntos": 12
+      },
+      "tf42e6c8cf6": {
+        "puesto": 10,
+        "kills": 1,
+        "puntos": 2
+      },
+      "t90194ff66a": {
+        "puesto": 11,
+        "kills": 7,
+        "puntos": 7
+      },
+      "td47a7df050": {
+        "puesto": 12,
+        "kills": 6,
+        "puntos": 6
+      }
+    }
+  }
+}

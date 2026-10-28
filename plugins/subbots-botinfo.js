@@ -45,7 +45,7 @@ let handler = async (m, { conn, usedPrefix }) => {
   const configPath = join(ROOT_DIR, 'Serbot', botActual, 'config.json')
   const isMain = isMainBotConn(conn)
 
-  let nombreBot = global.namebot || 'MAY-BOT'
+  let nombreBot = 'KACHOW BOT'
   let imgBot = resolveBotImage(configPath)
 
   if (!isMain && fs.existsSync(configPath)) {
@@ -77,17 +77,12 @@ let handler = async (m, { conn, usedPrefix }) => {
   txt += `┃ 🔑 *Prefijo:* ${usedPrefix}\n`
   txt += `╰━━━━━━━━━━━━━━━╯\n\n`
 
-  if (global.owner && Array.isArray(global.owner) && global.owner.length) {
-    txt += `👑 *PROPIETARIOS*\n\n`
-    for (const [number, name] of global.owner) {
-      if (!number || /tunumero|acael|xxx/i.test(String(number))) continue
-      txt += `▫️ *${name || 'Owner'}:* +${String(number).replace(/\D/g, '')}\n`
-    }
-    txt += `\n`
-  }
-
   txt += `🛒 *ADQUIERE TU PROPIO BOT*\n`
-  txt += `🚀 Solicita tu bot contactando a uno de los propietarios.`
+  txt += `🚀 Para obtener o comprar KACHOW BOT, escribe al +573146680977.`
+  const supportGroup = String(global.supportGroup || '').trim()
+  if (supportGroup) {
+    txt += `\n\n🆘 *GRUPO DE SOPORTE*\n🔗 ${supportGroup}`
+  }
 
   await conn.sendFile(m.chat, imgBot, 'thumbnail.jpg', txt.trim(), m, null, {
     contextInfo: {

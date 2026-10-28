@@ -1,0 +1,193 @@
+{
+  "activo": true,
+  "salaActual": 3,
+  "totalSalas": 6,
+  "equipos": {
+    "t44417bff74": {
+      "nombre": "X-fly",
+      "logo": "scrim-data-team2\\logos\\120363430354119934_g_us_t44417bff74.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tec4bf04708": {
+      "nombre": "Matadores",
+      "logo": "scrim-data-team2\\logos\\120363430354119934_g_us_tec4bf04708.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t523713c7fd": {
+      "nombre": "Alphas",
+      "logo": "scrim-data-team2\\logos\\120363430354119934_g_us_t523713c7fd.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tf773d47ed5": {
+      "nombre": "Llorones",
+      "logo": "scrim-data-team2\\logos\\120363430354119934_g_us_tf773d47ed5.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t68d54ad292": {
+      "nombre": "Leviatan",
+      "logo": "scrim-data-team2\\logos\\120363430354119934_g_us_t68d54ad292.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "ta3f3d7df63": {
+      "nombre": "Camas",
+      "logo": "scrim-data-team2\\logos\\120363430354119934_g_us_ta3f3d7df63.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tfc562b54ef": {
+      "nombre": "Ethas",
+      "logo": "scrim-data-team2\\logos\\120363430354119934_g_us_tfc562b54ef.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t20901f355b": {
+      "nombre": "Perros",
+      "logo": "scrim-data-team2\\logos\\120363430354119934_g_us_t20901f355b.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t9da5f5df51": {
+      "nombre": "Gatos",
+      "logo": "scrim-data-team2\\logos\\120363430354119934_g_us_t9da5f5df51.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tf5a2c19041": {
+      "nombre": "Lobos",
+      "logo": "scrim-data-team2\\logos\\120363430354119934_g_us_tf5a2c19041.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tf948d0c26b": {
+      "nombre": "Perras",
+      "logo": "scrim-data-team2\\logos\\120363430354119934_g_us_tf948d0c26b.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t87607e8a14": {
+      "nombre": "Gatas",
+      "logo": "scrim-data-team2\\logos\\120363430354119934_g_us_t87607e8a14.png",
+      "owner": "573146680977@s.whatsapp.net"
+    }
+  },
+  "resultados": {
+    "1": {
+      "t44417bff74": {
+        "puesto": 1,
+        "kills": 4,
+        "puntos": 16
+      },
+      "tec4bf04708": {
+        "puesto": 2,
+        "kills": 7,
+        "puntos": 16
+      },
+      "t523713c7fd": {
+        "puesto": 3,
+        "kills": 8,
+        "puntos": 16
+      },
+      "tf773d47ed5": {
+        "puesto": 4,
+        "kills": 9,
+        "puntos": 16
+      },
+      "t68d54ad292": {
+        "puesto": 5,
+        "kills": 5,
+        "puntos": 11
+      },
+      "ta3f3d7df63": {
+        "puesto": 6,
+        "kills": 7,
+        "puntos": 12
+      },
+      "tfc562b54ef": {
+        "puesto": 7,
+        "kills": 8,
+        "puntos": 12
+      },
+      "t20901f355b": {
+        "puesto": 8,
+        "kills": 4,
+        "puntos": 7
+      },
+      "t9da5f5df51": {
+        "puesto": 9,
+        "kills": 3,
+        "puntos": 5
+      },
+      "tf5a2c19041": {
+        "puesto": 10,
+        "kills": 8,
+        "puntos": 9
+      },
+      "tf948d0c26b": {
+        "puesto": 11,
+        "kills": 9,
+        "puntos": 9
+      },
+      "t87607e8a14": {
+        "puesto": 12,
+        "kills": 5,
+        "puntos": 5
+      }
+    },
+    "2": {
+      "t44417bff74": {
+        "puesto": 1,
+        "kills": 4,
+        "puntos": 16
+      },
+      "tec4bf04708": {
+        "puesto": 2,
+        "kills": 7,
+        "puntos": 16
+      },
+      "t523713c7fd": {
+        "puesto": 3,
+        "kills": 8,
+        "puntos": 16
+      },
+      "tf773d47ed5": {
+        "puesto": 4,
+        "kills": 9,
+        "puntos": 16
+      },
+      "t68d54ad292": {
+        "puesto": 5,
+        "kills": 5,
+        "puntos": 11
+      },
+      "ta3f3d7df63": {
+        "puesto": 6,
+        "kills": 7,
+        "puntos": 12
+      },
+      "tfc562b54ef": {
+        "puesto": 7,
+        "kills": 8,
+        "puntos": 12
+      },
+      "t20901f355b": {
+        "puesto": 8,
+        "kills": 4,
+        "puntos": 7
+      },
+      "t9da5f5df51": {
+        "puesto": 9,
+        "kills": 3,
+        "puntos": 5
+      },
+      "tf5a2c19041": {
+        "puesto": 10,
+        "kills": 8,
+        "puntos": 9
+      },
+      "tf948d0c26b": {
+        "puesto": 11,
+        "kills": 9,
+        "puntos": 9
+      },
+      "t87607e8a14": {
+        "puesto": 12,
+        "kills": 5,
+        "puntos": 5
+      }
+    }
+  }
+}

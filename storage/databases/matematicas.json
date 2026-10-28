@@ -1,0 +1,38 @@
+{
+  "easy": [
+    { "pregunta": "7 + 5", "respuesta": "12", "categoria": "easy" },
+    { "pregunta": "14 - 6", "respuesta": "8", "categoria": "easy" },
+    { "pregunta": "9 + 8", "respuesta": "17", "categoria": "easy" },
+    { "pregunta": "20 - 13", "respuesta": "7", "categoria": "easy" },
+    { "pregunta": "6 + 11", "respuesta": "17", "categoria": "easy" },
+    { "pregunta": "18 - 9", "respuesta": "9", "categoria": "easy" },
+    { "pregunta": "4 × 3", "respuesta": "12", "categoria": "easy" },
+    { "pregunta": "5 × 4", "respuesta": "20", "categoria": "easy" },
+    { "pregunta": "16 ÷ 4", "respuesta": "4", "categoria": "easy" },
+    { "pregunta": "18 ÷ 3", "respuesta": "6", "categoria": "easy" }
+  ],
+  "medium": [
+    { "pregunta": "24 + 37", "respuesta": "61", "categoria": "medium" },
+    { "pregunta": "83 - 46", "respuesta": "37", "categoria": "medium" },
+    { "pregunta": "12 × 8", "respuesta": "96", "categoria": "medium" },
+    { "pregunta": "144 ÷ 12", "respuesta": "12", "categoria": "medium" },
+    { "pregunta": "35 + 48", "respuesta": "83", "categoria": "medium" },
+    { "pregunta": "100 - 57", "respuesta": "43", "categoria": "medium" },
+    { "pregunta": "15 × 7", "respuesta": "105", "categoria": "medium" },
+    { "pregunta": "168 ÷ 14", "respuesta": "12", "categoria": "medium" },
+    { "pregunta": "63 + 29", "respuesta": "92", "categoria": "medium" },
+    { "pregunta": "225 ÷ 15", "respuesta": "15", "categoria": "medium" }
+  ],
+  "hard": [
+    { "pregunta": "125 × 16", "respuesta": "2000", "categoria": "hard" },
+    { "pregunta": "1440 ÷ 24", "respuesta": "60", "categoria": "hard" },
+    { "pregunta": "387 + 568", "respuesta": "955", "categoria": "hard" },
+    { "pregunta": "1000 - 637", "respuesta": "363", "categoria": "hard" },
+    { "pregunta": "48 × 27", "respuesta": "1296", "categoria": "hard" },
+    { "pregunta": "1764 ÷ 42", "respuesta": "42", "categoria": "hard" },
+    { "pregunta": "235 × 14", "respuesta": "3290", "categoria": "hard" },
+    { "pregunta": "3025 ÷ 55", "respuesta": "55", "categoria": "hard" },
+    { "pregunta": "725 + 896", "respuesta": "1621", "categoria": "hard" },
+    { "pregunta": "2500 - 1387", "respuesta": "1113", "categoria": "hard" }
+  ]
+}

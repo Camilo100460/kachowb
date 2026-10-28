@@ -22,24 +22,28 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     }
 
     
-    let txt = `💰 𝗧𝗼𝗽 𝗴𝗹𝗼𝗯𝗮𝗹𝗲𝘀 \n\n`
+    let txt = `╭━━〔 🪙 𝙏𝙊𝙋 𝙂𝙇𝙊𝘽𝘼𝙇 〕━━╮\n`
+    txt += `┃ 𝙈𝘼𝙔𝙊𝙍 𝘾𝘼𝙉𝙏𝙄𝘿𝘼𝘿 𝘿𝙀 ${String(global.moneda).toLocaleUpperCase()}\n`
+    txt += `┣━━━━━━━━━━━━━━━━\n`
 
-    
     allUsers.forEach((user, index) => {
       const position = index + 1
       let emoji = ''
-      
-      
+
       switch (position) {
         case 1: emoji = '🥇'; break
         case 2: emoji = '🥈'; break
         case 3: emoji = '🥉'; break
         default: emoji = '💰'; break
       }
-      
-      txt += `  𓂃 ࣪ ִֶָ☾. *${position}.* ${user.name}\n`
-      txt += `  𓂃 ࣪ ִֶָ☾. *${global.moneda}:* ${user.coins.toLocaleString()}\n\n`
+
+      txt += `┃ ${emoji} *${position}.* ${user.name}\n`
+      txt += `┃    𓍯 *${user.coins.toLocaleString('es-CO')} ${global.moneda}*\n`
+      if (index < allUsers.length - 1) txt += `┃ · · · · · · · · · · · · ·\n`
     })
+
+    txt += `╰━━━━━━━━━━━━━━━━╯\n`
+    txt += `𓂃 ࣪ ִֶָ☾. *𝙈𝙄𝙉𝙄 𝘽𝙊𝙏 · 𝙀𝘾𝙊𝙉𝙊𝙈𝙄𝘼*`
 
     return conn.sendMessage(m.chat, {
       text: txt,

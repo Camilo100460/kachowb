@@ -1,4 +1,4 @@
-console.log('⧉ Inicializando Pain...')
+console.log('⧉ Inicializando KACHOW BOT...')
 
 import { join, dirname } from 'path'
 import { createRequire } from 'module'
@@ -12,16 +12,17 @@ import cfonts from 'cfonts'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const require = createRequire(__dirname)
 
-cfonts.say('PAIN\nBOT', {
-  font: 'block',
+cfonts.say('KACHOW\nBOT', {
+  font: 'chrome',
   align: 'center',
-  gradient: ['cyan', 'blue']
+  colors: ['yellow', 'red', 'white'],
+  space: false
 })
 
-cfonts.say('WhatsApp Multi-Bot-Official', {
-  font: 'simple',
+cfonts.say('WhatsApp Multi-Bot', {
+  font: 'console',
   align: 'center',
-  gradient: ['blue', 'white']
+  colors: ['yellow']
 })
 
 let isWorking = false

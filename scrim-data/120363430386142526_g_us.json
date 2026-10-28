@@ -1,0 +1,13 @@
+{
+  "activo": true,
+  "salaActual": 1,
+  "totalSalas": 6,
+  "equipos": {
+    "t9e0daa499c": {
+      "nombre": "ZYRA GIRLS",
+      "logo": "scrim-data\\logos\\120363430386142526_g_us_t9e0daa499c.png",
+      "owner": "573011277561@s.whatsapp.net"
+    }
+  },
+  "resultados": {}
+}

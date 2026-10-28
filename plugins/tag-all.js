@@ -18,9 +18,8 @@ var handler = async (m, { conn, text, participants, isAdmin, command }) => {
     global.ownerLid?.some(([numero]) => numero.replace(/[^0-9]/g, '') + '@lid' === m.sender) ||
     m.sender === conn.user.jid
 
-  if (!esAdminManual && !esSuperAdmin && !esPropietario) {
-    return conn.reply(m.chat, '☠️ • 𝙎𝙤𝙡𝙤 𝙡𝙤𝙨 𝙖𝙙𝙢𝙞𝙣𝙞𝙨𝙩𝙧𝙖𝙙𝙤𝙧𝙚𝙨 𝙥𝙪𝙚𝙙𝙚𝙣 𝙪𝙨𝙖𝙧 𝙚𝙨𝙩𝙚 𝙘𝙤𝙢𝙖𝙣𝙙𝙤.', m)
-  }
+  // Si no es admin ni owner, no responde nada (silencio total)
+  if (!esAdminManual && !esSuperAdmin && !esPropietario) return
 
   let usuarios = participants.map(u => conn.decodeJid(u.id))
   const textoOriginal = typeof m.text === 'string' ? m.text.trim() : ''
@@ -68,9 +67,9 @@ var handler = async (m, { conn, text, participants, isAdmin, command }) => {
   }
 }
 
-handler.help = ['.n [mensaje]\n→ Notifica a todos los miembros del grupo', '+ [mensaje]\n→ Etiqueta a todos', '+1, +2, +4...\n→ Alias para etiquetar sin punto']
+handler.help = ['.n [mensaje]\n→ Notifica a todos los miembros del grupo', '.notify [mensaje]\n→ Alias de notificación para todos', '+ [mensaje]\n→ Etiqueta a todos', '+1, +2, +4...\n→ Alias para etiquetar sin punto']
 handler.tags = ['grupo']
-handler.command = [/^\+(\d+)?$/, '.n', 'n']
+handler.command = [/^\+(\d+)?$/, '.n', 'n', 'notify']
 handler.customPrefix = /^/
 handler.group = true
 handler.admin = true

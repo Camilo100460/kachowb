@@ -178,7 +178,6 @@ async function framesToAnimatedWebp(tmpDir) {
         '-loop', '0',
         '-preset', 'default',
         '-an',
-        '-vsync', '0',
         '-q:v', '85'
       ])
       .toFormat('webp')
@@ -212,7 +211,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 
     if (!text) {
       return conn.sendMessage(m.chat, {
-        text: `*[❗] Escribe el texto del sticker animado o respondé a un mensaje.*\n\nEjemplos:\n> ${usedPrefix + command} Hola\n> ${usedPrefix + command} Pain Bot oficial\n> ${usedPrefix + command} línea uno\\nlínea dos\n> (respondé un mensaje con ${usedPrefix + command})`,
+        text: `*[❗] Escribe el texto del sticker animado o respondé a un mensaje.*\n\nEjemplos:\n> ${usedPrefix + command} Hola\n> ${usedPrefix + command} KACHOW BOT oficial\n> ${usedPrefix + command} línea uno\\nlínea dos\n> (respondé un mensaje con ${usedPrefix + command})`,
         contextInfo: { ...rcanal.contextInfo }
       }, { quoted: m })
     }

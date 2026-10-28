@@ -1,5 +1,4 @@
-import fs from 'fs'
-import { join } from 'path'
+import { fileURLToPath } from 'url'
 import { findGroupParticipant } from '../lib/group-participant.js'
 
 let handler = async (m, { conn, usedPrefix, command }) => {
@@ -129,51 +128,32 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   }
 
   const texto = `
+👤 *PERFIL DE USUARIO*
+━━━━━━━━━━━━━━
 
-𓂃 ࣪ ִֶָ☾. 𝙿𝙴𝚁𝙵𝙸𝙻 𝙳𝙴 𝚄𝚂𝚄𝙰𝚁𝙸𝙾 𓂃 ࣪ ִֶָ☾.
+📌 *DATOS PERSONALES*
+• Nombre: ${userData.name || 'No establecido'}
+• Género: ${userData.genre || 'No establecido'}
+• Cumpleaños: ${userData.birth || 'No registrado'}
+• Descripción: ${userData.desc || 'Sin descripción'}
+• Favorito: ${userData.favourite || 'No establecido'}
 
+📊 *ESTADÍSTICAS*
+• Nivel: ${userData.level || 0}
+• Monedas: ${totalCoins} ${global.moneda}
+• Experiencia: ${userData.exp || 0}
+• Banco: ${bancoInfo}
 
-╭─╮  𓍯  𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲𝙸𝙾𝙽 𝙿𝙴𝚁𝚂𝙾𝙽𝙰𝙻  𓍯  
-│  𓂃 ࣪ ִֶָ☾.  𝙽𝙾𝙼𝙱𝚁𝙴:  ${userData.name || 'No establecido'}
-│  𓂃 ࣪ ִֶָ☾.  𝙶𝙴𝙽𝙴𝚁𝙾:  ${userData.genre || 'No establecido'}
-│  𓂃 ࣪ ִֶָ☾.  𝙲𝚄𝙼𝙿𝙻𝙴𝙰𝙽𝙾𝚂:  ${userData.birth || 'No registrado'}
-│  𓂃 ࣪ ִֶָ☾.  𝙳𝙴𝚂𝙲𝚁𝙸𝙿𝙲𝙸𝙾𝙽:  ${userData.desc || 'Sin descripción'}
-│  𓂃 ࣪ ִֶָ☾.  𝙵𝙰𝚅𝙾𝚁𝙸𝚃𝙾:  ${userData.favourite || 'No establecido'}
-╰─╯
+🛡️ *INFORMACIÓN DE CUENTA*
+• ID: ${targetUser}
+• Rol: ${userRole}
+• Registrado: ${userData.registered ? 'Sí' : 'No'}`.trim()
 
-╭─╮  𓍯  𝙴𝚂𝚃𝙰𝙳𝙸𝚂𝚃𝙸𝙲𝙰𝚂  𓍯  
-│  𓂃 ࣪ ִֶָ☾.  𝙽𝙸𝚅𝙴𝙻:  ${userData.level || 0}
-│  𓂃 ࣪ ִֶָ☾.  𝙲𝙾𝙸𝙽𝚂:  ${totalCoins} ${global.moneda}
-│  𓂃 ࣪ ִֶָ☾.  𝙴𝚇𝙿𝙴𝚁𝙸𝙴𝙽𝙲𝙸𝙰:  ${userData.exp || 0}
-│  𓂃 ࣪ ִֶָ☾.  𝙱𝙰𝙽𝙲𝙾:  ${bancoInfo}
-╰─╯
+  let imgBot
 
-╭─╮  𓍯  𝙸𝙽𝙵𝙾 𝙶𝙴𝙽𝙴𝚁𝙰𝙻  𓍯  
-│  𓂃 ࣪ ִֶָ☾.  𝙸𝙳:  ${targetUser}
-│  𓂃 ࣪ ִֶָ☾.  𝚁𝙾𝙻:  ${userRole}
-│  𓂃 ࣪ ִֶָ☾.  𝚁𝙴𝙶𝙸𝚂𝚃𝚁𝙰𝙳𝙾:  ${userData.registered ? 'Sí' : 'No'}
-╰─╯`.trim()
-
-  const botNumber = conn.user?.jid?.split('@')[0].replace(/\D/g, '')
-  const configPath = join('./Serbot', botNumber, 'config.json')
-
-  let imgBot = './storage/img/menu3.jpg'
-  let hasUserPP = false
-
-  try {
-    const pp = await conn.profilePictureUrl(targetUser, 'image')
-    if (pp) {
-      imgBot = pp
-      hasUserPP = true
-    }
-  } catch (e) {
-    if (fs.existsSync(configPath)) {
-      try {
-        const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
-        if (config.img) imgBot = config.img
-      } catch {}
-    }
-  }
+  imgBot = await conn.profilePictureUrl(targetUser, 'image').catch(() => null)
+  if (!imgBot) imgBot = await conn.profilePictureUrl(targetUser, 'preview').catch(() => null)
+  const hasUserPP = Boolean(imgBot)
 
   if (hasUserPP) {
     await conn.sendMessage(m.chat, {
@@ -185,6 +165,8 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       }
     }, { quoted: m })
   } else {
+    const fallbackImages = ['perfil1.jpg', 'perfil2.jpg', 'perfil3.jpg']
+    imgBot = fileURLToPath(new URL(`../${fallbackImages[Math.floor(Math.random() * fallbackImages.length)]}`, import.meta.url))
     await conn.sendFile(m.chat, imgBot, 'profile.jpg', texto, m, null, rcanal, { mentions: [userData.partner || targetUser] })
   }
 }

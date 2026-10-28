@@ -1,0 +1,110 @@
+import { getListParticipant, getListMentionJids } from '../lib/list-participant.js'
+
+const activeLists = new Map()
+const MAX_PLAYERS_PER_SQUAD = 4
+const slotEmojis = ['🦅', '🥷', '🥷', '🥷']
+const REACTION_SQUADS = new Map([
+	['👍', 0],
+	['❤️', 1]
+])
+
+const TIME_REGEX = /^([01]?\d|2[0-3]):([0-5]\d)$/
+
+const USAGE_MESSAGE = `⚠️ *Formato incorrecto.*
+
+> *.interna <hora>*`
+
+const renderPlayers = squad => squad
+	.map((member, index) => `${slotEmojis[index % slotEmojis.length]}•${member?.label || ''}`)
+	.join('\n')
+
+const buildList = ({ mexicoTime, colombiaTime, squads }) => `🦅 *𝙇𝙄𝙎𝙏𝘼 𝙄𝙉𝙏𝙀𝙍𝙉𝘼* 🪶
+
+🕘◦ *𝐇𝐎𝐑𝐀𝐑𝐈𝐎*
+🇲🇽◦ *𝐌𝐄́𝐗𝐈𝐂𝐎:* ${mexicoTime ? `${mexicoTime} PM` : ' '}
+🇨🇴◦ *𝐂𝐎𝐋𝐎𝐌𝐁𝐈𝐀:* ${colombiaTime ? `${colombiaTime} PM` : ' '}
+
+          _*𝐄𝐒𝐂𝐔𝐀𝐃𝐑𝐀 1*_
+${renderPlayers(squads[0])}
+
+          _*𝐄𝐒𝐂𝐔𝐀𝐃𝐑𝐀 2*_
+${renderPlayers(squads[1])}
+
+> 𝘙𝘦𝘢𝘤𝘤𝘪𝘰𝘯𝘢 𝘢 𝘦𝘴𝘵𝘦 𝘮𝘦𝘯𝘴𝘢𝘫𝘦 𝘱𝘢𝘳𝘢 𝘪𝘯𝘴𝘤𝘳𝘪𝘣𝘪𝘳𝘵𝘦.📝`
+
+const sendRoster = (conn, chat, listState, quoted) => conn.sendMessage(chat, {
+	text: buildList(listState),
+	contextInfo: { mentionedJid: getListMentionJids(listState) }
+}, { quoted })
+
+const handler = async (m, { conn, text }) => {
+	const time = text?.trim() || ''
+	const match = time.match(TIME_REGEX)
+
+	// Falta la hora o la hora no es válida
+	if (!match) {
+		return conn.sendMessage(m.chat, { text: USAGE_MESSAGE }, { quoted: m })
+	}
+
+	const mexicoTime = `${String(Number(match[1])).padStart(2, '0')}:${match[2]}`
+	const colombiaTime = `${String((Number(match[1]) + 1) % 24).padStart(2, '0')}:${match[2]}`
+
+	const listState = {
+		mexicoTime,
+		colombiaTime,
+		squads: [
+			Array(MAX_PLAYERS_PER_SQUAD).fill(null),
+			Array(MAX_PLAYERS_PER_SQUAD).fill(null)
+		]
+	}
+	const sent = await sendRoster(conn, m.chat, listState, m)
+	listState.messageKey = sent.key
+	activeLists.set(m.chat, listState)
+}
+
+handler.all = async (m, { conn }) => {
+	const reaction = m.message?.reactionMessage
+	if (!reaction) return
+	const listState = activeLists.get(m.chat)
+	if (!listState) return
+	if (reaction.key?.id !== listState.messageKey?.id) return
+
+	const squadIndex = REACTION_SQUADS.get(reaction.text)
+	const leaving = reaction.text === '😢' || reaction.text === ''
+	if (squadIndex === undefined && !leaving) return
+	const userId = m.sender
+	if (!userId) return
+
+	if (squadIndex !== undefined) {
+		const occupiedByOther = listState.squads[squadIndex].every(member => member && member.id !== userId)
+		if (occupiedByOther) return
+	}
+
+	for (const squad of listState.squads) {
+		const previousIndex = squad.findIndex(member => member?.id === userId)
+		if (previousIndex >= 0) squad.splice(previousIndex, 1)
+		while (squad.length < MAX_PLAYERS_PER_SQUAD) squad.push(null)
+	}
+
+	if (squadIndex !== undefined) {
+		const slotIndex = listState.squads[squadIndex].findIndex(member => !member)
+		if (slotIndex >= 0) listState.squads[squadIndex][slotIndex] = await getListParticipant(m, conn)
+	}
+
+	const previousMessageKey = listState.messageKey
+	const sent = await sendRoster(conn, m.chat, listState)
+	listState.messageKey = sent.key
+	if (previousMessageKey?.id) {
+		try {
+			await conn.sendMessage(m.chat, { delete: previousMessageKey })
+		} catch (error) {
+			console.warn(`[interna] No se pudo reemplazar el roster anterior: ${error.message}`)
+		}
+	}
+}
+
+handler.command = ['interna']
+handler.tags = ['listas']
+handler.help = ['interna <hora>']
+
+export default handler

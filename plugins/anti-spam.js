@@ -17,7 +17,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, isBotAdmin }
     if (action === 'on') {
       global.db.data.antiSpam[m.chat] = true
       
-      let txt = `ִֶָ☾. *Anti-spam activado correctamente*\n> Por: @${m.sender.split('@')[0]}`
+      let txt = `ִֶָ*[🛡️]* 𝘼𝙣𝙩𝙞-𝙨𝙥𝙖𝙢 𝙖𝙘𝙩𝙞𝙫𝙖𝙙𝙤 𝙘𝙤𝙧𝙧𝙚𝙘𝙩𝙖𝙢𝙚𝙣𝙩𝙚\n> Por: @${m.sender.split('@')[0]}`
       
       return conn.sendMessage(m.chat, {
         text: txt,
@@ -30,7 +30,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, isBotAdmin }
     } else if (action === 'off') {
       global.db.data.antiSpam[m.chat] = false
       
-      let txt = `ִֶָ☾. *Anti-spam desactivado correctamente*\n> Por: @${m.sender.split('@')[0]}`
+      let txt = `*ִֶָ[🔓]* 𝘼𝙣𝙩𝙞-𝙨𝙥𝙖𝙢 𝙙𝙚𝙨𝙖𝙘𝙩𝙞𝙫𝙖𝙙𝙤 𝙘𝙤𝙧𝙧𝙚𝙘𝙩𝙖𝙢𝙚𝙣𝙩𝙚\n> Por: @${m.sender.split('@')[0]}`
       
       return conn.sendMessage(m.chat, {
         text: txt,
@@ -42,7 +42,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, isBotAdmin }
       
     } else {
       return conn.sendMessage(m.chat, {
-        text: `[❗] Debes poner una acción.\n\n> *Ejemplo:* ${usedPrefix}antispam on\n> *Ejemplo:* ${usedPrefix}antispam off`,
+        text: `*[❗] Debes poner una acción.*\n\n> *Ejemplo:* ${usedPrefix}antispam on\n> *Ejemplo:* ${usedPrefix}antispam off`,
         contextInfo: {
           ...rcanal.contextInfo
         }

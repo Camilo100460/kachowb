@@ -4,9 +4,12 @@ import crypto from 'crypto'
 import { findGroupParticipant, findBotParticipant } from '../lib/group-participant.js'
 
 const ROOT_DIR = path.join(process.cwd())
+
+// OJO: los nombres estaban intercambiados respecto a lo que hacen las imágenes.
+// Si después de esto sigue al revés, vuelve a intercambiarlos.
 const STICKER_HASHES = {
-  open: getFileHash('abrirgrupo.webp'),
-  close: getFileHash('cerrargrupo.webp')
+  open: getFileHash('cerrargrupo.webp'),
+  close: getFileHash('abrirgrupo.webp')
 }
 
 function getFileHash(fileName) {
@@ -61,8 +64,29 @@ async function getGroupPermissions(m, conn) {
 }
 
 async function updateGroup(m, conn, action) {
-  const { metadata } = await getGroupPermissions(m, conn)
+  const { metadata, isAdmin, isBotAdmin } = await getGroupPermissions(m, conn)
   if (!metadata) return
+
+  const isOwner = m.fromMe || global.owner?.some(([number]) => {
+    const ownerJid = `${String(number).replace(/[^0-9]/g, '')}@s.whatsapp.net`
+    return (conn.decodeJid?.(m.sender) || m.sender) === (conn.decodeJid?.(ownerJid) || ownerJid)
+  }) || global.ownerLid?.some(([number]) => {
+    const ownerJid = `${String(number).replace(/[^0-9]/g, '')}@lid`
+    return (conn.decodeJid?.(m.sender) || m.sender) === (conn.decodeJid?.(ownerJid) || ownerJid)
+  })
+
+  if (!isAdmin && !isOwner) {
+    return conn.sendMessage(m.chat, {
+      react: { text: '❌', key: m.key }
+    }).catch(() => {})
+  }
+
+  if (!isBotAdmin) {
+    return conn.sendMessage(m.chat, {
+      text: '[❗] Necesito ser administrador para cambiar el estado del grupo.',
+      contextInfo: { ...rcanal.contextInfo }
+    }, { quoted: m })
+  }
 
   const shouldOpen = action === 'open'
 
@@ -93,19 +117,22 @@ async function updateGroup(m, conn, action) {
 
 let handler = async () => {}
 
-handler.all = async (m, { conn, isAdmin, isOwner }) => {
+handler.all = async (m, { conn }) => {
   if (!m.isGroup || m.fromMe) return
 
   const hashes = await getStickerHashes(m)
   if (!hashes.length) return
 
-  const action = hashes.includes(STICKER_HASHES.open)
+  const action = hashes.includes(STICKER_HASHES.close)
     ? 'close'
-    : hashes.includes(STICKER_HASHES.close)
+    : hashes.includes(STICKER_HASHES.open)
       ? 'open'
       : ''
+
+  // Descomenta para depurar:
+  // console.log('[sticker-debug]', { action, hashes, open: STICKER_HASHES.open, close: STICKER_HASHES.close })
+
   if (!action) return
-  if (!isAdmin && !isOwner) return
 
   try {
     await updateGroup(m, conn, action)

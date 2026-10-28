@@ -1,0 +1,551 @@
+[
+  {
+    "materia": "Tensorial",
+    "tema": "Materiales frágiles y dúctiles",
+    "pregunta": "¿Cuál es la diferencia fundamental entre un material frágil y uno dúctil?",
+    "opciones": {
+      "A": "El frágil tiene siempre un módulo de Young mayor que el dúctil",
+      "B": "El dúctil falla sin deformarse y el frágil se deforma mucho antes de romper",
+      "C": "El frágil casi no presenta deformación plástica y falla de forma abrupta sin aviso, mientras que el dúctil se deforma notablemente después de alcanzar el esfuerzo de fluencia",
+      "D": "El frágil es un material delicado que exige un manejo muy cuidadoso, y el dúctil no"
+    },
+    "respuesta": "C",
+    "explicacion": "Un material frágil se caracteriza por la ausencia de deformación plástica: una vez alcanzado su esfuerzo máximo (a tracción o a compresión) la deformación es prácticamente nula y el material rompe de manera abrupta, sin ninguna señal previa. Ejemplos: rocas, vidrio y concreto. Un material dúctil, en cambio, se deforma notablemente una vez se alcanza el esfuerzo de fluencia, por lo que avisa antes de romper; el ejemplo típico es el acero dulce. Es importante no confundir 'frágil' con 'delicado' del lenguaje cotidiano: la roca y el concreto son frágiles pero no requieren un manejo especial. La diferencia se ve en la curva esfuerzo-deformación (figura 4.1): el dúctil muestra una gran zona de deformación antes de la rotura y el frágil casi ninguna.",
+    "pagina": 140,
+    "conceptos_clave": [
+      "material frágil",
+      "material dúctil",
+      "esfuerzo de fluencia",
+      "curva esfuerzo-deformación"
+    ],
+    "ejemplo_practico": "Ejemplo: el concreto y el vidrio son frágiles; el acero dulce (fy = 420 MPa, E = 200 GPa) es dúctil y fluye a ε = 0,0021.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Comportamiento elástico y plástico",
+    "pregunta": "¿Cuál es la diferencia entre un material con comportamiento elástico y uno con comportamiento lineal?",
+    "opciones": {
+      "A": "Elástico significa que la relación σ–ε es una recta; lineal significa que el material se recupera al descargar",
+      "B": "Elástico significa que al descargar el material regresa por la misma curva al origen (aunque la curva no sea recta); lineal significa que σ y ε son proporcionales (ley de Hooke)",
+      "C": "Son sinónimos: todo material elástico es lineal y viceversa",
+      "D": "Elástico es el comportamiento posterior a la fluencia y lineal el anterior"
+    },
+    "respuesta": "B",
+    "explicacion": "Un material es elástico cuando, al cargarlo y descargarlo, sigue exactamente la misma curva y regresa al origen: no queda deformación permanente. Esa curva no tiene que ser recta. Un material es lineal cuando existe un subtramo en el que σ y ε son proporcionales (σ = Eε, ley de Hooke). En la figura 4.2 el tramo OB es elástico y el subtramo OA, además, es lineal: ahí se habla de comportamiento elástico lineal. Por eso las dos palabras no son equivalentes: puede haber elasticidad sin linealidad (tramo AB) pero el comportamiento elástico lineal exige las dos condiciones. Más allá del punto B hay deformación plástica permanente.",
+    "pagina": 141,
+    "conceptos_clave": [
+      "elástico",
+      "lineal",
+      "ley de Hooke",
+      "límite de proporcionalidad"
+    ],
+    "ejemplo_practico": "Ejemplo: en un acero dulce, OA es elástico lineal (σ = Eε) y AB es elástico pero no lineal; después de B aparece deformación residual.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Comportamiento elástico y plástico",
+    "pregunta": "¿Por qué en algunos materiales, como el acero estructural, el punto de fluencia y el límite elástico pueden considerarse equivalentes?",
+    "opciones": {
+      "A": "Porque el límite de proporcionalidad, el límite elástico y el punto de fluencia están muy cercanos entre sí en la curva esfuerzo-deformación y en la práctica se suponen iguales (fy)",
+      "B": "Porque en todos los materiales dúctiles esos tres puntos coinciden exactamente",
+      "C": "Porque el acero no tiene zona plástica",
+      "D": "Porque el endurecimiento por deformación hace que ambos puntos sean el mismo"
+    },
+    "respuesta": "A",
+    "explicacion": "En el acero estructural el límite de proporcionalidad (A), el límite elástico (B) y el punto de fluencia (E) están tan próximos que en la práctica se toman como un solo valor, el esfuerzo de fluencia fy. No es una igualdad exacta ni general: en materiales como aluminio, magnesio, plomo, cobre o titanio la curva no muestra una fluencia clara y hay que usar el método de la compensación (offset), trazando una recta paralela a la zona lineal a una deformación de 0,002. El acero sí tiene zona plástica (de hecho tiene endurecimiento por deformación entre E y H), así que las otras opciones son falsas.",
+    "pagina": 142,
+    "conceptos_clave": [
+      "límite elástico",
+      "punto de fluencia",
+      "método de la compensación",
+      "esfuerzo de fluencia"
+    ],
+    "ejemplo_practico": "Ejemplo: aluminio sin fluencia definida → fy aparente Rp0,2 % = 360 MPa con el método de la compensación (ε = 0,002).",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Círculo de Mohr y tensión plana",
+    "pregunta": "¿Por qué el círculo de Mohr bidimensional de la sección 2.9.1 describe completamente el estado de esfuerzos solo en tensión plana?",
+    "opciones": {
+      "A": "Porque solo funciona con materiales isótropos",
+      "B": "Porque exige que σx = σy",
+      "C": "Porque requiere que el cortante máximo sea siempre cero",
+      "D": "Porque solo representa los planos cuya normal está en xy (con z principal) y es el círculo completo únicamente si σz = 0; en deformación plana σz = ν(σx + σy) ≠ 0 y el cortante máximo real puede no estar en el plano"
+    },
+    "respuesta": "D",
+    "explicacion": "El círculo 2D describe los planos cuya normal está en el plano xy y supone que el eje z es principal (τxz = τyz = 0). Si además σz = 0 (tensión plana), los tres esfuerzos principales son (σ1)xy, (σ2)xy y 0, y el círculo 2D es solo uno de los tres círculos de Mohr 3D. Las inclinaciones de cortante máximo del análisis 2D (a 45° de los principales) coinciden con los planos de normal (n1 ± n3)/‖n1 ± n3‖ cuando n1 y n3 están ambos en el plano xy, es decir cuando el esfuerzo principal en z es el intermedio. Si σz es el máximo o el mínimo (por ejemplo (σ1)xy y (σ2)xy ambos positivos en tensión plana, con σ3 = 0 en z), el cortante máximo real sale del plano xy. En deformación plana aparece además σz = ν(σx + σy) ≠ 0 que hay que incluir como tercer principal.",
+    "pagina": 172,
+    "conceptos_clave": [
+      "círculo de Mohr",
+      "tensión plana",
+      "deformación plana",
+      "esfuerzo cortante máximo"
+    ],
+    "ejemplo_practico": "Ejemplo 2.6: σx = −1, σy = 2, τxy = −3 Pa → σ1 = 3,854 y σ2 = −2,854 Pa; en deformación plana con ν = 0,3, σz = 0,3 Pa queda como principal intermedio y τmax = 3,354 Pa.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Ley de Hooke y coeficiente de Poisson",
+    "pregunta": "¿Cuál es la razón del signo menos en las ecuaciones εy = −νεx y εz = −νεx?",
+    "opciones": {
+      "A": "Porque las deformaciones laterales siempre son positivas",
+      "B": "Porque cuando el material se alarga en x (εx > 0) se contrae en las direcciones transversales (εy, εz < 0), y el signo menos hace que ν resulte positivo",
+      "C": "Porque ν es negativo en la mayoría de los materiales",
+      "D": "Porque corrige las unidades de la deformación"
+    },
+    "respuesta": "B",
+    "explicacion": "Con la convención de signos del libro, los estiramientos son positivos y las contracciones negativas. Si una barra se estira en x (εx > 0), por el efecto de Poisson se acorta lateralmente (εy < 0 y εz < 0). Para que el coeficiente de Poisson, definido como ν = −εtransversal/εlongitudinal, sea un número positivo en la mayoría de los materiales ingenieriles, se incluye el signo menos en las ecuaciones (4.1). Existen materiales con ν negativo (augéticos), que se ensanchan lateralmente al estirarse, pero son raros. El signo no tiene que ver con unidades: las deformaciones son adimensionales.",
+    "pagina": 145,
+    "conceptos_clave": [
+      "efecto de Poisson",
+      "deformación lateral",
+      "convención de signos"
+    ],
+    "ejemplo_practico": "Ejemplo: acero con ν = 0,3 y εx = +1×10⁻³ → εy = εz = −3×10⁻⁴.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Ley de Hooke y coeficiente de Poisson",
+    "pregunta": "En la página 145 se escribe «se observa experimentalmente que al aplicar una deformación sobre un sólido…» y no «al aplicar un esfuerzo». ¿Por qué?",
+    "opciones": {
+      "A": "Porque en el laboratorio no se pueden aplicar esfuerzos",
+      "B": "Porque la deformación siempre ocurre antes que el esfuerzo en el tiempo",
+      "C": "Porque ν es una relación entre deformaciones (comportamiento geométrico): un esfuerzo en una dirección no siempre estira esa dirección, ya que las deformaciones dependen también de los esfuerzos en las otras direcciones (ecs. 4.3)",
+      "D": "Porque ν solo existe en materiales augéticos"
+    },
+    "respuesta": "C",
+    "explicacion": "El coeficiente de Poisson relaciona deformaciones: ν = −εtransversal/εlongitudinal. La observación de que al deformar un lado el otro se contrae es cinemática y no depende del estado de esfuerzos. En cambio, con esfuerzos la afirmación sería falsa en general: por (4.3), un esfuerzo normal de tracción en una dirección no necesariamente produce estiramiento en esa misma dirección, porque los esfuerzos de las otras direcciones también contribuyen a la deformación. Hablar de deformación evita esa ambigüedad y describe directamente el efecto de Poisson.",
+    "pagina": 145,
+    "conceptos_clave": [
+      "coeficiente de Poisson",
+      "deformación",
+      "superposición",
+      "esfuerzo"
+    ],
+    "ejemplo_practico": "Ejemplo con (4.3a): σx = 10 MPa y σy = σz = 40 MPa, ν = 0,3 → εx ∝ 10 − 0,3·80 = −14 < 0: hay tracción en x pero la dirección x se acorta.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Límites del coeficiente de Poisson",
+    "pregunta": "¿Por qué el coeficiente de Poisson de un material isótropo, lineal y elástico solo puede variar entre −1 y 0,5, y qué relación tiene con el módulo de compresibilidad K?",
+    "opciones": {
+      "A": "Porque G = E/[2(1+ν)] > 0 exige ν > −1 y K = E/[3(1−2ν)] > 0 exige ν < 0,5; cuando ν → 0,5, K → ∞ (material incompresible) y la matriz D se vuelve mal condicionada",
+      "B": "Porque la deformación transversal nunca puede superar la longitudinal, de modo que 0 < ν < 1",
+      "C": "Porque E > 0 obliga a −1 < ν < 1",
+      "D": "Porque Poisson demostró que ν = 0,25 para todos los materiales"
+    },
+    "respuesta": "A",
+    "explicacion": "Dos constantes elásticas deben ser positivas. El módulo de rigidez G = E/[2(1+ν)] > 0 implica 1 + ν > 0, es decir ν > −1. El módulo de compresibilidad K = E/[3(1−2ν)] > 0 implica 1 − 2ν > 0, es decir ν < 0,5. En la práctica ingenieril se asume 0 < ν < 0,5, porque los materiales con ν negativo (augéticos) son extremadamente raros. Cuando ν se acerca a 0,5, K tiende a infinito: el material casi no cambia de volumen (suelo saturado, caucho) y varios términos de la matriz constitutiva D divergen, lo que genera problemas numéricos en los programas de elementos finitos; por eso se recomienda fijar ν ≤ 0,48 si no hay formulaciones especiales (penalización o mixtas u–p). Los rangos −1 < ν < 0,5 no valen para ortótropos ni anisótropos.",
+    "pagina": 171,
+    "conceptos_clave": [
+      "coeficiente de Poisson",
+      "módulo de rigidez",
+      "módulo de compresibilidad",
+      "incompresibilidad"
+    ],
+    "ejemplo_practico": "Ejemplo: ν = 0,499 (arcilla saturada o caucho) → K = E/[3(1−0,998)] = E/0,006 ≈ 167·E, un valor enorme.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Cambios de volumen y dilatación cúbica",
+    "pregunta": "¿Cuál es una expresión más exacta que ΔV ≈ (εx + εy + εz)V para el cambio de volumen de un elemento sometido a esfuerzos normales?",
+    "opciones": {
+      "A": "ΔV = (εx + εy + εz)V es exacta y no se puede mejorar",
+      "B": "ΔV = εx εy εz V",
+      "C": "ΔV = (1 + εx + εy + εz)V",
+      "D": "ΔV = (εx + εy + εz + εxεy + εxεz + εyεz + εxεyεz)V, que equivale a (1+εx)(1+εy)(1+εz)V − V"
+    },
+    "respuesta": "D",
+    "explicacion": "Si las aristas dx, dy, dz pasan a medir (1+εx)dx, (1+εy)dy y (1+εz)dz, el volumen deformado es Vdef = (1+εx)(1+εy)(1+εz)V. Al restar V queda ΔV = (εx + εy + εz + εxεy + εxεz + εyεz + εxεyεz)V (ecuación 4.26). La aproximación lineal e ≈ εx + εy + εz (dilatación cúbica) desprecia los productos de dos o más deformaciones, que son infinitesimales de segundo y tercer orden. El error es justamente (εxεyεz + εxεy + εxεz + εyεz)V (figura 4.12d). Para un sólido completo se integra el cambio en cada diferencial: ΔV = ∭ e dV, o con el teorema de la divergencia, ∯ u·n dS.",
+    "pagina": 165,
+    "conceptos_clave": [
+      "dilatación cúbica",
+      "cambio de volumen",
+      "aproximación lineal",
+      "teorema de la divergencia"
+    ],
+    "ejemplo_practico": "Ejemplo 4.1: εx = εy = εz = −3,924×10⁻⁴ → e lineal = −1,177×10⁻³; el término de segundo orden 3ε² ≈ 4,6×10⁻⁷ es despreciable.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Principio de superposición",
+    "pregunta": "¿Cómo se obtienen las ecuaciones (4.3) y por qué se usa el principio de superposición?",
+    "opciones": {
+      "A": "Se obtienen sumando la historia de carga plástica; la superposición es válida siempre",
+      "B": "Se suman las deformaciones producidas por cada esfuerzo normal actuando solo (εx = σx/E, εy = εz = −νσx/E, etc.); es válido porque el material es lineal elástico y los desplazamientos son pequeños y no alteran la acción de las cargas",
+      "C": "Se obtienen del equilibrio estático; la superposición es válida también en barras esbeltas en flexocompresión",
+      "D": "Se obtienen sumando los cortantes a los normales; la superposición exige que τ ≠ 0"
+    },
+    "respuesta": "B",
+    "explicacion": "Para un elemento isótropo elástico lineal con σx, σy y σz, se analiza cada esfuerzo por separado (tabla 4.2): con solo σx, εx = σx/E y εy = εz = −νσx/E; análogo con σy y con σz. Sumando en cada dirección resulta εx = [σx − ν(σy+σz)]/E, εy = [σy − ν(σx+σz)]/E y εz = [σz − ν(σx+σy)]/E. La suma es legítima porque el sistema es lineal (la respuesta a varias acciones es la suma de las respuestas individuales) y porque los desplazamientos son pequeños y no cambian apreciablemente la acción de las fuerzas, de modo que se trabaja con la geometría original. No sirve, por ejemplo, en una barra esbelta con flexión y compresión axial, donde ambas acciones contribuyen al pandeo y la respuesta no es lineal (figura 4.6).",
+    "pagina": 147,
+    "conceptos_clave": [
+      "principio de superposición",
+      "ley de Hooke generalizada",
+      "linealidad",
+      "pequeñas deformaciones"
+    ],
+    "ejemplo_practico": "Ejemplo: σx = 10 MPa, σy = 5 MPa, σz = 0, ν = 0,3, E = 200 GPa → εx = (10 − 0,3·5)/200 000 = 4,25×10⁻⁵.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Módulo de cortante",
+    "pregunta": "¿Cuál es el sentido físico del módulo de rigidez G?",
+    "opciones": {
+      "A": "Mide la resistencia del material a los cambios de volumen",
+      "B": "Es la constante que relaciona el esfuerzo normal con la deformación longitudinal",
+      "C": "Mide la rigidez del material frente a esfuerzos cortantes (τ = Gγ): un G alto indica que se necesitan grandes esfuerzos cortantes para distorsionar angularmente el sólido",
+      "D": "Mide la contracción lateral cuando el material se estira"
+    },
+    "respuesta": "C",
+    "explicacion": "G (módulo de cortante, de rigidez o de cizalladura) relaciona el esfuerzo cortante con la deformación angular: τ = Gγ, con G = E/[2(1+ν)]. Representa la oposición del material a que capas adyacentes deslicen entre sí: si G es alto, se requieren grandes esfuerzos cortantes para producir una distorsión angular dada. Tiene unidades de esfuerzo (pascales) y siempre es positivo. Las otras opciones describen otras constantes: la resistencia al cambio de volumen es K, la relación σ–ε longitudinal es E y la contracción lateral es ν. Además, en isótropos el cortante no produce deformaciones longitudinales ni efecto de Poisson.",
+    "pagina": 152,
+    "conceptos_clave": [
+      "módulo de rigidez",
+      "esfuerzo cortante",
+      "deformación angular",
+      "material isótropo"
+    ],
+    "ejemplo_practico": "Ejemplo: acero con E = 200 GPa y ν = 0,3 → G = 200/(2·1,3) ≈ 76,9 GPa.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Ecuaciones de Lamé",
+    "pregunta": "¿Cuál es la forma correcta de las ecuaciones de Lamé para un material isótropo lineal elástico?",
+    "opciones": {
+      "A": "σx = λe + 2Gεx, con e = εx + εy + εz, λ = νE/[(1+ν)(1−2ν)] y τxy = Gγxy",
+      "B": "σx = λe + Gεx y τxy = 2Gγxy",
+      "C": "σx = Eεx − νe y τxy = Eγxy",
+      "D": "σx = 2Gεx únicamente, con τxy = λγxy"
+    },
+    "respuesta": "A",
+    "explicacion": "Se obtienen despejando los esfuerzos de (4.3) y (4.12). Sumando las tres ecuaciones (4.3): e = (1−2ν)(σx+σy+σz)/E, o sea σx+σy+σz = Ee/(1−2ν). De (4.3a): εx = [(1+ν)σx − ν(σx+σy+σz)]/E, y despejando σx = Eεx/(1+ν) + νEe/[(1+ν)(1−2ν)] = 2Gεx + λe. Análogo para σy y σz. Los cortantes salen de (4.12): τ = Gγ. En forma matricial es el sistema (4.17), con la matriz D que tiene (1−ν)/(1−2ν) en la diagonal normal, ν/(1−2ν) fuera de ella y 1/2 en las filas de cortante, multiplicada por E/(1+ν). Otra forma compacta: σ = λ tr(ε) I + 2Gε.",
+    "pagina": 154,
+    "conceptos_clave": [
+      "ecuaciones de Lamé",
+      "constante de Lamé",
+      "dilatación cúbica",
+      "matriz constitutiva"
+    ],
+    "ejemplo_practico": "Ejemplo: E = 200 GPa y ν = 0,3 → λ = 0,3·200/(1,3·0,4) ≈ 115,4 GPa y G ≈ 76,9 GPa.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Tensión plana",
+    "pregunta": "En un estado de tensión plana de un material isótropo, ¿cuál afirmación es correcta?",
+    "opciones": {
+      "A": "εz = 0 y σz ≠ 0",
+      "B": "σz = ν(σx + σy)",
+      "C": "γxz y γyz son distintos de cero",
+      "D": "σz = τxz = τyz = 0, pero εz = −ν(σx + σy)/E ≠ 0 por el efecto de Poisson"
+    },
+    "respuesta": "D",
+    "explicacion": "Tensión plana ocurre cuando solo uno de los esfuerzos principales es cero, típicamente en elementos delgados cargados en su plano: placas, muros cargados en sus bordes. Se supone σz = τxz = τyz = 0 (sin cargas en las caras y con carga distribuida uniformemente en el espesor). De (4.3) y (4.12) salen las ecuaciones (4.35): εx = (σx − νσy)/E, εy = (σy − νσx)/E, γxy = τxy/G, γxz = γyz = 0 y εz = −ν(σx + σy)/E. Observe que εz no es cero aunque σz sí lo sea: es el efecto de Poisson. Al despejar se obtiene (4.36) y en forma matricial σ = E/(1−ν²)·[[1, ν, 0],[ν, 1, 0],[0, 0, (1−ν)/2]]·ε.",
+    "pagina": 172,
+    "conceptos_clave": [
+      "tensión plana",
+      "efecto de Poisson",
+      "ley de Hooke",
+      "matriz constitutiva 2D"
+    ],
+    "ejemplo_practico": "Ejemplo: σx = 10 MPa, σy = 20 MPa, ν = 0,3, E = 200 GPa → εz = −0,3·30/200 000 = −4,5×10⁻⁵.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Deformación plana",
+    "pregunta": "En un estado de deformación plana de un material isótropo, ¿cuál afirmación es correcta?",
+    "opciones": {
+      "A": "σz = 0 y εz ≠ 0",
+      "B": "εz = γxz = γyz = 0, pero σz = ν(σx + σy) ≠ 0",
+      "C": "εz = −ν(σx + σy)/E",
+      "D": "Solo se aplica a placas muy delgadas cargadas en su plano"
+    },
+    "respuesta": "B",
+    "explicacion": "Deformación plana se da cuando solo una deformación principal es cero. Típicamente el cuerpo es muy largo en la dirección z (tubería, túnel, muro de contención, presa) y la carga es independiente de z. Una rebanada central queda confinada entre rebanadas vecinas, de modo que w = 0 y εz = γxz = γyz = 0. Al hacer εz = 0 en (4.3c) resulta σz = ν(σx + σy), que no es cero: es el esfuerzo que restringe el movimiento en z. Las ecuaciones son (4.38): εx = [(1+ν)/E][(1−ν)σx − νσy], etc., y la matriz constitutiva (4.40) tiene E(1−ν)/[(1+ν)(1−2ν)] en la diagonal. Las otras opciones corresponden a tensión plana.",
+    "pagina": 176,
+    "conceptos_clave": [
+      "deformación plana",
+      "esfuerzo σz",
+      "rebanada confinada",
+      "matriz constitutiva 2D"
+    ],
+    "ejemplo_practico": "Ejemplo (sección 4.9.3): σx = −1 Pa, σy = 2 Pa y ν = 0,3 → σz = 0,3(−1 + 2) = 0,3 Pa.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Tensión plana y deformación plana",
+    "pregunta": "¿Cuál es la diferencia entre tensión plana y deformación plana?",
+    "opciones": {
+      "A": "En tensión plana εz = 0 y en deformación plana σz = 0",
+      "B": "En ambos casos σz = 0 y εz = 0; solo cambia el nombre",
+      "C": "En tensión plana σz = 0 pero εz ≠ 0 (cuerpo delgado); en deformación plana εz = 0 pero σz = ν(σx + σy) ≠ 0 (cuerpo largo en z); en ambos el análisis se reduce a σx, σy y τxy",
+      "D": "La tensión plana solo se aplica a materiales ortótropos y la deformación plana solo a isótropos"
+    },
+    "respuesta": "C",
+    "explicacion": "Son dos simplificaciones distintas de un sólido tridimensional. Tensión plana: el cuerpo es delgado y no hay cargas en z, así que σz = τxz = τyz = 0, pero εz ≠ 0. Deformación plana: el cuerpo es largo en z y la rebanada está confinada, así que εz = γxz = γyz = 0, pero σz = ν(σx + σy) ≠ 0. En ambos casos las incógnitas de esfuerzo se reducen a σx, σy y τxy, pero las matrices constitutivas son diferentes: E/(1−ν²) en tensión plana y E(1−ν)/[(1+ν)(1−2ν)] en deformación plana. Las dos aplican a materiales isótropos y ortótropos (con las constantes correspondientes).",
+    "pagina": 172,
+    "conceptos_clave": [
+      "tensión plana",
+      "deformación plana",
+      "matriz constitutiva",
+      "reducción a dos dimensiones"
+    ],
+    "ejemplo_practico": "Ejemplo: E = 200 GPa y ν = 0,3 → D11 = E/(1−ν²) = 219,8 GPa en tensión plana y E(1−ν)/[(1+ν)(1−2ν)] = 269,2 GPa en deformación plana.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Tensión plana y deformación plana",
+    "pregunta": "Al comparar el análisis bidimensional con el tridimensional de tensión y deformación plana, ¿cómo varían los valores y vectores propios del tensor de esfuerzos?",
+    "opciones": {
+      "A": "Se conservan los dos valores y vectores propios del caso 2D (con un 0 en la componente z) y aparece un tercero con dirección [0, 0, ±1]ᵀ: valor 0 en tensión plana y ν(σx+σy) en deformación plana; luego se reordena σ1 ≥ σ2 ≥ σ3 y el cortante máximo puede cambiar",
+      "B": "Todos los valores propios cambian y las direcciones principales rotan fuera del plano xy",
+      "C": "El tercer valor propio es siempre ν(σx+σy), tanto en tensión plana como en deformación plana",
+      "D": "Los valores propios no cambian y el cortante máximo siempre es (σ1−σ2)/2"
+    },
+    "respuesta": "A",
+    "explicacion": "Con el tensor 3D de tensión plana (4.37) o de deformación plana (4.42) se plantea el problema de valores propios. Dos valores propios coinciden con (σ1)xy y (σ2)xy y sus vectores son los mismos del caso 2D con un 0 en z. El tercero corresponde al eje z: 0 en tensión plana y σz = ν(σx+σy) en deformación plana, con vector [0, 0, ±1]ᵀ cuyo sentido se ajusta con la regla de la mano derecha (n̂3 = n̂1 × n̂2). Luego los valores se reordenan de mayor a menor, y el cortante máximo es la mayor de las tres semidiferencias, de modo que su magnitud y sus planos pueden salirse del plano xy (cuando el esfuerzo en z es el máximo o el mínimo).",
+    "pagina": 178,
+    "conceptos_clave": [
+      "valores y vectores propios",
+      "esfuerzos principales",
+      "regla de la mano derecha",
+      "cortante máximo"
+    ],
+    "ejemplo_practico": "Ejemplo (σx = −1, σy = 2, τxy = −3 Pa): tensión plana → σ = 3,854; 0; −2,854 Pa; deformación plana con ν = 0,3 → σ = 3,854; 0,3; −2,854 Pa.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Materiales anisótropos",
+    "pregunta": "En tensión plana se tiene τxz = 0 y τyz = 0. ¿Implica esto necesariamente que γxz = γyz = 0 en un material elástico anisótropo?",
+    "opciones": {
+      "A": "Sí, siempre, porque γ = τ/G",
+      "B": "Sí, porque el tensor de deformaciones es simétrico",
+      "C": "Solo si ν = 0",
+      "D": "No: en un anisótropo la matriz de conformidad acopla esfuerzos normales y cortantes, de modo que γxz y γyz pueden ser distintos de cero aunque τxz = τyz = 0; solo son cero en isótropos u ortótropos alineados con los ejes"
+    },
+    "respuesta": "D",
+    "explicacion": "En un material isótropo γ = τ/G, de modo que τ = 0 implica γ = 0. También en un ortótropo con ejes de ortotropía alineados con los ejes coordenados, donde no hay interacción entre esfuerzos normales y deformaciones angulares (ecuaciones 4.21). En un anisótropo general (ecuación 4.18) cada deformación es combinación lineal de las seis componentes de esfuerzo, así que γxz puede depender de σx, σy o τxy aunque τxz = 0. Por eso la hipótesis de tensión plana (σz = τxz = τyz = 0) no garantiza que γxz = γyz = 0 en esos materiales. La figura 4.9 ilustra que un esfuerzo normal puede producir deformación angular en un anisótropo.",
+    "pagina": 157,
+    "conceptos_clave": [
+      "anisótropo",
+      "matriz de conformidad",
+      "acoplamiento normal-cortante",
+      "tensión plana"
+    ],
+    "ejemplo_practico": "Ejemplo: en un laminado de fibra de carbono con fibras inclinadas, un σx puro produce además una distorsión γxy ≠ 0.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Esfuerzos principales y refuerzo del concreto",
+    "pregunta": "¿Por qué la dirección principal n̂1 asociada a σ1 > 0 indica la forma óptima de colocar el refuerzo en una viga de concreto reforzado?",
+    "opciones": {
+      "A": "Porque el concreto resiste mejor la tracción que la compresión",
+      "B": "Porque σ1 > 0 es la tracción máxima, actúa sobre un plano principal sin cortante, y las barras alineadas con n̂1 trabajan a tracción axial y cruzan perpendicularmente las grietas; el concreto resiste solo entre 0,10 y 0,20 f'c a tracción",
+      "C": "Porque en la dirección n̂1 el esfuerzo cortante es máximo",
+      "D": "Porque σ1 es siempre un esfuerzo de compresión"
+    },
+    "respuesta": "B",
+    "explicacion": "El concreto es especialmente débil a tracción (entre 0,10 y 0,20 de f'c), por lo que las tracciones las toma el acero en forma de barras, fibras o mallas. El esfuerzo principal máximo σ1 > 0 es la mayor tracción en el punto y actúa en un plano donde no hay esfuerzos cortantes; las líneas isostáticas de tracción son las trayectorias de esas direcciones. Si el acero se coloca a lo largo de ellas trabaja axialmente, que es lo más eficiente, e intercepta perpendicularmente las grietas que se abrirían. En tensión plana, cuando (σ1)xy > 0 y (σ2)xy < 0, el esfuerzo principal mayor en 3D es (σ1)xy (con σ2 = 0 y σ3 = (σ2)xy), por eso la inclinación θ1 da la dirección óptima.",
+    "pagina": 189,
+    "conceptos_clave": [
+      "esfuerzos principales",
+      "líneas isostáticas de tracción",
+      "concreto reforzado",
+      "refuerzo óptimo"
+    ],
+    "ejemplo_practico": "Ejemplo: con (σ1)xy > 0 y (σ2)xy < 0 en tensión plana → σ1 = (σ1)xy, σ2 = 0 y σ3 = (σ2)xy; el acero sigue la inclinación θ1.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Agrietamiento y criterio de Saint-Venant",
+    "pregunta": "¿Por qué el plano ortogonal a n̂1 de la deformación principal ε1 > 1,5×10⁻⁴ indica el plano de agrietamiento de una viga de concreto reforzado?",
+    "opciones": {
+      "A": "Porque la grieta es paralela a n̂1, que es la dirección de compresión",
+      "B": "Porque el concreto se agrieta cuando τmax supera su resistencia al corte, a 45°",
+      "C": "Porque el concreto (frágil) se agrieta cuando su deformación longitudinal máxima supera un umbral (criterio de Saint-Venant) y la grieta aparece perpendicular a n̂1; como el concreto se modela isótropo, las direcciones principales de esfuerzo y deformación coinciden, y en tensión plana con σ1 > 0 > σ2 la línea de la grieta sigue la inclinación θ2",
+      "D": "Porque la grieta aparece cuando σ2 alcanza f'c"
+    },
+    "respuesta": "C",
+    "explicacion": "Según el criterio de falla de Saint-Venant, un material frágil se rompe cuando la deformación principal máxima ε1 (estiramiento) supera un umbral. En el concreto ese umbral está entre 1,0×10⁻⁴ y 1,2×10⁻⁴, independiente de f'c, y para calcular la profundidad de las grietas se usa 1,5×10⁻⁴. El plano de falla es ortogonal a la dirección principal n̂1 de ε1. Como el concreto se asume isótropo, las direcciones principales de esfuerzos y de deformaciones coinciden (coaxialidad, sección 4.4). En tensión plana con (σ1)xy > 0 y (σ2)xy < 0, n̂1 tiene inclinación θ1, así que la grieta (perpendicular a n̂1) se orienta según θ2. El concreto se agrieta primero por tracción y no por cortante.",
+    "pagina": 190,
+    "conceptos_clave": [
+      "criterio de Saint-Venant",
+      "deformación principal",
+      "agrietamiento",
+      "coaxialidad"
+    ],
+    "ejemplo_practico": "Ejemplo: en la viga de la figura 4.26, el modelo elástico predice grietas con inclinación θ2 en las posiciones donde ε1 > 1,5×10⁻⁴.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Interpretación de gráficos de esfuerzos",
+    "pregunta": "Para la viga de la figura 4.20 (carga uniforme, tensión plana), ¿cómo se diseñaría el refuerzo «óptimo», qué forma tendrían las fisuras si fuera de concreto reforzado y cómo fallaría sin refuerzo?",
+    "opciones": {
+      "A": "Barras longitudinales inferiores que se inclinan hacia los apoyos siguiendo las líneas de tracción (σ1); fisuras casi verticales abajo en el centro e inclinadas por tensión diagonal cerca de los apoyos (perpendiculares a la tracción); sin refuerzo falla de forma frágil y súbita por una grieta en el centro inferior",
+      "B": "Barras verticales en el centro, donde τmax es máximo; fisuras horizontales en la fibra neutra; sin refuerzo falla dúctilmente",
+      "C": "Barras solo en la fibra superior; fisuras horizontales arriba; sin refuerzo falla por aplastamiento gradual",
+      "D": "Refuerzo únicamente en los apoyos; fisuras verticales en todo el vano; sin refuerzo no falla"
+    },
+    "respuesta": "A",
+    "explicacion": "El refuerzo óptimo sigue las trayectorias de tracción (σ1 > 0): horizontales abajo en el centro del vano, donde domina la flexión, y cada vez más inclinadas hacia los apoyos, donde domina el cortante (figura 4.24); por facilidad constructiva se usan barras dobladas hacia arriba (figura 4.25) o flejes verticales. Las fisuras aparecen perpendiculares a n̂1: casi verticales abajo en el centro (flexión) e inclinadas cerca de los apoyos (grietas por tensión diagonal), mientras que bajo la carga aparece descascaramiento por la expansión lateral de Poisson. Sin refuerzo, el concreto (frágil) fallaría de golpe, sin aviso, por una grieta que parte de la fibra inferior en el centro, donde (σ1)xy es máximo.",
+    "pagina": 189,
+    "conceptos_clave": [
+      "trayectorias de tracción",
+      "refuerzo óptimo",
+      "grietas por tensión diagonal",
+      "falla frágil"
+    ],
+    "ejemplo_practico": "Ejemplo: viga con t = 1 m, L = 3 m, c = 0,5 m y q = −10 kN/m; el σ1 máximo ocurre en la fibra inferior central.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Interpretación de gráficos de esfuerzos",
+    "pregunta": "¿Cuál es la interpretación correcta de los gráficos de las figuras 4.21, 4.22 y 4.23 de la viga con carga uniforme?",
+    "opciones": {
+      "A": "σx es máximo en la fibra neutra y cero en los bordes; τxy es máximo en los bordes",
+      "B": "τxy es máximo en la fibra superior; εy en el borde superior es negativo porque la carga comprime",
+      "C": "σy varía linealmente con la altura y σx es constante en toda la sección",
+      "D": "σx varía linealmente con la altura (tracción abajo, compresión arriba, nulo en la fibra neutra); σy es 0 abajo y −10 kPa arriba (la carga) con variación cúbica; τxy es parabólico, máximo en el eje neutro, nulo arriba y abajo y mayor cerca de los apoyos; εy arriba es positivo por Poisson; los principales y τmax (isocromáticas) muestran tracciones, compresiones y zonas críticas"
+    },
+    "respuesta": "D",
+    "explicacion": "Figura 4.21: σx tiene curvas de nivel equiespaciadas, por lo que varía linealmente con y (rojo = tracción abajo, azul = compresión arriba, verde ≈ 0 en la fibra neutra); σy vale 0 en el borde inferior y −10 kPa en el superior (la carga q/t) y varía cúbicamente; τxy es parabólico en y, con máximo en el eje neutro y cero en los bordes, y se concentra cerca de los apoyos. Figura 4.22: εx indica fibras estiradas y contraídas; εy en la parte superior es positivo a pesar de la compresión, por el efecto de Poisson; εz son las líneas isopacas; γxy es proporcional a τxy y cambia de signo a cada lado. Figura 4.23: muestran (σ1)xy, (σ2)xy y τmax con las direcciones principales; las curvas de nivel son las isobaras y las isocromáticas.",
+    "pagina": 185,
+    "conceptos_clave": [
+      "distribución de esfuerzos en vigas",
+      "efecto de Poisson",
+      "esfuerzos principales",
+      "isocromáticas"
+    ],
+    "ejemplo_practico": "Ejemplo: con t = 1 m, L = 3 m, c = 0,5 m, q = −10 kN/m, E = 21 GPa y ν = 0,23, σy en el borde superior = −10 kPa.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Diagramas de cortante y momento",
+    "pregunta": "¿Por qué la fuerza cortante V y el momento flector M se obtienen con V(x) = −∬τxy dz dy y M(x) = −∬y σx dz dy?",
+    "opciones": {
+      "A": "V es la integral de σx y M es la integral de τxy sobre la sección",
+      "B": "V es la resultante de los esfuerzos cortantes sobre la sección (fuerza = esfuerzo × área) y M es el momento de las fuerzas normales σx dA respecto del eje neutro (brazo y); con la viga analizada resulta V = qx y M = −q(L² − x²)/2",
+      "C": "V = −∬y τxy dA y M = −∬σx dA",
+      "D": "V y M no tienen relación con los esfuerzos σx y τxy"
+    },
+    "respuesta": "B",
+    "explicacion": "Cada elemento de área dA soporta una fuerza cortante τxy dA y una fuerza normal σx dA. La suma (integral) de las primeras es la fuerza cortante V de la sección. La suma de los momentos de las fuerzas normales respecto del eje neutro (brazo y) es el momento flector M. Los signos provienen de la convención del libro: V positivo es ↑↓ y M positivo produce tracción en la fibra inferior. Al integrar las ecuaciones (4.45) con Maxima se obtiene V(x) = qx y M(x) = −(q/2)(L² − x²), idénticos a los diagramas obtenidos con los métodos de Estática. Esto relaciona los mapas de colores de esfuerzos con los diagramas usados en el diseño.",
+    "pagina": 194,
+    "conceptos_clave": [
+      "fuerza cortante",
+      "momento flector",
+      "integración de esfuerzos",
+      "convención de signos"
+    ],
+    "ejemplo_practico": "Ejemplo: q = −10 kN/m y L = 3 m → V(3) = −30 kN, V(−3) = +30 kN y M(0) = +45 kN·m (tracción en la fibra inferior).",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Materiales anisótropos",
+    "pregunta": "¿Cómo se deforma un material anisótropo ante una condición de esfuerzos dada, en comparación con uno isótropo?",
+    "opciones": {
+      "A": "Igual que un isótropo, pero con un módulo de Young distinto en cada dirección",
+      "B": "Solo se deforma longitudinalmente, sin deformaciones angulares",
+      "C": "Presenta acoplamiento: un esfuerzo normal puede producir además deformación angular y un esfuerzo cortante puede producir alargamientos y acortamientos; requiere hasta 21 constantes independientes frente a las 2 (E y ν) del isótropo",
+      "D": "Solo se deforma angularmente, sin deformaciones longitudinales"
+    },
+    "respuesta": "C",
+    "explicacion": "En un material isótropo, un esfuerzo normal solo produce deformaciones longitudinales y un esfuerzo cortante solo produce deformación angular (figura 4.9, casos c y d). En un anisótropo hay acoplamiento: bajo esfuerzos normales también se deforma angularmente y bajo esfuerzos cortantes también se alarga o acorta (casos a y b). La ley de Hooke general es σ = Dε con un tensor de cuarto orden dijkl de 81 componentes que, por la simetría de σ y de ε, se reduce a 36 y, por la simetría y definición positiva de D, a 21 constantes independientes. Con ejes de simetría ese número baja (por ejemplo, 9 en ortótropos, o 2 en isótropos). Ejemplos: madera, tejidos biológicos, fibra de carbono, metales laminados.",
+    "pagina": 157,
+    "conceptos_clave": [
+      "anisotropía",
+      "matriz constitutiva",
+      "constantes elásticas",
+      "acoplamiento"
+    ],
+    "ejemplo_practico": "Ejemplo: el tensor dijkl tiene 3⁴ = 81 componentes → 36 por simetría de σ y ε → 21 por simetría de D (anisótropo general).",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Flejes y tensión diagonal",
+    "pregunta": "Se dice que los flejes se colocan para «resistir el cortante». ¿De cuál cortante se habla, por qué se diseñan con el diagrama de fuerzas cortantes y qué falla evitan?",
+    "opciones": {
+      "A": "Se habla de la fuerza cortante V (resumen de τxy); se diseñan con su diagrama porque cerca de los apoyos τxy domina los esfuerzos σ1 y τmax, y evitan las grietas por tensión diagonal (tracción en planos inclinados), no una falla del material por cortante",
+      "B": "Se habla del esfuerzo cortante máximo del centro de la luz, donde τmax es máximo, y evitan el aplastamiento del concreto",
+      "C": "Se colocan en el centro de la viga porque allí τmax es máximo y evitan la flexión",
+      "D": "Solo sirven para resistir la temperatura y la retracción"
+    },
+    "respuesta": "A",
+    "explicacion": "La fuerza cortante V(x) es la integral de τxy sobre la sección (ecuación 4.46), por eso el diagrama de V resume la intensidad del esfuerzo cortante τxy. Cerca de los apoyos, τxy domina tanto a (σ1)xy como a (τmax)xy: por ejemplo, en el punto (−2,5; −0,1) τxy aporta el 63,36 % de σ1 y el 73,91 % de τmax. Allí σ1 produce las grietas inclinadas por tensión diagonal, que los flejes cruzan y controlan. En el centro de la luz, en cambio, las tracciones por flexión dominan el agrietamiento y no se colocan flejes por τmax. Los flejes no controlan el cortante máximo ni evitan una falla del material por cortante propiamente dicha (que ocurre, por ejemplo, en la interfaz de vigas compuestas o en ménsulas); además ayudan a armar el refuerzo y a resistir efectos de temperatura y retracción plástica.",
+    "pagina": 195,
+    "conceptos_clave": [
+      "flejes",
+      "fuerza cortante",
+      "tensión diagonal",
+      "esfuerzos principales"
+    ],
+    "ejemplo_practico": "Ejemplo: punto (−2,5; −0,1): σx = 15,94, σy = −3,52 y τxy = −36 kPa → σ1 = 43,50 kPa; sin τxy sería 15,94 kPa, es decir, τxy aporta el 63,36 %.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Desplazamientos y rotación rígida",
+    "pregunta": "¿Por qué los desplazamientos y las rotaciones rígidas no producen esfuerzos en el sólido?",
+    "opciones": {
+      "A": "Porque los esfuerzos dependen del desplazamiento absoluto y no de sus derivadas",
+      "B": "Porque la rotación cambia las distancias entre puntos pero el material compensa el cambio",
+      "C": "Porque producen deformación pero el material la disipa en forma de calor",
+      "D": "Porque los esfuerzos se obtienen de las deformaciones (parte simétrica de la matriz gradiente H): en una traslación H = 0 y en una rotación rígida H es antisimétrica (H = Ω), de modo que ε = (H + Hᵀ)/2 = 0 y sin deformación no hay esfuerzo"
+    },
+    "respuesta": "D",
+    "explicacion": "En un sólido elástico los esfuerzos se calculan a partir de las deformaciones con la ley de Hooke (σ = Dε). La matriz gradiente de desplazamientos se descompone en H = ε + Ω, con ε simétrica (deformaciones) y Ω antisimétrica (rotación rígida). En una traslación rígida u = u₀ constante, entonces H = 0. En una rotación rígida pequeña H = Ω es antisimétrica, así que ε = (H + Hᵀ)/2 = 0: las distancias entre partículas no cambian. En ambos casos ε = 0 y por tanto σ = 0. Un cuerpo puede tener desplazamientos sin deformarse, pero toda deformación implica un desplazamiento relativo entre puntos.",
+    "pagina": 128,
+    "conceptos_clave": [
+      "traslación rígida",
+      "rotación rígida",
+      "matriz gradiente de desplazamientos",
+      "tensor de deformaciones"
+    ],
+    "ejemplo_practico": "Ejemplo: u = −ωz·y y v = ωz·x → ∂u/∂y = −ωz y ∂v/∂x = ωz → εx = εy = 0 y γxy = 0: solo hay rotación ωz y ningún esfuerzo.",
+    "nivel_explicacion": "detallado"
+  },
+  {
+    "materia": "Tensorial",
+    "tema": "Agrietamiento y criterio de Saint-Venant",
+    "pregunta": "¿Cómo se produce el agrietamiento de una viga de concreto reforzado y qué es una grieta por tensión diagonal?",
+    "opciones": {
+      "A": "Cuando τmax supera la resistencia al corte del concreto; las grietas son siempre a 45° en el centro de la luz",
+      "B": "Cuando la deformación principal máxima ε1 supera unos 1,0–1,2×10⁻⁴ (independiente de f'c), con grietas perpendiculares a n̂1: verticales por flexión abajo en el centro e inclinadas cerca de los apoyos; la grieta por tensión diagonal es una grieta de tracción en un plano inclinado, donde τxy domina a σ1, y no una falla por cortante",
+      "C": "Solo cuando la compresión supera f'c, con grietas horizontales en la fibra superior",
+      "D": "Cuando el acero entra en fluencia, antes de que el concreto alcance su deformación límite"
+    },
+    "respuesta": "B",
+    "explicacion": "El concreto, frágil y débil a tracción, se agrieta cuando su deformación longitudinal máxima ε1 excede un valor entre 1,0×10⁻⁴ y 1,2×10⁻⁴ (criterio de Saint-Venant), sin importar f'c. Las grietas se abren perpendiculares a n̂1: casi verticales en la zona de máxima flexión (abajo en el centro) e inclinadas en las zonas de fuerza cortante considerable, cerca de los apoyos. Estas últimas son las grietas por tensión diagonal: aunque aparecen donde hay cortante, son grietas de tracción en planos inclinados, causadas porque τxy domina el esfuerzo principal (σ1)xy. Por eso no se debe hablar de «falla por cortante» en esta viga. Bajo la carga aparece además descascaramiento por expansión lateral (efecto de Poisson) en un estado de doble compresión. El acero y los flejes controlan estas grietas.",
+    "pagina": 190,
+    "conceptos_clave": [
+      "agrietamiento",
+      "grieta por tensión diagonal",
+      "criterio de Saint-Venant",
+      "concreto reforzado"
+    ],
+    "ejemplo_practico": "Ejemplo: viga de 140 cm de la figura 4.26 (cargas a 40 cm de los apoyos): el modelo elástico predice grietas inclinadas θ2 donde ε1 > 1,5×10⁻⁴.",
+    "nivel_explicacion": "detallado"
+  }
+]

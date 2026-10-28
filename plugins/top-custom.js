@@ -31,12 +31,42 @@ function pickRandomParticipants(participants, botJid, limit = 10) {
   return selected
 }
 
+// Convierte letras y números a la fuente negrita matemática (𝐀𝐁𝐂 𝟏𝟐𝟑)
+function toBoldFont(str) {
+  return [...String(str).normalize('NFD')]
+    .map(ch => {
+      const c = ch.codePointAt(0)
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1D400 + c - 65)
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x1D41A + c - 97)
+      if (c >= 48 && c <= 57) return String.fromCodePoint(0x1D7CE + c - 48)
+      return ch
+    })
+    .join('')
+    .normalize('NFC')
+}
+
+const NUMBER_EMOJIS = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟']
+
+const HEADER_EMOJIS = ['🔥', '😎', '🤡', '👑', '💀', '😈']
+
+function pickHeaderEmojis(customEmoji) {
+  if (customEmoji) return [customEmoji, customEmoji]
+
+  const left = HEADER_EMOJIS[Math.floor(Math.random() * HEADER_EMOJIS.length)]
+  let right
+  do {
+    right = HEADER_EMOJIS[Math.floor(Math.random() * HEADER_EMOJIS.length)]
+  } while (right === left)
+
+  return [left, right]
+}
+
 function lineEmoji(position, customEmoji) {
   if (customEmoji) return customEmoji
   if (position === 1) return '🥇'
   if (position === 2) return '🥈'
   if (position === 3) return '🥉'
-  return '⭐'
+  return '•'
 }
 
 let handler = async (m, { conn, text, usedPrefix }) => {
@@ -50,15 +80,23 @@ let handler = async (m, { conn, text, usedPrefix }) => {
   const parsed = parseTopInput(text)
   if (!parsed) {
     return conn.sendMessage(m.chat, {
-      text: `𓍯 𝚃𝙾𝙿 𝙿𝙴𝚁𝚂𝙾𝙽𝙰𝙻𝙸𝚉𝙰𝙳𝙾 𓍯
-
-> 𓂃 ࣪ ִֶָ☾.  *${usedPrefix}top <nombre>|emoji*
-
-> 𓂃 ࣪ ִֶָ☾.  *${usedPrefix}top coneros*
-> 𓂃 ࣪ ִֶָ☾.  *${usedPrefix}top coneros|🪙*
-> 𓂃 ࣪ ִֶָ☾.  *${usedPrefix}top los mas malos|😈*
-
-⊹ Muestra 10 miembros del grupo ⊹`,
+      text: [
+        '╭〔 🏆 *TOP PERSONALIZADO* 〕╮',
+        '┃',
+        '┃ ✍️ *ESCRIBE UN TÍTULO*',
+        `┃ 🏷️ ${usedPrefix}top <nombre>`,
+        `┃ 🎨 ${usedPrefix}top <nombre>|<emoji>`,
+        '┣━━━━━━━━━━',
+        '┃',
+        '┃ 💡 *EJEMPLOS*',
+        `┃ 🪙 ${usedPrefix}top coneros|🪙`,
+        `┃ 😈 ${usedPrefix}top los mas malos|😈`,
+        '┣━━━━━━━━━━',
+        '┃',
+        '┃ 🎲 Elige 10 miembros al azar',
+        '┃    y los menciona en el grupo.',
+        '╰━━━━━━━━━━'
+      ].join('\n'),
       contextInfo: { ...rcanal.contextInfo },
     }, { quoted: m })
   }
@@ -76,13 +114,14 @@ let handler = async (m, { conn, text, usedPrefix }) => {
       }, { quoted: m })
     }
 
-    const title = parsed.name.toUpperCase()
-    let txt = `   𓍯  TOP ${title}  𓍯\n\n`
+    const title = toBoldFont(`TOP ${parsed.name.toUpperCase()}`)
+    const [leftEmoji, rightEmoji] = pickHeaderEmojis(parsed.emoji)
+    let txt = `${leftEmoji} ${title} ${rightEmoji}\n\n`
 
     selectedUsers.forEach((user, index) => {
       const position = index + 1
       const emoji = lineEmoji(position, parsed.emoji)
-      txt += `${emoji} @${user.id.split('@')[0]}\n`
+      txt += `${NUMBER_EMOJIS[index]} ${emoji} @${user.id.split('@')[0]}\n`
     })
 
     return conn.sendMessage(m.chat, {

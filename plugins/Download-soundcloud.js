@@ -59,7 +59,7 @@ async function apiJson(pathWithQuery) {
   const res = await fetch(url, {
     headers: {
       Accept: 'application/json',
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) PainBot/1.0'
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) KACHOWBOT/1.0'
     }
   })
   const raw = await res.text()
@@ -115,7 +115,7 @@ async function downloadTrack(scUrl) {
 
 async function fetchBuffer(url) {
   const res = await fetch(url, {
-    headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) PainBot/1.0' }
+    headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) KACHOWBOT/1.0' }
   })
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
   return Buffer.from(await res.arrayBuffer())

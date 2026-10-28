@@ -1,0 +1,317 @@
+{
+  "activo": true,
+  "salaActual": 5,
+  "totalSalas": 6,
+  "equipos": {
+    "t44417bff74": {
+      "nombre": "x-fly",
+      "logo": "scrim-data\\logos\\120363429232418377_g_us_t44417bff74.png",
+      "owner": "19047931753@s.whatsapp.net"
+    },
+    "t89e127be6b": {
+      "nombre": "alpha roja",
+      "logo": "scrim-data\\logos\\120363429232418377_g_us_t89e127be6b.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t908589a7ea": {
+      "nombre": "Eco Odin",
+      "logo": "scrim-data\\logos\\120363429232418377_g_us_t908589a7ea.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "ta0e67eefdf": {
+      "nombre": "Colmillo",
+      "logo": "scrim-data\\logos\\120363429232418377_g_us_ta0e67eefdf.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "td8a83d0958": {
+      "nombre": "Guerreros",
+      "logo": "scrim-data\\logos\\120363429232418377_g_us_td8a83d0958.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t0237241740": {
+      "nombre": "Titanes",
+      "logo": "scrim-data\\logos\\120363429232418377_g_us_t0237241740.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t72063ad165": {
+      "nombre": "Caballeros",
+      "logo": "scrim-data\\logos\\120363429232418377_g_us_t72063ad165.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tb4ac2035c9": {
+      "nombre": "Comandos",
+      "logo": "scrim-data\\logos\\120363429232418377_g_us_tb4ac2035c9.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t1bcab39874": {
+      "nombre": "Segadores",
+      "logo": "scrim-data\\logos\\120363429232418377_g_us_t1bcab39874.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tbbe2898828": {
+      "nombre": "Hijos",
+      "logo": "scrim-data\\logos\\120363429232418377_g_us_tbbe2898828.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "t17515d51a3": {
+      "nombre": "Escuadrón",
+      "logo": "scrim-data\\logos\\120363429232418377_g_us_t17515d51a3.png",
+      "owner": "573146680977@s.whatsapp.net"
+    },
+    "tbb8abae87a": {
+      "nombre": "Arcángel",
+      "logo": "scrim-data\\logos\\120363429232418377_g_us_tbb8abae87a.png",
+      "owner": "573146680977@s.whatsapp.net"
+    }
+  },
+  "resultados": {
+    "1": {
+      "t44417bff74": {
+        "puesto": 1,
+        "kills": 3,
+        "puntos": 15
+      },
+      "t89e127be6b": {
+        "puesto": 2,
+        "kills": 3,
+        "puntos": 12
+      },
+      "t908589a7ea": {
+        "puesto": 3,
+        "kills": 4,
+        "puntos": 12
+      },
+      "ta0e67eefdf": {
+        "puesto": 4,
+        "kills": 3,
+        "puntos": 10
+      },
+      "td8a83d0958": {
+        "puesto": 5,
+        "kills": 8,
+        "puntos": 14
+      },
+      "t0237241740": {
+        "puesto": 6,
+        "kills": 3,
+        "puntos": 8
+      },
+      "t72063ad165": {
+        "puesto": 7,
+        "kills": 9,
+        "puntos": 13
+      },
+      "tb4ac2035c9": {
+        "puesto": 8,
+        "kills": 3,
+        "puntos": 6
+      },
+      "t1bcab39874": {
+        "puesto": 9,
+        "kills": 7,
+        "puntos": 9
+      },
+      "tbbe2898828": {
+        "puesto": 10,
+        "kills": 3,
+        "puntos": 4
+      },
+      "t17515d51a3": {
+        "puesto": 11,
+        "kills": 8,
+        "puntos": 8
+      },
+      "tbb8abae87a": {
+        "puesto": 12,
+        "kills": 3,
+        "puntos": 3
+      }
+    },
+    "2": {
+      "t44417bff74": {
+        "puesto": 1,
+        "kills": 3,
+        "puntos": 15
+      },
+      "t89e127be6b": {
+        "puesto": 2,
+        "kills": 3,
+        "puntos": 12
+      },
+      "t908589a7ea": {
+        "puesto": 3,
+        "kills": 4,
+        "puntos": 12
+      },
+      "ta0e67eefdf": {
+        "puesto": 4,
+        "kills": 3,
+        "puntos": 10
+      },
+      "td8a83d0958": {
+        "puesto": 5,
+        "kills": 8,
+        "puntos": 14
+      },
+      "t0237241740": {
+        "puesto": 6,
+        "kills": 3,
+        "puntos": 8
+      },
+      "t72063ad165": {
+        "puesto": 7,
+        "kills": 9,
+        "puntos": 13
+      },
+      "tb4ac2035c9": {
+        "puesto": 8,
+        "kills": 3,
+        "puntos": 6
+      },
+      "t1bcab39874": {
+        "puesto": 9,
+        "kills": 7,
+        "puntos": 9
+      },
+      "tbbe2898828": {
+        "puesto": 10,
+        "kills": 3,
+        "puntos": 4
+      },
+      "t17515d51a3": {
+        "puesto": 11,
+        "kills": 8,
+        "puntos": 8
+      },
+      "tbb8abae87a": {
+        "puesto": 12,
+        "kills": 3,
+        "puntos": 3
+      }
+    },
+    "3": {
+      "t44417bff74": {
+        "puesto": 1,
+        "kills": 3,
+        "puntos": 15
+      },
+      "t89e127be6b": {
+        "puesto": 2,
+        "kills": 3,
+        "puntos": 12
+      },
+      "t908589a7ea": {
+        "puesto": 3,
+        "kills": 4,
+        "puntos": 12
+      },
+      "ta0e67eefdf": {
+        "puesto": 4,
+        "kills": 3,
+        "puntos": 10
+      },
+      "td8a83d0958": {
+        "puesto": 5,
+        "kills": 8,
+        "puntos": 14
+      },
+      "t0237241740": {
+        "puesto": 6,
+        "kills": 3,
+        "puntos": 8
+      },
+      "t72063ad165": {
+        "puesto": 7,
+        "kills": 9,
+        "puntos": 13
+      },
+      "tb4ac2035c9": {
+        "puesto": 8,
+        "kills": 3,
+        "puntos": 6
+      },
+      "t1bcab39874": {
+        "puesto": 9,
+        "kills": 7,
+        "puntos": 9
+      },
+      "tbbe2898828": {
+        "puesto": 10,
+        "kills": 3,
+        "puntos": 4
+      },
+      "t17515d51a3": {
+        "puesto": 11,
+        "kills": 8,
+        "puntos": 8
+      },
+      "tbb8abae87a": {
+        "puesto": 12,
+        "kills": 12,
+        "puntos": 12
+      }
+    },
+    "4": {
+      "t44417bff74": {
+        "puesto": 1,
+        "kills": 3,
+        "puntos": 15
+      },
+      "t89e127be6b": {
+        "puesto": 2,
+        "kills": 3,
+        "puntos": 12
+      },
+      "t908589a7ea": {
+        "puesto": 3,
+        "kills": 4,
+        "puntos": 12
+      },
+      "ta0e67eefdf": {
+        "puesto": 4,
+        "kills": 3,
+        "puntos": 10
+      },
+      "td8a83d0958": {
+        "puesto": 5,
+        "kills": 8,
+        "puntos": 14
+      },
+      "t0237241740": {
+        "puesto": 6,
+        "kills": 3,
+        "puntos": 8
+      },
+      "t72063ad165": {
+        "puesto": 7,
+        "kills": 9,
+        "puntos": 13
+      },
+      "tb4ac2035c9": {
+        "puesto": 8,
+        "kills": 3,
+        "puntos": 6
+      },
+      "t1bcab39874": {
+        "puesto": 9,
+        "kills": 7,
+        "puntos": 9
+      },
+      "tbbe2898828": {
+        "puesto": 10,
+        "kills": 3,
+        "puntos": 4
+      },
+      "t17515d51a3": {
+        "puesto": 11,
+        "kills": 8,
+        "puntos": 8
+      },
+      "tbb8abae87a": {
+        "puesto": 12,
+        "kills": 12,
+        "puntos": 12
+      }
+    }
+  }
+}

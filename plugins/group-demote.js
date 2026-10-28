@@ -18,7 +18,7 @@ let handler = async (m, { conn, args, participants, isAdmin, isOwner, isPrems, u
   }
 
   if (!m.isGroup) return conn.sendMessage(m.chat, {
-    text: '[❗] Este comando solo puede ser usado en grupos.',
+    text: '> _*[❗] Este comando solo puede ser usado en grupos.*_',
     contextInfo: {
       ...rcanal.contextInfo
     }
@@ -27,7 +27,7 @@ let handler = async (m, { conn, args, participants, isAdmin, isOwner, isPrems, u
   
   if (!m.mentionedJid || m.mentionedJid.length === 0) {
     return conn.sendMessage(m.chat, {
-      text: `[❗] Debes mencionar a un usuario para poder quitar admin.\n\n> *Ejemplo:* ${usedPrefix + command} @usuario`,
+      text: `> _*[❗] Debes mencionar a un usuario para poder quitar admin.*_\n\n> *Ejemplo:* ${usedPrefix + command} @usuario`,
       contextInfo: {
         ...rcanal.contextInfo
       }

@@ -24,7 +24,7 @@ let handler = async (m, { conn, text, usedPrefix, command, isOwner, isAdmin }) =
   const links = ensureLinks()
   const action = String(command || '').toLowerCase()
 
-  if (action === 'link') {
+  if (action === 'linkslist') {
     if (!links.length) {
       return conn.reply(m.chat, '🔗 No hay enlaces guardados todavía.', m, global.rcanal)
     }
@@ -59,8 +59,8 @@ let handler = async (m, { conn, text, usedPrefix, command, isOwner, isAdmin }) =
   return conn.reply(m.chat, `✅ Enlace guardado:\n\n*${entry.description}*\n${entry.url}`, m, global.rcanal)
 }
 
-handler.help = ['mandarlink descripción/https://enlace → guarda un enlace', 'link → muestra los enlaces guardados']
+handler.help = ['mandarlink descripción/https://enlace → guarda un enlace', 'linkslist → muestra los enlaces guardados']
 handler.tags = ['owner', 'herramientas']
-handler.command = ['mandarlink', 'link']
+handler.command = ['mandarlink', 'linkslist']
 
 export default handler

@@ -250,8 +250,8 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   }
 }
 
-handler.help = ['#sss + {responder foto/video ver una vez} → guarda el contenido']
+handler.help = ['#sss / #ver + {responder foto/video ver una vez} → reenvía el contenido']
 handler.tags = ['stickers']
-handler.command = ['sss']
+handler.command = ['sss', 'ver']
 
 export default handler

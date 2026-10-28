@@ -1,4 +1,6 @@
 import fetch from 'node-fetch'
+import yts from 'yt-search'
+import { downloadVideoWithAhm7 } from '../lib/ahm7-download.js'
 
 const YT_URL_RE = /youtu\.be|youtube\.com/i
 const RESULTS_LIMIT = 5
@@ -31,21 +33,55 @@ function cleanFileName(title = 'video') {
 }
 
 async function searchFirst(query) {
-  const searchUrl = `https://api.delirius.online/search/ytsearch?q=${encodeURIComponent(query)}`
-  const sres = await fetch(searchUrl).then(r => r.json())
-  if (!sres?.status || !Array.isArray(sres.data) || !sres.data.length) {
-    throw '[❗] No se encontraron resultados para la búsqueda.'
+  try {
+    const result = await yts.search({ query, hl: 'es', gl: 'ES' })
+    const video = result?.videos?.[0]
+    if (video?.url) {
+      return {
+        title: video.title,
+        url: video.url,
+        videoId: video.videoId,
+        duration: video.timestamp,
+        views: video.views,
+        image: video.thumbnail,
+        author: { name: video.author?.name || video.author || 'Desconocido' }
+      }
+    }
+  } catch (error) {
+    console.warn('[video] yt-search falló; se probará Delirius:', error?.message || error)
   }
-  return sres.data[0]
+
+  const searchUrl = `https://api.delirius.online/search/ytsearch?q=${encodeURIComponent(query)}`
+  const response = await fetch(searchUrl, {
+    headers: { accept: 'application/json' },
+    signal: AbortSignal.timeout(12000)
+  })
+  const body = await response.text()
+  let data
+  try {
+    data = JSON.parse(body.replace(/^\uFEFF/, ''))
+  } catch {
+    throw new Error(`La búsqueda de respaldo devolvió HTML o JSON inválido (HTTP ${response.status}).`)
+  }
+  if (!response.ok || !data?.status || !Array.isArray(data.data) || !data.data.length) {
+    throw new Error(data?.msg || `No se encontraron resultados (HTTP ${response.status}).`)
+  }
+  return data.data[0]
 }
 
 async function downloadVideo(videoUrl, format) {
-  const downloadApi = `https://api.delirius.online/download/ytmp4?url=${encodeURIComponent(videoUrl)}&format=${encodeURIComponent(format)}`
-  const dres = await fetch(downloadApi).then(r => r.json())
-  if (!dres?.status || !dres.data) {
-    throw '[❗] No se pudo obtener el video desde la URL.'
+  const result = await downloadVideoWithAhm7(videoUrl)
+  if (!result.success) throw new Error(result.error || 'AHM7 no pudo obtener el video.')
+
+  const chosenQuality = result.qualities.find(item => item.url === result.video)?.quality
+    || result.qualities[0]?.quality
+    || format
+  return {
+    ...result,
+    download: result.video,
+    author: result.platform || 'Desconocido',
+    format: chosenQuality
   }
-  return dres.data
 }
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {

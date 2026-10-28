@@ -1,4 +1,4 @@
-# Pain Bot
+# KACHOW BOT
 
 **By Sunkovv**
 
@@ -183,17 +183,17 @@ cd ~/pain-bot
 **Importante:** vincula primero con `npm start` y el código. Cuando la sesión ya esté en `Sessions/`:
 
 ```bash
-pm2 start index.js --name painbot
+pm2 start index.js --name kachowbot
 pm2 save
 ```
 
 | Comando | Acción |
 |---------|--------|
 | `pm2 status` | Estado del proceso |
-| `pm2 logs painbot` | Logs en vivo |
-| `pm2 restart painbot` | Reiniciar |
-| `pm2 stop painbot` | Detener |
-| `pm2 delete painbot` | Eliminar de PM2 |
+| `pm2 logs kachowbot` | Logs en vivo |
+| `pm2 restart kachowbot` | Reiniciar |
+| `pm2 stop kachowbot` | Detener |
+| `pm2 delete kachowbot` | Eliminar de PM2 |
 
 Recuperar PM2 al reabrir Termux:
 
@@ -246,6 +246,18 @@ Más comandos en `.menu` / `.menu2` dentro del chat.
 
 ---
 
+## IA local
+
+Los comandos `.ia`, `.gpt` y `.chatgpt`, las consultas generales de `.bot` y las menciones a “KACHOW BOT” usan Ollama en `http://127.0.0.1:11434` y el modelo `qwen2.5:3b` por defecto. Instala Ollama, descarga el modelo una sola vez y deja Ollama activo mientras corre el bot:
+
+```bash
+ollama pull qwen2.5:3b
+```
+
+La descarga inicial requiere internet; las consultas posteriores se procesan localmente. Para cambiar el modelo o la dirección del servicio, configura `KACHOWBOT_OLLAMA_MODEL` o `KACHOWBOT_OLLAMA_URL` en el entorno donde arranques el bot.
+
+---
+
 ## Estructura
 
 ```text
@@ -262,7 +274,7 @@ pain-bot/
 └── package.json
 ```
 
-Los plugins suelen recargarse al guardar. Si no aparece uno nuevo, reinicia con `npm start` o `pm2 restart painbot`.
+Los plugins suelen recargarse al guardar. Si no aparece uno nuevo, reinicia con `npm start` o `pm2 restart kachowbot`.
 
 ---
 
@@ -272,7 +284,7 @@ Los plugins suelen recargarse al guardar. Si no aparece uno nuevo, reinicia con 
 cd pain-bot
 git pull origin main
 npm start
-# o: pm2 restart painbot
+# o: pm2 restart kachowbot
 ```
 
 No hace falta `npm install` tras el pull mientras `node_modules` venga actualizado en el repo.
@@ -322,11 +334,11 @@ Uso personal o educativo. Respeta las [políticas de WhatsApp](https://www.whats
 
 | | |
 |---|---|
-| **Proyecto** | Pain Bot |
+| **Proyecto** | KACHOW BOT |
 | **By** | Sunkovv |
 | **Núcleo** | [Baileys](https://github.com/WhiskeySockets/Baileys) (WhiskeySockets) |
 | **Repositorio** | https://github.com/nexusday/pain-bot.git |
 
 ---
 
-*Pain Bot — By Sunkovv*
+*KACHOW BOT — By Sunkovv*

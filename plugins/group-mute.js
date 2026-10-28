@@ -86,15 +86,15 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, participants
 
     const botIds = collectTargetIds(conn.user?.jid || conn.user?.id, participants, conn)
     if (idsOverlap(targetIds, botIds)) {
-      return conn.sendMessage(m.chat, { text: '[❌] No puedes mutear al bot.', contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
+      return conn.sendMessage(m.chat, { text: '> _*[❌] No puedes mutear al bot.*_', contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
     }
 
     if (isTargetAdmin) {
-      return conn.sendMessage(m.chat, { text: '[❌] No puedes mutear a un administrador del grupo.', contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
+      return conn.sendMessage(m.chat, { text: '> _*[❌] No puedes mutear a un administrador del grupo.*_', contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
     }
 
     if (idsOverlap(targetIds, ownerIds)) {
-      return conn.sendMessage(m.chat, { text: '[❌] No puedes mutear al propietario del bot.', contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
+      return conn.sendMessage(m.chat, { text: '> _*[❌] No puedes mutear al propietario del bot.*_', contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
     }
 
     const muted = global.db.data.muted[m.chat]
@@ -102,7 +102,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, participants
 
     if (['mute', 'group-mute', 'mutechat', 'silenciar', 'silencio'].includes(command)) {
       if (alreadyMuted) {
-        return conn.sendMessage(m.chat, { text: `El usuario ya está muteado.`, contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
+        return conn.sendMessage(m.chat, { text: `> _*El usuario ya está muteado.*_`, contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
       }
       for (const jid of targetIds) {
         if (!muted.includes(jid)) muted.push(jid)
@@ -115,7 +115,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, participants
 
     if (['delmute', 'unmute', 'group-unmute', 'desilenciar', 'quitar-silencio', 'quitarsilencio'].includes(command)) {
       if (!alreadyMuted) {
-        return conn.sendMessage(m.chat, { text: `El usuario no está muteado.`, contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
+        return conn.sendMessage(m.chat, { text: `> _*El usuario no está muteado.*_`, contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
       }
       global.db.data.muted[m.chat] = removeOverlapping(muted, targetIds)
       return conn.sendMessage(m.chat, {
@@ -127,7 +127,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isAdmin, participants
     return conn.sendMessage(m.chat, { text: `Comando no reconocido. Usa ${usedPrefix}silenciar @usuario o ${usedPrefix}desilenciar @usuario`, contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
   } catch (e) {
     console.error(e)
-    return conn.sendMessage(m.chat, { text: '[❌] Error al procesar el comando.', contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
+    return conn.sendMessage(m.chat, { text: '> _*[❌] Error al procesar el comando.*_', contextInfo: { ...rcanal.contextInfo } }, { quoted: m })
   }
 }
 
