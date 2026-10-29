@@ -1,12 +1,12 @@
 /*
  * ================= CORP CUADRILÁTEROS (v2.1) =================
  * 4 equipos. Gana el primero que llegue a 2 salas (mín. 2, máx. 5).
- * Grupo de LOGOS: registra equipos. Grupo de RESULTADOS: usa la clave.
+ * Grupo de EQUIPOS: registra equipos. Grupo de FLYERS: usa la clave.
  *
- * Los 4 flyers se envían juntos en un álbum al usar el comando enviartodo.
+ * Los comandos con clave envían los flyers al grupo de EQUIPOS.
  *
  * Plantillas (en la carpeta raíz del bot):
- *   CAIDAS.png · MATCH_DAY.png · BOOYAH__5M.png · GANADOR.png
+ *   CAIDAS.png · MATCH_DAY.png · BOOYAH__5M.png · GANADOR.png · reglas.png
  * ==============================================================
  */
 import fs from 'node:fs'
@@ -38,10 +38,40 @@ const ALIAS_CORTOS = {
 }
 const cmd = b => b + SUFIJO
 const aliasPorBase = Object.fromEntries(Object.entries(ALIAS_CORTOS).map(([alias, base]) => [base, alias]))
-const c = b => '.' + (aliasPorBase[b] || cmd(b))
-const baseDe = { ...Object.fromEntries(BASES.map(b => [cmd(b), b])), ...Object.fromEntries(Object.entries(ALIAS_CORTOS).map(([alias, base]) => [alias, base])) }
+const COMANDOS_DIRECTOS = {
+  ganador: 'ganador',
+  enviartodo: 'enviartodo',
+  enviarinfo: 'enviarinfo',
+  matchday: 'matchdaycuadri',
+  machday: 'matchdaycuadri',
+  caidas: 'caidascuadri',
+  reglas: 'reglas',
+  vip: 'vip',
+  winner: 'campeon',
+  booyah: 'salas'
+}
+const NOMBRES_PUBLICOS = {
+  ganador: 'ganador',
+  enviartodo: 'enviartodo',
+  enviarinfo: 'enviarinfo',
+  matchdaycuadri: 'matchday',
+  caidascuadri: 'caidas',
+  reglas: 'reglas',
+  vip: 'vip',
+  campeon: 'winner',
+  salas: 'booyah'
+}
+const c = b => '.' + (NOMBRES_PUBLICOS[b] || aliasPorBase[b] || cmd(b))
+const baseDe = {
+  ...Object.fromEntries(BASES.map(b => [cmd(b), b])),
+  ...Object.fromEntries(Object.entries(ALIAS_CORTOS).map(([alias, base]) => [alias, base])),
+  ...COMANDOS_DIRECTOS
+}
 baseDe[cmd('machdaycuadri')] = 'matchdaycuadri' // alias por si lo escriben sin la "t"
 const RESULTADOS = new Set(['ganador', 'salas', 'campeon', 'borrarsala', 'enviartodo'])
+const COMANDOS_CON_CLAVE = new Set([
+  ...RESULTADOS, 'participantes', 'matchdaycuadri', 'caidascuadri', 'reglas', 'vip', 'enviarinfo'
+])
 
 // ---------- Reglas ----------
 const MAX_EQUIPOS = 4
@@ -67,7 +97,8 @@ const PLANTILLAS = {
   caidas: 'CAIDAS.png',
   matchday: 'MATCH_DAY.png',
   salas: 'BOOYAH__5M.png',
-  ganador: 'GANADOR.png'
+  ganador: 'GANADOR.png',
+  reglas: 'reglas.png'
 }
 const X_MAPA = path.resolve('.', 'equis corp.png')
 const rutaPlantilla = tipo => path.resolve('.', PLANTILLAS[tipo])
@@ -166,15 +197,23 @@ const marcador = s => {
 
 // ---------- Captions ----------
 const marco = (titulo, cuerpo) => `⸻- 🦩 *${titulo}* -⸻\n\n${cuerpo}`
-const capParticipantes = s => marco('MATCH DAY',
+const capParticipantes = s => `ᝰ.ᐟ𝙈𝘼𝙏𝘾𝙃 𝘿𝘼𝙔🐍\n\n` +
   `⤷𝐄𝐐𝐔𝐈𝐏𝐎𝐒 💕 (${Object.keys(s.equipos).length}/${MAX_EQUIPOS})\n\n` +
-  Object.values(s.equipos).map((e, i) => `-> 🎀 ${colorDeEquipo(e, i).nombre} › ${negrita(e.nombre.toUpperCase())}`).join('\n'))
-const capCaidas = s => marco('CAÍDAS',
+  Object.values(s.equipos).map((e, i) => `-> 🎀 ${colorDeEquipo(e, i).nombre} › ${negrita(e.nombre.toUpperCase())}`).join('\n')
+const capCaidas = s => `ᝰ.ᐟ𝘾𝘼𝙄𝘿𝘼𝙎 𝙔 𝙍𝙊𝙏𝘼𝘾𝙄𝙊𝙉𝙀𝙎🐍\n\n` +
   `⤷𝐂𝐀𝐈𝐃𝐀𝐒 💕\n\n` +
   Object.values(s.equipos).map((e, i) => {
     const color = colorDeEquipo(e, i)
     return `-> 🪂 ${color.nombre} › ${negrita(e.nombre.toUpperCase())} › C${color.casillas.join(', C')}`
-  }).join('\n'))
+  }).join('\n')
+const capReglas = `ᝰ.ᐟ𝙍𝙀𝙂𝙇𝘼𝙎 🐍
+
+➠𝙇𝙚𝙚𝙧 𝙩𝙤𝙙𝙖 𝙡𝙖 𝙞𝙣𝙛𝙤𝙧𝙢𝙖𝙘𝙞𝙤́𝙣.
+➠𝙑𝙚𝙨𝙩𝙞𝙢𝙚𝙣𝙩𝙖 𝙢𝙖́𝙨 𝙖 𝙨𝙪 𝙘𝙤𝙡𝙤𝙧 𝙖𝙨𝙞𝙜𝙣𝙖𝙙𝙤.
+➠𝙀𝙡 𝙣𝙞𝙫𝙚𝙡 𝙙𝙚 𝙘𝙪𝙚𝙣𝙩𝙖 𝙚𝙨 +𝟮𝟬 𝙮 𝙣𝙤 𝙚𝙨 𝙢𝙤𝙙𝙞𝙛𝙞𝙘𝙖𝙗𝙡𝙚.`
+const capVip = `Les recuerdo que ahora contamos con *grupo VIP*, así que cada victoria contará para poder *ascender*.
+
+> \`\`\` Que tengan una linda tarde, nos vemos en un rato. 🫰\`\`\``
 const capSalas = s => {
   const v = victorias(s)
   const filas = Object.entries(s.salas).map(([n, id]) => `-> 🏁 ${nombreSala(Number(n))} › ${negrita(String(s.equipos[id]?.nombre || '-').toUpperCase())}`).join('\n')
@@ -305,7 +344,7 @@ async function ejecutar(m, { conn, args, command, isOwner }) {
     return m.reply(`⛔ No tienes permiso para usar los comandos del cuadrilátero.\nTu ID: ${mios.join(' / ') || 'desconocido'}\nUn owner debe agregarlo en config.js → global.cuadriUsers`)
   }
 
-  // Clave: los comandos de resultados apuntan al grupo de logos
+  // La clave vincula los comandos del grupo de flyers al grupo de equipos.
   let group = chatActual
   let clave = null
   const primero = String(args[0] || '')
@@ -314,19 +353,21 @@ async function ejecutar(m, { conn, args, command, isOwner }) {
     const origen = leerClaves()[primero]
     if (origen) { clave = primero; group = origen; args = args.slice(1) }
   }
-  if (RESULTADOS.has(comando)) {
-    if (!clave) return m.reply(pareceClave ? '❌ Clave incorrecta o ese cuadrilátero ya no existe.' : `🔐 Usa este comando en el *grupo de resultados* con la clave.\nEjemplo: ${c(comando)} 1234`)
-    if (group === chatActual) return m.reply('🚫 Usa este comando en el grupo de resultados, no en el de logos.')
+  if (comando === 'reglas' && !pareceClave) return
+  if (COMANDOS_CON_CLAVE.has(comando)) {
+    if (!clave) return m.reply(pareceClave ? '❌ Clave incorrecta o ese cuadrilátero ya no existe.' : `🔐 Usa este comando en el *grupo de flyers* con la clave.\nEjemplo: ${c(comando)} 1234`)
+    if (group === chatActual) return m.reply('🚫 Usa este comando en el grupo de flyers, no en el de equipos.')
   }
 
   const state = load(group)
-  const sendImage = (image, caption = '') => conn.sendMessage(chatActual, { image, caption })
+  const chatDestino = clave ? group : chatActual
+  const sendImage = (image, caption = '') => conn.sendMessage(chatDestino, { image, caption })
   const sendAlbum = async images => {
-    const album = await conn.sendMessage(chatActual, {
+    const album = await conn.sendMessage(chatDestino, {
       album: { expectedImageCount: images.length, expectedVideoCount: 0 }
     })
     for (const image of images) {
-      await conn.sendMessage(chatActual, {
+      await conn.sendMessage(chatDestino, {
         image: image.buffer,
         caption: image.caption,
         albumParentKey: album.key
@@ -345,7 +386,7 @@ async function ejecutar(m, { conn, args, command, isOwner }) {
         save(group, { ...estadoVacio(), activo: true, clave: nueva })
         let enPrivado = false
         try {
-          await conn.sendMessage(sender, { text: `🔐 *Clave del cuadrilátero:* ${nueva}\n\nÚsala en el grupo de resultados:\n${c('ganador')} ${nueva} primera sala Negro\n${c('salas')} ${nueva}\n${c('campeon')} ${nueva}\n${c('enviartodo')} ${nueva}` })
+          await conn.sendMessage(sender, { text: `🔐 *Clave del cuadrilátero:* ${nueva}\n\nEn el grupo de flyers, usa:\n${c('ganador')} ${nueva} primera sala Negro\n${c('matchdaycuadri')} ${nueva}\n${c('caidascuadri')} ${nueva}\n${c('reglas')} ${nueva}\n${c('vip')} ${nueva}\n${c('enviartodo')} ${nueva}\n${c('enviarinfo')} ${nueva}` })
           enPrivado = true
         } catch {}
         return m.reply(`🔥 *CUADRILÁTERO iniciado* (${MAX_EQUIPOS} equipos, gana quien llegue a ${SALAS_PARA_GANAR} salas)\n\nCualquier integrante del grupo puede registrar un equipo enviando su *logo* con este formato:\n${c('cuadri')} Nombre del equipo/Color\n\nColores: Negro (C1-C3), Blanco (C4-C6), Amarillo (C7-C9) o Rojo (C10-C12).\n\n` +
@@ -423,6 +464,15 @@ async function ejecutar(m, { conn, args, command, isOwner }) {
         return sendImage(await imgCaidas(state), capCaidas(state))
       }
 
+      case 'reglas': {
+        if (!hayPlantilla('reglas')) return falta('reglas')
+        return sendImage(fs.readFileSync(rutaPlantilla('reglas')), capReglas)
+      }
+
+      case 'vip': {
+        return conn.sendMessage(chatDestino, { text: capVip })
+      }
+
       case 'ganador': {
         if (!state.activo) {
           return m.reply(state.ganador
@@ -496,8 +546,7 @@ async function ejecutar(m, { conn, args, command, isOwner }) {
         const tareas = [
           ['Ganador', 'ganador', imgCampeon, capCampeon],
           ['Match Day', 'matchday', imgMatchDay, capParticipantes],
-          ['Booyah (salas)', 'salas', imgSalas, capSalas],
-          ['Caídas / mapas', 'caidas', imgCaidas, capCaidas]
+          ['Booyah (salas)', 'salas', imgSalas, capSalas]
         ]
         await reaccionar('⏳')
         const faltantes = tareas.filter(([, tipo]) => !hayPlantilla(tipo)).map(([nombre]) => nombre)
@@ -524,6 +573,37 @@ async function ejecutar(m, { conn, args, command, isOwner }) {
         return
       }
 
+      case 'enviarinfo': {
+        if (!Object.keys(state.equipos).length) return m.reply('Aún no hay equipos registrados.')
+        const tareas = [
+          ['Caídas', 'caidas', imgCaidas, capCaidas],
+          ['Reglas', 'reglas', () => fs.readFileSync(rutaPlantilla('reglas')), () => capReglas],
+          ['Match Day', 'matchday', imgMatchDay, capParticipantes]
+        ]
+        await reaccionar('⏳')
+        const faltantes = tareas.filter(([, tipo]) => !hayPlantilla(tipo)).map(([nombre]) => nombre)
+        if (faltantes.length) return m.reply(`Faltan plantillas y no puedo enviar el álbum completo: ${faltantes.join(', ')}.`)
+
+        const imagenes = []
+        for (const [nombre, , generar, caption] of tareas) {
+          try {
+            imagenes.push({ buffer: await generar(state), caption: caption(state) })
+          } catch (e) {
+            console.error(`[corp] enviarinfo "${nombre}":`, e?.message)
+            return m.reply(`⚠️ No pude generar el flyer de ${nombre}; no se envió el álbum.`)
+          }
+        }
+        try {
+          await sendAlbum(imagenes)
+        } catch (e) {
+          console.error('[corp] enviarinfo: error enviando el álbum:', e?.message)
+          await reaccionar('❌')
+          return m.reply('⚠️ No pude enviar completo el álbum de flyers. Inténtalo de nuevo.')
+        }
+        await reaccionar('✅')
+        return
+      }
+
       case 'menucuadri': {
         return m.reply([
           '🔥 *MENÚ CORP CUADRILÁTEROS*',
@@ -534,18 +614,21 @@ async function ejecutar(m, { conn, args, command, isOwner }) {
           `• ${c('cuadri')} <nombre>/<color> + logo — registra un equipo (Negro, Blanco, Amarillo o Rojo)`,
           `• ${c('quitarequipo')} <nombre> — elimina un equipo`,
           `• ${c('equipos')} — lista de equipos`,
-          `• ${c('matchdaycuadri')} — flyer Match Day`,
-          `• ${c('caidascuadri')} — flyer de Caídas`,
           `• ${c('clave')} — te reenvía la clave por privado`,
           `• ${c('fincuadri')} — termina el cuadrilátero`,
           '',
-          '*Grupo de RESULTADOS* (con la clave)',
+          '*Grupo de FLYERS* (con la clave)',
           `• ${c('ganador')} <clave> primera sala <color>`,
-          `• ${c('salas')} <clave> — flyer Booyah de salas`,
-          `• ${c('campeon')} <clave> — flyer del ganador`,
+          `• ${c('booyah')} <clave> — flyer Booyah de salas`,
+          `• ${c('winner')} <clave> — flyer del ganador`,
+          `• ${c('matchdaycuadri')} <clave> — flyer Match Day`,
+          `• ${c('caidascuadri')} <clave> — flyer de Caídas y rotaciones`,
+          `• ${c('reglas')} <clave> — flyer de reglas`,
+          `• ${c('vip')} <clave> — envía el mensaje VIP sin imagen`,
           `• ${c('borrarsala')} <clave> — borra la última sala`,
-          `• ${c('enviartodo')} <clave> — envía los 4 flyers juntos en un álbum al terminar`,
-          'Orden: Ganador, Match Day, Booyah (mapas no jugados con X) y Caídas.',
+          `• ${c('enviartodo')} <clave> — ganador, Match Day y Booyah en un álbum al terminar`,
+          `• ${c('enviarinfo')} <clave> — Caídas, Reglas y Match Day en un álbum`,
+          'Los flyers se envían al grupo de EQUIPOS.',
           '',
           'También siguen funcionando los nombres largos terminados en "corp".'
         ].join('\n'))
@@ -568,9 +651,9 @@ async function ejecutar(m, { conn, args, command, isOwner }) {
 let cola = Promise.resolve()
 const handler = (m, ctx) => (cola = cola.catch(() => {}).then(() => ejecutar(m, ctx)))
 
-handler.help = [...BASES.map(cmd), ...Object.keys(ALIAS_CORTOS)]
+handler.help = [...BASES.map(cmd), ...Object.keys(ALIAS_CORTOS), ...Object.keys(COMANDOS_DIRECTOS)]
 handler.tags = ['game']
-handler.command = [...BASES.map(cmd), ...Object.keys(ALIAS_CORTOS)]
+handler.command = [...BASES.map(cmd), ...Object.keys(ALIAS_CORTOS), ...Object.keys(COMANDOS_DIRECTOS)]
 handler.group = true
 
 export default handler
