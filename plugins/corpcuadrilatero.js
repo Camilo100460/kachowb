@@ -98,7 +98,7 @@ const PLANTILLAS = {
   matchday: 'MATCH_DAY.png',
   salas: 'BOOYAH__5M.png',
   ganador: 'GANADOR.png',
-  reglas: 'reglascuadri.jpeg'
+  reglas: 'reglas.png'
 }
 const X_MAPA = path.resolve('.', 'equis corp.png')
 const rutaPlantilla = tipo => path.resolve('.', PLANTILLAS[tipo])
@@ -214,6 +214,16 @@ const capReglas = `ᝰ.ᐟ𝙍𝙀𝙂𝙇𝘼𝙎 🐍
 const capVip = `Les recuerdo que ahora contamos con *grupo VIP*, así que cada victoria contará para poder *ascender*.
 
 > \`\`\` Que tengan una linda tarde, nos vemos en un rato. 🫰\`\`\``
+const EMOJI_COLOR = { negro: '⚫', blanco: '⚪', amarillo: '🟡', rojo: '🔴' }
+const SALAS_NUM = ['𝗦𝟭', '𝗦𝟮', '𝗦𝟯', '𝗦𝟰', '𝗦𝟱']
+const textoBooyah = s => {
+  const filas = SALAS_NUM.map((etiqueta, i) => {
+    const equipo = s.equipos[s.salas[i + 1]]
+    const emoji = equipo ? EMOJI_COLOR[colorDeEquipo(equipo, Object.keys(s.equipos).indexOf(s.salas[i + 1])).id] : '❔'
+    return `│ ${etiqueta} ┊${emoji}`
+  })
+  return ['╭─ 𝗕𝗢𝗢𝗬𝗔𝗛 ─╮', ...filas, '╰──────────╯'].join('\n')
+}
 const capSalas = s => {
   const v = victorias(s)
   const filas = Object.entries(s.salas).map(([n, id]) => `-> 🏁 ${nombreSala(Number(n))} › ${negrita(String(s.equipos[id]?.nombre || '-').toUpperCase())}`).join('\n')
@@ -507,6 +517,7 @@ async function ejecutar(m, { conn, args, command, isOwner }) {
         save(group, state)
 
         await reaccionar('👍')
+        await conn.sendMessage(chatDestino, { text: textoBooyah(state) })
         await m.reply(`🏁 *${nombreSala(n)}* → *${nombre}* (+1)\n\n${marcador(state)}`)
         if (state.ganador) {
           await m.reply(`🏆 *¡${nombre} gana el cuadrilátero!* (${v[id]} salas en ${salasJugadas(state)} jugadas)`)
@@ -525,6 +536,7 @@ async function ejecutar(m, { conn, args, command, isOwner }) {
         state.ganador = null
         state.activo = true
         save(group, state)
+        await conn.sendMessage(chatDestino, { text: textoBooyah(state) })
         return m.reply(`🗑️ Se borró la *${nombreSala(n).toLowerCase()}* (ganaba ${state.equipos[id]?.nombre || 'un equipo'}).\n\n${marcador(state)}\n\n➡️ Vuelve a registrarla: ${c('ganador')} ${state.clave} ${nombreSala(n).split(' ')[0].toLowerCase()} sala <color>`)
       }
 
