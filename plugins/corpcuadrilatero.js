@@ -98,7 +98,7 @@ const PLANTILLAS = {
   matchday: 'MATCH_DAY.png',
   salas: 'BOOYAH__5M.png',
   ganador: 'GANADOR.png',
-  reglas: 'reglascuadri.jpeg'
+  reglas: 'reglas.png'
 }
 const X_MAPA = path.resolve('.', 'equis corp.png')
 const rutaPlantilla = tipo => path.resolve('.', PLANTILLAS[tipo])
@@ -197,15 +197,8 @@ const marcador = s => {
 
 // ---------- Captions ----------
 const marco = (titulo, cuerpo) => `⸻- 🦩 *${titulo}* -⸻\n\n${cuerpo}`
-const capParticipantes = s => `ᝰ.ᐟ𝙈𝘼𝙏𝘾𝙃 𝘿𝘼𝙔🐍\n\n` +
-  `⤷𝐄𝐐𝐔𝐈𝐏𝐎𝐒 💕 (${Object.keys(s.equipos).length}/${MAX_EQUIPOS})\n\n` +
-  Object.values(s.equipos).map((e, i) => `-> 🎀 ${colorDeEquipo(e, i).nombre} › ${negrita(e.nombre.toUpperCase())}`).join('\n')
-const capCaidas = s => `ᝰ.ᐟ𝘾𝘼𝙄𝘿𝘼𝙎 𝙔 𝙍𝙊𝙏𝘼𝘾𝙄𝙊𝙉𝙀𝙎🐍\n\n` +
-  `⤷𝐂𝐀𝐈𝐃𝐀𝐒 💕\n\n` +
-  Object.values(s.equipos).map((e, i) => {
-    const color = colorDeEquipo(e, i)
-    return `-> 🪂 ${color.nombre} › ${negrita(e.nombre.toUpperCase())} › C${color.casillas.join(', C')}`
-  }).join('\n')
+const capParticipantes = () => 'ᝰ.ᐟ𝙈𝘼𝙏𝘾𝙃 𝘿𝘼𝙔🐍'
+const capCaidas = () => 'ᝰ.ᐟ𝘾𝘼𝙄𝘿𝘼𝙎 𝙔 𝙍𝙊𝙏𝘼𝘾𝙄𝙊𝙉𝙀𝙎🐍'
 const capReglas = `ᝰ.ᐟ𝙍𝙀𝙂𝙇𝘼𝙎 🐍
 
 ➠𝙇𝙚𝙚𝙧 𝙩𝙤𝙙𝙖 𝙡𝙖 𝙞𝙣𝙛𝙤𝙧𝙢𝙖𝙘𝙞𝙤́𝙣.
@@ -434,7 +427,17 @@ async function ejecutar(m, { conn, args, command, isOwner, isAdmin }) {
         state.equipos[id] = { nombre, logo, color: color.id, owner: existente?.owner || sender }
         save(group, state)
         const total = Object.keys(state.equipos).length
-        await m.reply(`✅ Equipo *${nombre}* ${existente ? 'actualizado' : 'registrado'} con color *${color.nombre}* (${total}/${MAX_EQUIPOS}). Casillas: *${color.casillas.join(', ')}*.${total === MAX_EQUIPOS ? `\n\nLos flyers no se envían automáticamente. Al terminar el cuadrilátero, usa ${c('enviartodo')} ${state.clave}.` : ''}`)
+        const confirmacion = `✅ Equipo *${nombre}* ${existente ? 'actualizado' : 'registrado'} con color *${color.nombre}* (${total}/${MAX_EQUIPOS}). Casillas: *${color.casillas.join(', ')}*.`
+        if (total < MAX_EQUIPOS) {
+          await m.reply(confirmacion)
+          return
+        }
+        let mentions = []
+        try { mentions = (await conn.groupMetadata(chatActual)).participants.map(p => p.id || p.jid).filter(Boolean) } catch {}
+        await conn.sendMessage(chatActual, {
+          text: `${confirmacion}\n\n🐍│𝗕𝗟𝗢𝗤𝗨𝗘 𝗟𝗟𝗘𝗡𝗢.\nTienen hasta las 4:00PM 🇲🇽 5:00PM 🇨🇴 para cancelar su cupo.\nPosterior a la hora de cancelación se considerará abandono y se dan BAN.\n\n📩 A partir de las 4:00PM 🇲🇽  5:00PM 🇨🇴 puedes usar el comando *${c('enviartodo')} ${state.clave}* para enviar los flyers.\n\n> Dudas e inquietudes al privado del encargado.`,
+          mentions
+        }, { quoted: m })
         return
       }
 
@@ -591,23 +594,23 @@ async function ejecutar(m, { conn, args, command, isOwner, isAdmin }) {
         ]
         await reaccionar('⏳')
         const faltantes = tareas.filter(([, tipo]) => !hayPlantilla(tipo)).map(([nombre]) => nombre)
-        if (faltantes.length) return m.reply(`Faltan plantillas y no puedo enviar el álbum completo: ${faltantes.join(', ')}.`)
+        if (faltantes.length) return m.reply(`Faltan plantillas: ${faltantes.join(', ')}.`)
 
-        const imagenes = []
-        for (const [nombre, , generar, caption] of tareas) {
-          try {
-            imagenes.push({ buffer: await generar(state), caption: caption(state) })
-          } catch (e) {
-            console.error(`[corp] enviarinfo "${nombre}":`, e?.message)
-            return m.reply(`⚠️ No pude generar el flyer de ${nombre}; no se envió el álbum.`)
-          }
-        }
         try {
-          await sendAlbum(imagenes)
+          for (const [nombre, , generar, caption] of tareas) {
+            try {
+              await sendImage(await generar(state), caption(state))
+            } catch (e) {
+              console.error(`[corp] enviarinfo "${nombre}":`, e?.message)
+              await reaccionar('❌')
+              return m.reply(`⚠️ No pude enviar el flyer de ${nombre}.`)
+            }
+          }
+          await conn.sendMessage(chatDestino, { text: capVip })
         } catch (e) {
-          console.error('[corp] enviarinfo: error enviando el álbum:', e?.message)
+          console.error('[corp] enviarinfo:', e?.message)
           await reaccionar('❌')
-          return m.reply('⚠️ No pude enviar completo el álbum de flyers. Inténtalo de nuevo.')
+          return m.reply('⚠️ No pude enviar toda la información. Inténtalo de nuevo.')
         }
         await reaccionar('✅')
         return
