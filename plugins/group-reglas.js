@@ -35,6 +35,8 @@ let handler = async (m, { conn, text, isAdmin, isOwner, usedPrefix, command }) =
   const target = getImageTarget(m)
   const action = String(text || '').trim().toLowerCase()
 
+  if (/^\d{4}$/.test(action)) return
+
   if (action === 'borrar' || action === 'eliminar' || action === 'delete') {
     if (!isAdmin && !isOwner) return m.reply('Solo un administrador puede borrar la imagen de reglas.')
     const saved = rules[m.chat]
@@ -120,7 +122,7 @@ let handler = async (m, { conn, text, isAdmin, isOwner, usedPrefix, command }) =
 
 handler.help = ['reglas (responde a una imagen para guardarla; .reglas borrar para eliminarla)']
 handler.tags = ['grupo']
-handler.command = ['reglas']
+handler.command = [/^reglas$/]
 handler.group = true
 
 export default handler
