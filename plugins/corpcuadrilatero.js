@@ -340,18 +340,15 @@ const captionDe = m => String(m.msg?.caption || m.text || '')
   .replace(new RegExp(`^\\s*[.!#/]?(?:${cmd('cuadri')}|${aliasPorBase.cuadri})\\s*`, 'i'), '').trim()
 
 // ---------- Comandos ----------
-async function ejecutar(m, { conn, args, command, isOwner }) {
+async function ejecutar(m, { conn, args, command, isOwner, isAdmin }) {
   const comando = baseDe[String(command).toLowerCase()]
   if (!comando) return
   const chatActual = m.chat
   const sender = conn.decodeJid(m.sender)
 
-  // Permisos (el comando .cuadri lo puede usar cualquiera)
-  const digitos = v => String(v || '').replace(/[:@].*$/, '').replace(/\D/g, '')
-  const mios = [m.sender, m.key?.participant, m.senderLid, m.senderPn].map(digitos).filter(Boolean)
-  const permitidos = (global.cuadriUsers || global.scrimUsers || []).map(digitos).filter(Boolean)
-  if (comando !== 'cuadri' && !isOwner && !mios.some(id => permitidos.includes(id))) {
-    return m.reply(`⛔ No tienes permiso para usar los comandos del cuadrilátero.\nTu ID: ${mios.join(' / ') || 'desconocido'}\nUn owner debe agregarlo en config.js → global.cuadriUsers`)
+  // Permisos: .cuadri (enviar logo) es para todos; el resto, solo admins
+  if (comando !== 'cuadri' && !isAdmin && !isOwner) {
+    return m.reply('⛔ Solo los administradores pueden usar los comandos del cuadrilátero.')
   }
 
   // La clave vincula los comandos del grupo de flyers al grupo de equipos.
