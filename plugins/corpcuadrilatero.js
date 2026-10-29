@@ -98,7 +98,7 @@ const PLANTILLAS = {
   matchday: 'MATCH_DAY.png',
   salas: 'BOOYAH__5M.png',
   ganador: 'GANADOR.png',
-  reglas: 'reglas.png'
+  reglas: 'reglascuadri.jpeg'
 }
 const X_MAPA = path.resolve('.', 'equis corp.png')
 const rutaPlantilla = tipo => path.resolve('.', PLANTILLAS[tipo])
