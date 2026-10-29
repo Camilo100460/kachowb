@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url'
 global.owner = [
   ['573107668900', 'Dueño', true],
   ['26666668999', 'Owner', true],
-  ['573178454976', 'Owner', true],
+  ['573146680977', 'Owner', true],
 ]
 global.scrimUsers = [
   '573146680977',
