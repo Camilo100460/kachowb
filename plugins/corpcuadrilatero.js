@@ -1,12 +1,12 @@
 /*
- * ================= CORP CUADRILÁTEROS (v2.1) =================
+ * ================= CORP CUADRILÁTEROS (v2.2) =================
  * 4 equipos. Gana el primero que llegue a 2 salas (mín. 2, máx. 5).
  * Grupo de EQUIPOS: registra equipos. Grupo de FLYERS: usa la clave.
  *
  * Los comandos con clave envían los flyers al grupo de EQUIPOS.
  *
  * Plantillas (en la carpeta raíz del bot):
- *   CAIDAS.png · MATCH_DAY.png · BOOYAH__5M.png · GANADOR.png · reglas.png
+ *   CAIDAS.png · MATCH_DAY.png · BOOYAH__5M.png · GANADOR.png · reglascuadri.jpeg
  * ==============================================================
  */
 import fs from 'node:fs'
@@ -133,7 +133,7 @@ const BARRA_GANADOR = { cx: 925, cy: 1424, w: 700, h: 80 }
 // ---------- Estado ----------
 const keyOf = v => String(v).replace(/[^\w-]/g, '_')
 const stateFile = g => path.join(DATA_DIR, `${keyOf(g)}.json`)
-const estadoVacio = () => ({ activo: false, equipos: {}, salas: {}, ganador: null, clave: null })
+const estadoVacio = () => ({ activo: false, equipos: {}, salas: {}, ganador: null, clave: null, organizador: null })
 const load = g => { try { return { ...estadoVacio(), ...JSON.parse(fs.readFileSync(stateFile(g), 'utf8')) } } catch { return estadoVacio() } }
 const save = (g, s) => fs.writeFileSync(stateFile(g), JSON.stringify(s, null, 2))
 
@@ -154,6 +154,12 @@ function borrarLogosGrupo(group) {
 
 // ---------- Utilidades ----------
 const norm = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim()
+
+// Fecha y hora del momento en que se envía el flyer (zona horaria configurable)
+const ZONA_HORARIA = 'America/Bogota'
+const fechaHoy = () => new Intl.DateTimeFormat('es-CO', { timeZone: ZONA_HORARIA, day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date())
+const horaAhora = () => new Intl.DateTimeFormat('en-US', { timeZone: ZONA_HORARIA, hour: 'numeric', minute: '2-digit', hour12: true }).format(new Date())
+
 const teamKey = nombre => 't' + crypto.createHash('md5').update(norm(nombre)).digest('hex').slice(0, 10)
 const colorDeEquipo = (equipo, indice) => colorPorId[norm(equipo.color)] || colorPorId[COLORES[indice % COLORES.length].id]
 const negrita = s => [...String(s)].map(ch => {
@@ -229,13 +235,14 @@ const capPublicacionFinal = s => {
   const victoriasEquipo = victorias(s)
   const ranking = Object.entries(s.equipos)
     .sort(([idA], [idB]) => Number(idB === s.ganador) - Number(idA === s.ganador) || victoriasEquipo[idB] - victoriasEquipo[idA])
-    .map(([id, equipo], i) => `${['🥇', '🥈', '🥉', '🏅'][i]} • ${equipo.nombre.toUpperCase()}${id === s.ganador ? '\n@Usuario desconocido' : ''}`)
+    .map(([, equipo], i) => `${['🥇', '🥈', '🥉', '🏅'][i]} • ${equipo.nombre.toUpperCase()}`)
     .join('\n')
+  const org = s.organizador ? `@${String(s.organizador).split('@')[0].split(':')[0]}` : ''
   return `╰━𝗖𝗨𝗔𝗗𝗥𝗜𝗦 𝗧𝗬𝗣𝗛𝗢𝗡━╮
 
- ✦│| 𝗙𝗘𝗖𝗛𝗔: 
- ✦│| 𝗛𝗢𝗥𝗔: 
- ✦│| 𝗢𝗥𝗚: 
+ ✦│| 𝗙𝗘𝗖𝗛𝗔: ${fechaHoy()}
+ ✦│| 𝗛𝗢𝗥𝗔: ${horaAhora()}
+ ✦│| 𝗢𝗥𝗚: ${org}
 
 🐍 𝗧𝗬𝗣𝗛𝗢𝗡 𝗚𝗔𝗠𝗜𝗡𝗚 —
  𝗔𝘁𝗮𝗰𝗮𝗿. 𝗗𝗼𝗺𝗶𝗻𝗮𝗿. 𝗩𝗲𝗻𝗰𝗲𝗿.
@@ -370,6 +377,7 @@ async function ejecutar(m, { conn, args, command, isOwner, isAdmin }) {
       await conn.sendMessage(chatDestino, {
         image: image.buffer,
         caption: image.caption,
+        mentions: image.mentions || [],
         albumParentKey: album.key
       })
     }
@@ -383,7 +391,7 @@ async function ejecutar(m, { conn, args, command, isOwner, isAdmin }) {
         if (state.activo) return m.reply(`⚠️ Ya hay un cuadrilátero activo. Usa *${c('fincuadri')}* y luego *${c('iniciarcuadri')}*.`)
         borrarLogosGrupo(group)
         const nueva = nuevaClave(group)
-        save(group, { ...estadoVacio(), activo: true, clave: nueva })
+        save(group, { ...estadoVacio(), activo: true, clave: nueva, organizador: sender })
         let enPrivado = false
         try {
           await conn.sendMessage(sender, { text: `🔐 *Clave del cuadrilátero:* ${nueva}\n\nEn el grupo de flyers, usa:\n${c('ganador')} ${nueva} primera sala Negro\n${c('matchdaycuadri')} ${nueva}\n${c('caidascuadri')} ${nueva}\n${c('reglas')} ${nueva}\n${c('vip')} ${nueva}\n${c('enviartodo')} ${nueva}\n${c('enviarinfo')} ${nueva}` })
@@ -435,7 +443,7 @@ async function ejecutar(m, { conn, args, command, isOwner, isAdmin }) {
         let mentions = []
         try { mentions = (await conn.groupMetadata(chatActual)).participants.map(p => p.id || p.jid).filter(Boolean) } catch {}
         await conn.sendMessage(chatActual, {
-          text: `${confirmacion}\n\n🐍│𝗕𝗟𝗢𝗤𝗨𝗘 𝗟𝗟𝗘𝗡𝗢.\nTienen hasta las 4:00PM 🇲🇽 5:00PM 🇨🇴 para cancelar su cupo.\nPosterior a la hora de cancelación se considerará abandono y se dan BAN.\n\n📩 A partir de las 4:00PM 🇲🇽  5:00PM 🇨🇴 puedes usar el comando *${c('enviartodo')} ${state.clave}* para enviar los flyers.\n\n> Dudas e inquietudes al privado del encargado.`,
+          text: `${confirmacion}\n\n🐍│𝗕𝗟𝗢𝗤𝗨𝗘 𝗟𝗟𝗘𝗡𝗢.\nCancelaciones hasta las 4:00PM 🇲🇽 5:00PM 🇨🇴. Después se aplica BAN por abandono.\n\n📩 Desde esa hora usa *${c('enviartodo')} ${state.clave}* para enviar los flyers.\n\n> Dudas al privado del encargado.`,
           mentions
         }, { quoted: m })
         return
@@ -574,6 +582,7 @@ async function ejecutar(m, { conn, args, command, isOwner, isAdmin }) {
           }
         }
         imagenes[0].caption = capPublicacionFinal(state)
+        imagenes[0].mentions = state.organizador ? [state.organizador] : []
         try {
           await sendAlbum(imagenes)
         } catch (e) {
